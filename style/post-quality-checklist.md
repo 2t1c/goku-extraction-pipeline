@@ -46,6 +46,7 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 ## Phase 2 readiness
 
+- [ ] **Target database is `Evergreen Backlog`** (Notion). Sub-item is created there, parented to the source video page.
 - [ ] Notion sub-item title matches the post hook claim (or a short distillation)
 - [ ] Topic Tags set (1–4 from the schema)
 - [ ] Parent video relation linked
