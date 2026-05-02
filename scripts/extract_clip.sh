@@ -1,8 +1,17 @@
 #!/bin/bash
 # extract_clip.sh — Fast keyframe-seek clip extraction.
 #
-# Usage: extract_clip.sh <youtube_url> <start HH:MM:SS> <end HH:MM:SS>
-# Output: ~/ytclipper-fast/clips/<VIDEO_ID>_<START>_<END>.mp4 (colons → dashes in filename)
+# Usage:
+#   extract_clip.sh <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug]
+#
+#   <slug> is optional. When provided, the output file is named "<slug>.mp4"
+#   (lowercase, hyphens). When omitted, falls back to "<VIDEO_ID>_<START>_<END>.mp4".
+#
+#   Slug should match the Notion title and Typefully draft title for consistency
+#   so files are easy to find in Finder. Example:
+#     extract_clip.sh URL 00:34:09 00:36:42 andreessen-ovitz-7am-meeting
+#
+# Output: $CLIPS_DIR (default ~/Desktop/AI Agents/clips/)
 #
 # Performance lessons:
 #   1. -ss BEFORE -i = keyframe seek (~1s). -ss after = decode-and-discard (~3-5min for far seeks).
@@ -14,9 +23,10 @@ set -e
 URL="$1"
 START="$2"
 END="$3"
+SLUG="$4"  # optional descriptive filename (lowercase, hyphens)
 
 if [ -z "$URL" ] || [ -z "$START" ] || [ -z "$END" ]; then
-  echo "Usage: $0 <youtube_url> <start HH:MM:SS> <end HH:MM:SS>"
+  echo "Usage: $0 <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug]"
   exit 1
 fi
 
@@ -41,9 +51,17 @@ if [ -z "$VIDEO_ID" ]; then
 fi
 
 SOURCE="$SOURCES_DIR/${VIDEO_ID}.mp4"
-START_SAFE=$(echo "$START" | tr ':' '-')
-END_SAFE=$(echo "$END" | tr ':' '-')
-OUTPUT="$CLIPS_DIR/${VIDEO_ID}_${START_SAFE}_${END_SAFE}.mp4"
+
+if [ -n "$SLUG" ]; then
+  # User-provided slug — sanitize: lowercase, replace whitespace + special chars with hyphens, strip leading/trailing
+  SLUG_CLEAN=$(echo "$SLUG" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+  OUTPUT="$CLIPS_DIR/${SLUG_CLEAN}.mp4"
+else
+  # Fallback: VIDEO_ID + timestamps
+  START_SAFE=$(echo "$START" | tr ':' '-')
+  END_SAFE=$(echo "$END" | tr ':' '-')
+  OUTPUT="$CLIPS_DIR/${VIDEO_ID}_${START_SAFE}_${END_SAFE}.mp4"
+fi
 
 # Step 1: Download source if not cached
 if [ -f "$SOURCE" ]; then
