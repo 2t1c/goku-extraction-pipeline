@@ -41,15 +41,26 @@ When user approves, execute in parallel batches:
 2. **Typefully draft create** on the configured social set (X enabled, unscheduled, share=true).
 3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second.
 4. **When clip lands:**
-   - `scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part upload to Notion, attaches as native video block.
-   - `scripts/typefully_upload.py SOCIAL_SET_ID DRAFT_ID FILE NAME` — presigned S3 PUT, polls media status, attaches to draft. Note: Typefully server-side video processing takes 5–15 min.
-5. **Cross-link** Typefully URL/ID into Notion sub-item properties.
+   - `scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part upload to Notion, attaches as native video block. **Fully automated.**
+   - For Typefully: **do NOT use the API attach by default.** Instead, surface the local file path to the user so they can drag-drop into the draft (~10 sec). Skipping the API saves 5–15 min of server-side processing wait per post and avoids the UI race condition.
+5. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
 6. **Update parent backlog**: check the corresponding extractable-idea checkbox with link to the new sub-item.
-7. **Advance Notion status** `Adding Media` → `Ready to Post` once both Notion and Typefully attaches succeed.
+7. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached. Don't block on Typefully — that's the user's last touch.
 
-## Race condition warning (must surface to user)
+## Final user-facing message
 
-Typefully UI edits can strip media attachments saved via API. After ANY API attach, tell the user: "Don't hand-edit the Typefully draft until you refresh first."
+When you finish Phase 2, surface to the user:
+- Local clip path: `~/ytclipper-fast/clips/<filename>.mp4`
+- Typefully draft edit URL: `https://typefully.com/?d=<draft_id>&a=<social_set_id>`
+- One-liner: "Drag the .mp4 onto the draft when you're ready to ship."
+
+## Optional fallback (fully automated)
+
+If running headless or the user explicitly asks: `scripts/typefully_upload.py SOCIAL_SET_ID DRAFT_ID FILE NAME` does the API path (presigned PUT + poll + attach). Default is manual.
+
+## Race condition warning (only matters in fallback path)
+
+Only relevant when using the API attach: Typefully UI edits can strip media_ids. If you use the fallback, tell the user "refresh the Typefully tab before any further edits." With the default manual path, this isn't a concern.
 
 ## Iteration
 

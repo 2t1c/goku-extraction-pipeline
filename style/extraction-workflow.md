@@ -48,23 +48,26 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 2. Patch the Typefully scratchpad with the Notion sub-item URL.
 3. Update the parent video page's "extractable ideas" checklist — check the corresponding box and add a link to the new sub-item.
 
-### 2.3 Upload media (parallel — fire both)
+### 2.3 Upload media — Notion API, Typefully manual (default)
 
 When the clip file exists:
 
-1. **Notion**: `python3 scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part File Upload API + attach as native video block.
-2. **Typefully**: 
-   - `POST /v1/media-uploads` to get a presigned S3 URL + media_id.
-   - `curl -T FILE PRESIGNED_URL` (PUT, raw bytes, no headers).
-   - Poll `GET /v1/media-uploads/<media_id>` until status is `ready` (5–15 min).
-   - `PATCH /v1/drafts/<draft_id>` with `media_ids: [media_id]` and the unchanged post text.
+1. **Notion (automated):** `python3 scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part File Upload API + attach as native video block. ~10–20 sec per file.
+2. **Typefully (manual drag-drop, user does this):** Print the local clip path and the Typefully draft edit URL. The user drags the file onto the draft in their browser (~10 sec). Skip the API attach.
+
+**Why manual for Typefully:** the API path forces a 5–15 min server-side video processing wait (sometimes 30+). Manual drag-drop bypasses the polling loop, avoids the UI race condition, and lets the user upload + edit in one session. Saves ~35 min per 5-post session.
+
+**Optional fallback (fully automated):** `scripts/typefully_upload.py` still works — `python3 scripts/typefully_upload.py SOCIAL_SET_ID DRAFT_ID FILE NAME`. Use only when running headless or when the user explicitly asks for full automation.
 
 ### 2.4 Finalize
 
-When both attaches succeed:
+When the Notion video block is attached:
 
-1. Patch Notion sub-item Status: `Adding Media` → `Ready to Post`.
-2. Tell the user the draft is ready and **warn about the Typefully UI race** (their UI edits can strip media if they don't refresh first).
+1. Patch Notion sub-item Status: `Adding Media` → `Ready to Post`. Don't wait on Typefully — that's the user's last touch.
+2. Tell the user:
+   - The local clip path: `~/ytclipper-fast/clips/<filename>.mp4`
+   - The Typefully draft edit URL: `https://typefully.com/?d=<draft_id>&a=<social_set_id>`
+   - The instruction: "Drag the file onto the draft when you're ready to ship."
 3. Ask: "Ship next idea?"
 
 ## Phase 3 — Iteration
