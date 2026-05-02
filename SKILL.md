@@ -25,14 +25,18 @@ For each candidate post idea from the source:
 1. **Read** the full transcript. Don't skim — find Tier 1 angles that hit the Goku virality stack (authority + shocking specific claim + named characters + suppression layer).
 2. **Surface 5–10 candidate ideas** ranked by tier (1 = potential 500K+, 2 = 100K–500K, 3 = 50K–150K). Show them to the user with one-line rationales.
 3. **User picks one.** Don't draft until they confirm.
-4. **Draft the post** in strict Goku style. Read these in order:
-   - `style/master-prompt.md` — the canonical Goku format
-   - `style/closer-template.md` — the current 4-part closer
-   - `style/clip-selection.md` — the clip start-cue rules
-5. **Word-count the body** before delivering. ≤250 words, target 180–210.
-6. **Pick a clip range + start/end cues.** Verbatim phrases, not just timestamps. Start cue must pass the standalone-hook test.
-7. Show the draft to the user. **In the same turn, kick off `bash scripts/extract_clip.sh URL START END &` in background** — the user nearly always approves with minimal edits, and parallel pre-cutting eliminates the ffmpeg wait from Phase 2 (especially the 2–4 min source download on the first clip of a session).
-8. **Wait for "Approved" before creating Notion / Typefully artifacts.** Local clip files are safe to pre-create; workspace objects are not.
+4. **Draft the post** in strict Goku style. Read these IN ORDER, every time:
+   - `style/master-prompt.md` — the canonical Goku format (current rules, supersedes any older Goku doc)
+   - `style/word-count.md` — target 240–250 words, not 180–210
+   - `style/no-recency-words.md` — no `just`, `now`, `today`, `recently`, `this week`
+   - `style/closer-template.md` — engagement Q + brand + P.S. + attribution
+   - `style/clip-selection.md` — standalone-hook rule for the clip start cue
+   - `examples/andreessen-interview/extracted-posts/` — what good looks like
+5. **Word-count the body before delivering.** Target 240–250 words. Don't estimate — count. If short, pull more substance from the transcript per `word-count.md` (secondary characters, parallels, backstory) — never pad with filler.
+6. **Run the post quality checklist** at `style/post-quality-checklist.md`. Every box must check before showing the user. The most-violated rule in practice: recency words sneaking into the hook.
+7. **Pick a clip range + start/end cues.** Verbatim phrases. Start cue passes the standalone-hook test.
+8. Show the draft to the user. **In the same turn, kick off `bash scripts/extract_clip.sh URL START END <slug> &` in background** — the user nearly always approves with minimal edits, and parallel pre-cutting eliminates the ffmpeg wait from Phase 2. Use a descriptive slug (e.g. `andreessen-ovitz-7am-meeting`) per `feedback_clip_naming_convention`.
+9. **Wait for "Approved" before creating Notion / Typefully artifacts.** Local clip files are safe to pre-create; workspace objects are not.
 
 ## Phase 2 — Operational Execution
 
