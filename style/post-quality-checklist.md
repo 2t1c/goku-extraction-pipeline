@@ -51,6 +51,8 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] Topic Tags set (1–4 from the schema)
 - [ ] Parent video relation linked
 - [ ] Local clip path in body for manual fallback: `~/Desktop/AI Agents/clips/<slug>.mp4`
+- [ ] **Cover image set** to a random pick from `config/notion-schema.json:cover_image_recommendations` (both parent video page AND sub-item). Not a YouTube thumbnail. See `notion-card-rendering.md`.
+- [ ] **Verbatim quotes rendered as `paragraph` blocks** with straight `"..."` ASCII marks. Never `quote` block type — Notion curly-quotes the content and breaks copy-paste to X. See `notion-card-rendering.md`.
 
 ## If the user has standing rules from past sessions
 

@@ -31,6 +31,7 @@ For each candidate post idea from the source:
    - `style/no-recency-words.md` — no `just`, `now`, `today`, `recently`, `this week`
    - `style/closer-template.md` — engagement Q + brand + P.S. + attribution
    - `style/clip-selection.md` — standalone-hook rule for the clip start cue
+   - `style/notion-card-rendering.md` — Notion cover image + quote rendering rules
    - `examples/andreessen-interview/extracted-posts/` — what good looks like
 5. **Word-count the body before delivering.** Target 240–250 words. Don't estimate — count. If short, pull more substance from the transcript per `word-count.md` (secondary characters, parallels, backstory) — never pad with filler.
 6. **Run the post quality checklist** at `style/post-quality-checklist.md`. Every box must check before showing the user. The most-violated rule in practice: recency words sneaking into the hook.

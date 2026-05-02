@@ -1,6 +1,18 @@
 {
   "_comment": "Reference schema for the Evergreen Backlog Notion database. The pipeline reads from this to know property names. If your database differs, update the property names in scripts/notion_upload.py and the SKILL.md template.",
+  "_card_rendering": "See style/notion-card-rendering.md for cover-image rotation and quote-rendering rules. Every page gets a random cover from cover_image_recommendations below; verbatim quotes use paragraph blocks with straight ASCII quotes, never the quote block type.",
   "database_name": "Evergreen Backlog",
+  "cover_image_recommendations": [
+    "https://www.notion.so/images/page-cover/gradients_2.png",
+    "https://www.notion.so/images/page-cover/gradients_3.png",
+    "https://www.notion.so/images/page-cover/gradients_5.png",
+    "https://www.notion.so/images/page-cover/gradients_8.png",
+    "https://www.notion.so/images/page-cover/gradients_10.jpg",
+    "https://www.notion.so/images/page-cover/gradients_11.jpg",
+    "https://www.notion.so/images/page-cover/met_william_morris_1875.jpg",
+    "https://www.notion.so/images/page-cover/woodcuts_4.jpg",
+    "https://www.notion.so/images/page-cover/solid_blue.png"
+  ],
   "expected_status_options": [
     "Backlog",
     "Writing",
