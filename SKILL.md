@@ -43,25 +43,26 @@ When user approves, execute in parallel batches:
 3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second.
 4. **When clip lands:**
    - `scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part upload to Notion, attaches as native video block. **Fully automated.**
-   - For Typefully: **do NOT use the API attach by default.** Instead, surface the local file path to the user so they can drag-drop into the draft (~10 sec). Skipping the API saves 5–15 min of server-side processing wait per post and avoids the UI race condition.
+   - **Typefully parallel API (default):** `POST /v1/media-uploads` then `curl -T FILE PRESIGNED_URL`. Fire and move on. Don't block on encoding. At batch checkpoints, poll pending media_ids and PATCH drafts when each is `ready`. Manual drag-drop only if user explicitly asks or API fails.
 5. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
 6. **Update parent backlog**: check the corresponding extractable-idea checkbox with link to the new sub-item.
-7. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached. Don't block on Typefully — that's the user's last touch.
+7. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached and Typefully PUT is fired.
 
 ## Final user-facing message
 
 When you finish Phase 2, surface to the user:
-- Local clip path: `~/ytclipper-fast/clips/<filename>.mp4`
-- Typefully draft edit URL: `https://typefully.com/?d=<draft_id>&a=<social_set_id>`
-- One-liner: "Drag the .mp4 onto the draft when you're ready to ship."
+- Notion sub-item URL (Status `Ready to Post`)
+- Typefully draft URLs (text already attached, media PUT fired and processing)
+- Local clip path (manual drag-drop escape hatch): `~/Desktop/AI Agents/clips/<filename>.mp4`
+- **Lockout warning**: "Don't hand-edit any pending Typefully drafts until I confirm all media attaches landed."
 
-## Optional fallback (fully automated)
+## Manual drag-drop fallback
 
-If running headless or the user explicitly asks: `scripts/typefully_upload.py SOCIAL_SET_ID DRAFT_ID FILE NAME` does the API path (presigned PUT + poll + attach). Default is manual.
+If user explicitly asks for manual or API fails: surface the local clip path. They drag the .mp4 onto the draft in browser (~10 sec). `scripts/typefully_upload.py` is also available for headless full-automation runs.
 
-## Race condition warning (only matters in fallback path)
+## Race condition warning (load-bearing)
 
-Only relevant when using the API attach: Typefully UI edits can strip media_ids. If you use the fallback, tell the user "refresh the Typefully tab before any further edits." With the default manual path, this isn't a concern.
+Typefully UI edits between the PUT and the final PATCH attach can strip media_ids. Tell the user explicitly: "Don't touch the pending Typefully drafts until I confirm attaches landed." Lockout window is the slowest single clip's encoding time (5–15 min).
 
 ## Iteration
 
