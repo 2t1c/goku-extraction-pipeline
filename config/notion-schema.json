@@ -1,0 +1,57 @@
+{
+  "_comment": "Reference schema for the Evergreen Backlog Notion database. The pipeline reads from this to know property names. If your database differs, update the property names in scripts/notion_upload.py and the SKILL.md template.",
+  "database_name": "Evergreen Backlog",
+  "expected_status_options": [
+    "Backlog",
+    "Writing",
+    "Drafting",
+    "Adding Media",
+    "Ready to Review",
+    "Ready to Post",
+    "Scheduled",
+    "Published",
+    "Killed"
+  ],
+  "expected_topic_tags": [
+    "AI",
+    "Finance",
+    "Geopolitics",
+    "Business",
+    "Psychology",
+    "Philosophy",
+    "Marketing",
+    "Tech",
+    "Health",
+    "Culture",
+    "Science",
+    "History"
+  ],
+  "properties": {
+    "Video Title": { "type": "title", "required": true, "description": "Sub-item title; mirror as Typefully draft_title" },
+    "Video URL": { "type": "url", "description": "Source YouTube URL" },
+    "Source URL": { "type": "url", "description": "Same as Video URL by default; can differ if source is non-YouTube" },
+    "Status": { "type": "select", "description": "Initialize as 'Adding Media'; advance to 'Ready to Post' after both Notion + Typefully attaches succeed" },
+    "Topic Tags": { "type": "multi_select", "description": "Pick 1–4 tags from expected_topic_tags above" },
+    "Parent item": { "type": "relation", "limit": 1, "description": "Self-relation to the parent video page (the source). Each video gets one parent + many sub-items (one per extracted post)" },
+    "Sub-item": { "type": "relation", "description": "Reverse of Parent item; auto-populated" },
+    "Clip Start": { "type": "text", "description": "Verbatim opening phrase of the video clip (not a timestamp). The video editor uses this to locate the cut." },
+    "Clip End": { "type": "text", "description": "Verbatim closing phrase of the video clip" },
+    "Key Quote": { "type": "text", "description": "The single sharpest quote in the post; used for snippet previews" },
+    "Typefully Shared URL": { "type": "url", "description": "Public share URL of the Typefully draft" },
+    "Typefully Draft ID": { "type": "text", "description": "Numeric Typefully draft ID for API access" }
+  },
+  "page_body_template": [
+    "## Post draft (Goku long-form, Ready to Post)",
+    "<full post text>",
+    "",
+    "## Clip spec",
+    "- **Range:** <HH:MM:SS> – <HH:MM:SS> (~<duration>)",
+    "- **Start cue (verbatim):** <exact opening sentence>",
+    "- **End cue (verbatim):** <exact closing sentence>",
+    "",
+    "## Beats covered",
+    "<one line listing beats in order>",
+    "",
+    "<after upload: native video block, attached via File Upload API>"
+  ]
+}
