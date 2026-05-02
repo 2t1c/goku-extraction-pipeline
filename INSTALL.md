@@ -57,14 +57,18 @@ See `config/notion-schema.json` for the full reference.
 
 ## 4. Clip storage
 
-By default, the pipeline expects:
+By default, the pipeline writes to:
 
 ```
-~/ytclipper-fast/sources/   # cached full-length source videos (persistent)
-~/ytclipper-fast/clips/     # cut clips, ready to upload
+~/ytclipper-fast/sources/    # cached full-length source videos (persistent, deep-nested — they're huge)
+~/Desktop/AI Agents/clips/   # cut clips (user-facing — you drag-drop these into Typefully)
 ```
 
-Override via `CLIPPER_HOME` env var. The `sources/` dir survives across sessions — don't put it in `/tmp` or `temp/` (those get cleaned).
+Why split? Source videos are 500–1500 MB and you don't interact with them directly. Cut clips are ~10–25 MB and you drag them into Typefully drafts. The clips folder lives on the Desktop in plain sight; the sources folder stays out of the way.
+
+Override either via env vars: `SOURCES_DIR=...` and `CLIPS_DIR=...`.
+
+**Don't put `SOURCES_DIR` in `/tmp` or any temp folder.** Those get cleaned across sessions and force a 3-min re-download each time.
 
 ## 5. Verify
 

@@ -23,10 +23,14 @@ fi
 # Tools
 YTDLP="${YTDLP:-/opt/homebrew/bin/yt-dlp}"
 FFMPEG="${FFMPEG:-/opt/homebrew/bin/ffmpeg}"
-CLIPPER_HOME="${CLIPPER_HOME:-$HOME/ytclipper-fast}"
 
-SOURCES_DIR="$CLIPPER_HOME/sources"
-CLIPS_DIR="$CLIPPER_HOME/clips"
+# Source videos are large (500–1500 MB). Cached deeper in $HOME so they don't clutter visible folders.
+SOURCES_DIR="${SOURCES_DIR:-$HOME/ytclipper-fast/sources}"
+
+# Clips are user-facing — they get drag-dropped into Typefully manually.
+# Default to a place visible in Finder, near the user's working folder.
+CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/AI Agents/clips}"
+
 mkdir -p "$SOURCES_DIR" "$CLIPS_DIR"
 
 # Parse YouTube ID from URL (11-char alphanumeric/dash/underscore)
