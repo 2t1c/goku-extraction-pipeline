@@ -28,9 +28,23 @@ Surface to user. Wait for them to pick.
 5. Run the virality stress test — see master-prompt.md, Part 11.
 6. Pick a clip range + verbatim start/end cues per `style/clip-selection.md`.
 
-### 1.4 Show draft + wait
+### 1.4 Show draft + wait + pre-cut clip in background
 
-Deliver post + clip spec. **Do not proceed to Phase 2 until user says "Approved" or equivalent.**
+Deliver post + clip spec to the user. **In the same turn, kick off the clip extraction in background:**
+
+```bash
+bash scripts/extract_clip.sh URL START END &
+```
+
+The user almost always approves with zero or minimal edits. By the time they say "Approved," the clip file should already exist on disk — so Phase 2 skips straight to upload without an ffmpeg wait. With cached source video the cut is ~1 second, but on the first clip of a session it's 2–4 min, and that's exactly the wait worth eliminating from the user's path.
+
+**Don't pre-cut on the ideation menu** (Phase 1 step 1.2). Multiple candidates are surfaced; only one gets drafted; cutting all wastes work.
+
+**Don't pre-create Notion sub-items or Typefully drafts.** Those are real workspace artifacts. Pre-cutting only the local clip file is safe — it can be deleted if the post is killed.
+
+If the user revises the clip range during review, re-cut. It's cheap.
+
+**Wait for "Approved" or equivalent before Phase 2 of the workspace artifacts.**
 
 ## Phase 2 — Operational Execution (mostly parallel)
 

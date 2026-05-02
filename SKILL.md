@@ -31,7 +31,8 @@ For each candidate post idea from the source:
    - `style/clip-selection.md` — the clip start-cue rules
 5. **Word-count the body** before delivering. ≤250 words, target 180–210.
 6. **Pick a clip range + start/end cues.** Verbatim phrases, not just timestamps. Start cue must pass the standalone-hook test.
-7. Show the draft to the user. **Wait for "Approved" before Phase 2.**
+7. Show the draft to the user. **In the same turn, kick off `bash scripts/extract_clip.sh URL START END &` in background** — the user nearly always approves with minimal edits, and parallel pre-cutting eliminates the ffmpeg wait from Phase 2 (especially the 2–4 min source download on the first clip of a session).
+8. **Wait for "Approved" before creating Notion / Typefully artifacts.** Local clip files are safe to pre-create; workspace objects are not.
 
 ## Phase 2 — Operational Execution
 
