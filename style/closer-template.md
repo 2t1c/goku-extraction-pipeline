@@ -8,21 +8,30 @@ After the body ends, in this exact order:
 
 ### 1. Engagement Question (write fresh)
 
-One sentence. Low-friction, personal, directly relevant to the post's topic. Avoid:
-- Generic "What do you think?"
-- Yes/no questions
-- Questions about the historical figure (these are about the post, not the reader)
+**Keep it dead simple.** One short opinion-prompting question that asks the reader what they *think* about the post's subject. The reader should be able to answer in 5 seconds with a one-word reply.
 
-Examples by topic:
+**Good patterns:**
+- Binary opinion: *"Genius — or just ruthless?"* / *"Smart move or shady?"* / *"Right or wrong?"*
+- Direct gut check: *"What do you think?"* / *"Was this insane or brilliant?"*
+- Forced choice: *"Hero or villain?"* / *"Visionary or lunatic?"*
+
+**Why simple wins:** the engagement Q's job is to lower the bar to commenting. A 5-word binary gets 10× more replies than a 20-word "where in your own life..." style question. Threads under simple questions become a sentiment readout (genius/ruthless ratio); threads under introspective questions die because nobody wants to write a paragraph.
+
+**Examples by post topic:**
 
 | Post topic | Question |
 |---|---|
-| Founder vs manager paradigm | *"What 'professionally run' institution in your life has quietly stopped working?"* |
-| Hidden side project | *"What 'side project' in your work might quietly be your real business?"* |
-| Wrong-shaped founder | *"What 'graveyard industry' in your domain has been waiting for the wrong-shaped founder?"* |
-| Ignored warning | *"What 'you're going to light your fortune on fire' warning have you ignored — and were glad you did?"* |
-| Modern moral panic | *"What technology being called 'dangerous' today are you probably wrong about?"* |
-| Smart-no regret | *"What's the smartest 'no' you've said that turned out wrong?"* |
+| Ovitz's 7am hack | *"Genius — or just ruthless?"* |
+| Elon almost lit fortune on fire | *"Brave or reckless?"* |
+| Moritz passed on Tesla | *"Was Moritz right at the time?"* |
+| 2,000 car companies died | *"Was Tesla destined or lucky?"* |
+| Bicycle face moral panic | *"What's our generation's 'bicycle face'?"* |
+| Edison thought phonograph was for sermons | *"Could anyone have predicted music?"* |
+
+**Avoid:**
+- Long "where in your life..." introspective questions — these get scrolled past
+- Multi-clause questions
+- Questions about the post itself ("what was the most surprising part?") — these are about the post, not the reader's view
 
 ### 2. Brand CTA (verbatim — never change)
 
