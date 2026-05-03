@@ -27,14 +27,16 @@ For each candidate post idea from the source:
 3. **User picks one.** Don't draft until they confirm.
 4. **Draft the post** in strict Goku style. Read these IN ORDER, every time:
    - `style/master-prompt.md` — the canonical Goku format (current rules, supersedes any older Goku doc)
+   - `style/hook-recipe.md` — the violent-verb hook formula. **Read this before writing any hook.**
+   - `style/body-techniques.md` — number cascades, dialogue exchanges, closing paradoxes, speaker stake in prose
    - `style/word-count.md` — target 240–250 words, not 180–210
    - `style/no-recency-words.md` — no `just`, `now`, `today`, `recently`, `this week`
    - `style/closer-template.md` — engagement Q + brand + P.S. + attribution
    - `style/clip-selection.md` — standalone-hook rule for the clip start cue
    - `style/notion-card-rendering.md` — Notion cover image + quote rendering rules
-   - `examples/andreessen-interview/extracted-posts/` — what good looks like
+   - `examples/andreessen-interview/extracted-posts/` — what good looks like (H, A, I are the gold standards)
 5. **Word-count the body before delivering.** Target 240–250 words. Don't estimate — count. If short, pull more substance from the transcript per `word-count.md` (secondary characters, parallels, backstory) — never pad with filler.
-6. **Run the post quality checklist** at `style/post-quality-checklist.md`. Every box must check before showing the user. The most-violated rule in practice: recency words sneaking into the hook.
+6. **Run the post quality checklist** at `style/post-quality-checklist.md`. Every box must check before showing the user. The most-violated rules in practice: (a) bland verb in hook (`built`, `created`, `revealed` instead of `killed`, `crushed`, `lit on fire`), (b) recency words sneaking in, (c) credential paragraph at body open instead of speaker-stake-in-prose.
 7. **Pick a clip range + start/end cues.** Verbatim phrases. Start cue passes the standalone-hook test.
 8. Show the draft to the user. **In the same turn, kick off `bash scripts/extract_clip.sh URL START END <slug> &` in background** — the user nearly always approves with minimal edits, and parallel pre-cutting eliminates the ffmpeg wait from Phase 2. Use a descriptive slug (e.g. `andreessen-ovitz-7am-meeting`) per `feedback_clip_naming_convention`.
 9. **Wait for "Approved" before creating Notion / Typefully artifacts.** Local clip files are safe to pre-create; workspace objects are not.

@@ -4,11 +4,15 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 ## Hook (15 words max)
 
-- [ ] Format: `[Credentialed Name] says [specific shocking claim]`
-- [ ] Verb is exactly `says`. Not `just revealed`. Not `recently said`. Not `now believes`.
+- [ ] Format: `[Speaker] says [named actor] [violent verb] [named target] [specific anchor]`
+- [ ] Reporting verb is exactly `says`. Not `just revealed`. Not `claims`. Not `argues`.
+- [ ] **Violent verb is present** — `killed`, `crushed`, `lit on fire`, `broke`, `swallowed`, `wiped out`, `buried`, `gutted`, `flipped`. (See full list in `hook-recipe.md`.) **Reject hooks that use `built`, `created`, `started`, `worked on`, `helped`, `said`, `revealed`** — these describe instead of dramatize.
+- [ ] Named actor (specific person/company/place, not "a founder" or "Big Pharma")
+- [ ] Named target (the entity getting hit/changed/destroyed)
+- [ ] Exactly one specific anchor — number, date, or visual detail (`$180M`, `September 1993`, `20 Jaguars`). Zero = vague. Three = list.
 - [ ] No recency words anywhere: no `just`, `now`, `today`, `this week`, `breaking`, `recently`
-- [ ] Credential is the shortest phrase that establishes authority (e.g. `Sequoia's`, `Netscape founder`, `Dr.`)
-- [ ] Claim is one specific shocking thing — named person, specific number, or paradigm-break
+- [ ] Credential prefix only if bare name is weak (`Dr.`, `Netscape founder`, `Sequoia's`)
+- [ ] Word count 11–14 ideal, 15 max
 
 ## Body (240–250 words)
 
@@ -19,7 +23,9 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] No tabloid adjectives: no `shocking`, `unbelievable`, `jaw-dropping`, `insane`, `crazy`, `mind-blowing`.
 - [ ] No recency words anywhere in the body.
 - [ ] If bullets are used: 3+ parallel items, 3–6 words each, sentence fragments.
-- [ ] Body lands on a sharp line — ideally a verbatim quote.
+- [ ] **Body deploys 2–4 named techniques from `body-techniques.md`** (number cascade, dialogue exchange, closing paradox, speaker stake in prose, before/then, named-concept boldface, visual detail trio, end-on-verbatim, hedge preservation). Fewer than 2 = summary, more than 5 = overstuffed.
+- [ ] **No credential paragraph at body open** (use technique 4 — speaker stake in prose — instead).
+- [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement. **Never a soft summary or "what this means is…" line.**
 
 ## Closer (after body, in this order)
 
