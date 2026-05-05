@@ -27,6 +27,12 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] No recency words anywhere in the body.
 - [ ] If bullets are used: 3+ parallel items, 3–6 words each, sentence fragments.
 - [ ] **Body deploys 2–4 named techniques from `body-techniques.md`** (number cascade, dialogue exchange, closing paradox, speaker stake in prose, before/then, named-concept boldface, visual detail trio, end-on-verbatim, hedge preservation). Fewer than 2 = summary, more than 5 = overstuffed.
+- [ ] **Required narrative moves — at least 3 of 5 present** (per master-prompt.md May 2026 update):
+  - [ ] (1) Named concept is **bolded** on first use (one per post max). Skip if post has no named concept.
+  - [ ] (2) Speaker stake woven into prose, not a credential paragraph (e.g. *"Andreessen, who was building Mosaic at the time, watched it happen."*)
+  - [ ] (3) Body ends on a **reflective verbatim quote where the speaker takes both sides** (pro/con, win/cost, gratitude/regret), not author-voice reflection
+  - [ ] (4) **"Then" hinge sentence** — single-sentence pivot, on its own line, with whitespace around it (*"Then America Online bought a connection to it."*)
+  - [ ] (5) **Memorable reframe in the setup**, not just description (*"They were the smartest two million people in the world."* vs. *"The internet had 2M users."*)
 - [ ] **No credential paragraph at body open** (use technique 4 — speaker stake in prose — instead).
 - [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement that earns the engagement Q. **Never a soft summary or "what this means is…" line.**
 

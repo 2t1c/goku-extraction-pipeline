@@ -35,6 +35,16 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 - **2–4 verbatim quotes per post.** Quotes are exempt from the 15-word cap. Strongest move: end the body with a direct quote OR a tight reflection that earns the engagement Q.
 - **Speaker connectors, used sparingly.** "Naval continues:", "Then Baszucki drops the historical context.", "[Speaker], looking back:" — these connective beats make quotes feel woven into the story rather than air-dropped. Use 1–2 per post; overuse turns into filler.
 
+## Required narrative moves (May 2026 update)
+
+These five moves came out of audit against the Andreessen "Eternal September" canonical post. **Strong posts deploy at least 3 of these; weak posts skip them all.**
+
+- **(1) Bold the named concept on first use.** Every post that has a shareable handle (`**Eternal September**`, `**Builder's Club**`, `**perpetual motion machine**`) gets it bolded — one per post max. The bolded term is what someone Googles afterward, what gets quoted in screenshots, what carries the post into other conversations. Posts without a named concept don't get a bold; don't invent one to hit the quota.
+- **(2) Speaker stake in prose, not a credential paragraph.** The speaker's authority should be woven into the narrative at the moment it matters: *"Andreessen, who was building Mosaic at the time, watched it happen."* / *"Baszucki, who'd been coding world simulations since the Apple II, knew which game he was actually building."* This replaces standalone "Marc Andreessen, co-founder of Netscape, said..." setups. **Required when the speaker's authority is load-bearing for the claim.**
+- **(3) End the body on a reflective verbatim quote where the speaker takes both sides.** The strongest body endings have the speaker himself acknowledge the tension — pro/con, win/cost, regret/gratitude. *"I'm pro that. I'm glad that happened. But the pro and the con of that is..."* The reader gets the post's central tension delivered in the speaker's own voice. **Then** the engagement Q invites them in. Author-voice closing reflections are weaker than speaker-voice ambivalence.
+- **(4) The "Then" hinge — single-sentence pivot, on its own line.** Every story has the moment when the world changes. Mark it visually: *"Then America Online bought a connection to it."* / *"Then he ignored that instinct."* / *"Then one night, a vision arrived."* One sentence, one line, sandwiched in white space. The post pivots on it. Don't bury this hinge inside a paragraph.
+- **(5) Memorable reframe in the setup, not just description.** The opening should reframe the world the reader is about to walk into, not just describe it. *"They were the smartest two million people in the world."* (vs. "The internet had two million users in 1993.") *"Roblox's first 1,500 users were the entire seed crystal of a graph that today connects 70 million daily players."* (vs. "Roblox started with 1,500 users.") The reframe is the line that makes the rest of the post inevitable.
+
 ## Body toolkit (use what fits, skip what doesn't)
 
 The named techniques live in `body-techniques.md` with worked examples. Quick index:
