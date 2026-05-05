@@ -26,12 +26,14 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 
 ## Body rules
 
-- **Word count: 240–250.** Hard ceiling 250; aim for 245. Don't deliver shorter — denser posts perform better. (See `word-count.md`.)
-- **Sentence length: ≤15 words.** Quotes exempt. At most one sentence over 15 words per post, and it has to carry the heaviest idea.
+- **Word count: 240–260.** Aim for 245–255. Don't deliver shorter than 220 — denser posts perform better. Don't pad to hit the ceiling — cut weak beats first. (See `word-count.md`.)
+- **Sentence length: vary deliberately.** Hard cap is 15 words on prose sentences; quotes exempt. At most one sentence over 15. **Mix lengths on purpose** — 5-word punches alongside 10–14-word narrative beats. Three-fragment parallel triplets ("No advertising. No commerce. No spam.") are powerful when deployed sparingly as deliberate beats — never as default rhythm. A post that is all 4-word fragments reads as staccato and unreadable.
+- **Narrative arc, not insight stack.** Strong posts walk the reader through: setup → inciting moment → consequence cascade → reflection → open question. The reader feels they're learning a story, not getting hit with a list of claims. **Avoid the insight-stack pattern** (claim → quote → claim → quote → claim → quote) — that reads as a summary, not a story. See `body-techniques.md` for arc structures.
 - **Reported speech only.** No first-person voice in the body except verbatim quotes. "Andreessen says…", "Per Andreessen:", "In his words:".
 - **No tabloid adjectives.** Banned: shocking, unbelievable, jaw-dropping, mind-blowing, insane, crazy. Let the facts sound sensational on their own.
 - **No recency words.** No "just", "now", "today", "recently", "this week" framing the claim as breaking. Past-tense reportage when the source is dated.
-- **2–4 verbatim quotes per post.** Quotes are exempt from the 15-word cap. Strongest move: end the body with a direct quote.
+- **2–4 verbatim quotes per post.** Quotes are exempt from the 15-word cap. Strongest move: end the body with a direct quote OR a tight reflection that earns the engagement Q.
+- **Speaker connectors, used sparingly.** "Naval continues:", "Then Baszucki drops the historical context.", "[Speaker], looking back:" — these connective beats make quotes feel woven into the story rather than air-dropped. Use 1–2 per post; overuse turns into filler.
 
 ## Body toolkit (use what fits, skip what doesn't)
 

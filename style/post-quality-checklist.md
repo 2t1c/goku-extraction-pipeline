@@ -14,24 +14,28 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] Credential prefix only if bare name is weak (`Dr.`, `Netscape founder`, `Sequoia's`)
 - [ ] Word count 11–14 ideal, 15 max
 
-## Body (240–250 words)
+## Body (240–260 words)
 
-- [ ] **Counted, not estimated.** Actual word count is in the 240–250 range.
-- [ ] Every prose sentence ≤15 words. Quotes exempt. At most one sentence over 15.
+- [ ] **Counted, not estimated.** Actual word count is in the 240–260 range. (Slight under at 230 acceptable if cuts are clean and post lands.)
+- [ ] **Sentence length varies deliberately.** Mix 4–6-word punches with 10–14-word narrative beats. Not all-fragments. Not all-long. A staccato post of 4-word fragments reads as unreadable.
+- [ ] Every prose sentence ≤15 words. Quotes exempt. At most one sentence over 15 (used for the heaviest narrative beat — like the AOL/Athens setup).
+- [ ] **Narrative arc is present** — setup → inciting moment → consequence cascade → reflection → open Q. Reader feels they're walking through a story, not reading a list of claims. **Avoid the insight-stack pattern** (claim → quote → claim → quote).
 - [ ] 2–4 direct verbatim quotes from the transcript.
 - [ ] Reported speech only. No first-person voice in body. No "I think", no "in my view".
+- [ ] **Speaker connectors used 1–2 times max** ("Naval continues:", "Then Baszucki drops the historical context.", "[Speaker], looking back:"). Used sparingly to weave quotes into the narrative — not as default rhythm.
 - [ ] No tabloid adjectives: no `shocking`, `unbelievable`, `jaw-dropping`, `insane`, `crazy`, `mind-blowing`.
 - [ ] No recency words anywhere in the body.
 - [ ] If bullets are used: 3+ parallel items, 3–6 words each, sentence fragments.
 - [ ] **Body deploys 2–4 named techniques from `body-techniques.md`** (number cascade, dialogue exchange, closing paradox, speaker stake in prose, before/then, named-concept boldface, visual detail trio, end-on-verbatim, hedge preservation). Fewer than 2 = summary, more than 5 = overstuffed.
 - [ ] **No credential paragraph at body open** (use technique 4 — speaker stake in prose — instead).
-- [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement. **Never a soft summary or "what this means is…" line.**
+- [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement that earns the engagement Q. **Never a soft summary or "what this means is…" line.**
 
 ## Closer (after body, in this order)
 
-- [ ] **Engagement Q**: simple binary opinion question, ≤8 words ideally. Not "where in your life is...".
-- [ ] **Brand CTA**: VERBATIM as in `closer-template.md`. Not paraphrased.
-- [ ] **P.S. Product CTA**: VERBATIM as in `closer-template.md`. Includes the Gumroad URL inline.
+- [ ] **Engagement Q**: open natural question rooted in the post's specific tension, ≤16 words. **Not a formulaic A/B binary** ("Capital or discipline?", "Rent or own?") — those read as button-presses. The Q should invite the reader to apply the post's tension to their own situation. (See `closer-template.md` for examples.)
+- [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, @GeniusGTX is a gallery..."). Not paraphrased.
+- [ ] **P.S. — PAS para 1 is personalized**: opens the wound the post just exposed in 2 short sentences (≤45 words total), tied to the post's central tension.
+- [ ] **P.S. — playbook plug paragraph + closer line are verbatim** as in `closer-template.md` ("I've made a free playbook... Feynman, Munger, and Musk... 90+ cognitive tools, trusted by 5,000+ founders and investors. / Grab your copy: [URL]").
 - [ ] **Attribution**: format `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around every @handle** so X auto-tags render.
 
 ## Source fidelity
@@ -66,9 +70,13 @@ Always check `~/.claude/projects/.../memory/feedback_*` for the latest preferenc
 
 Currently active feedback rules (May 2026):
 
-- Engagement Q must be simple binary
+- **Engagement Q must be open + story-rooted**, NOT a formulaic A/B binary. (Updated May 2026 — supersedes the old "simple binary" rule.)
+- **Narrative arc required** — setup → inciting moment → consequence cascade → reflection → open Q. The Andreessen "Eternal September" post is the canonical example. (Added May 2026.)
+- **Sentence length varies deliberately** — mix short punches with longer narrative beats. Not all-fragments. (Added May 2026.)
+- **P.S. has personalized PAS para 1 + fixed playbook plug** (Feynman/Munger/Musk + 90+ tools + 5,000+ founders/investors). Old "free toolkit / 113 five-star reviews" wording deprecated. (Updated May 2026.)
+- **Clip start cue must match the audio verbatim** — including any filler words ("Um", "you know") that begin the spoken phrase. Don't cherry-pick the cleanest version of the line. (Added May 2026.)
 - No recency words in posts
-- Word count target 240–250
+- Word count target 240–260
 - Spaced handles in attribution
 - Manual drag-drop or parallel API attach for Typefully (user-controlled)
 - Slug naming for clip files

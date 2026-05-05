@@ -1,6 +1,8 @@
-# Word Count — target 240–250
+# Word Count — target 240–260
 
-Body length target is **240–250 words**. Hard ceiling: 250. Floor: 230.
+Body length target is **240–260 words**. Aim for 245–255. Floor: 230. Ceiling: 260.
+
+**Note:** the count is the body (hook + prose + quotes + engagement Q). Brand CTA, P.S., and attribution are not counted.
 
 ## Why upper-end and not 180–210
 
