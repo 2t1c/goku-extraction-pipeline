@@ -54,8 +54,16 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 - [ ] **Engagement Q**: open natural question rooted in the post's specific tension, ≤16 words. **Not a formulaic A/B binary** ("Capital or discipline?", "Rent or own?") — those read as button-presses. The Q should invite the reader to apply the post's tension to their own situation. (See `closer-template.md` for examples.)
 - [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, @GeniusGTX is a gallery..."). Not paraphrased.
-- [ ] **P.S. — PAS para 1 is personalized AND short**: 1–2 sentences, **≤30 words total** (aim 18–25), tied to the post's central tension. Long P.S. paras read as "second body" / salesy. Compression makes it feel personal and natural.
-- [ ] **P.S. — playbook plug split across short paragraphs with blank lines for breathing room.** Verbatim wording per `closer-template.md`, but rendered as 4 separate paragraphs (offer / authority anchor / proof line / Grab your copy URL) — NOT as one dense block. The last 4–5 lines of the post are what the reader sees right before deciding to click; cramming them reads as overwhelming and salesy.
+- [ ] **P.S. — fixed drop-in wording, 4 short paragraphs with blank lines between.** Verbatim per `closer-template.md`. **No personalization, no theme-tie, no agitation.** The body did the narrative work; the P.S. is just the clean product handoff. Same on every post:
+  ```
+  P.S. I made a free playbook on how to use and create your own mental models.
+
+  The same thinking strategies Feynman, Munger, and Musk built their careers on.
+
+  Trusted by 5,000+ founders and investors.
+
+  Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
+  ```
 - [ ] **Whitespace audit on the entire post.** One sentence per line is the default. Blank lines between every paragraph. The post should look airy on the page, not like a chunk. The reader's eyes should never hit a wall of text — especially in the closer.
 - [ ] **Attribution**: format `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around every @handle** so X auto-tags render.
 

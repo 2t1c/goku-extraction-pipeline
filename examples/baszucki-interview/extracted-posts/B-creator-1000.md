@@ -43,13 +43,11 @@ Where would you actually start if you wanted to make a real living from your wor
 
 If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
 
-P.S. Most ambitious people race to be #1 in a market where the long tail is dying. The bigger win — and the harder spot — is finding the rare market where #1,000 is growing faster than #1.
-
-I've made a free playbook on how to use and create your own mental models.
+P.S. I made a free playbook on how to use and create your own mental models.
 
 The same thinking strategies Feynman, Munger, and Musk built their careers on.
 
-Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
+Trusted by 5,000+ founders and investors.
 
 Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
 

@@ -43,13 +43,11 @@ How many people are walking past their own vision because the logical path looks
 
 If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
 
-P.S. The most expensive years of your career are usually the ones spent doing the logical thing instead of the right thing. The cost is invisible until intuition snaps you back — and most people never get that snap.
-
-I've made a free playbook on how to use and create your own mental models.
+P.S. I made a free playbook on how to use and create your own mental models.
 
 The same thinking strategies Feynman, Munger, and Musk built their careers on.
 
-Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
+Trusted by 5,000+ founders and investors.
 
 Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
 
