@@ -20,6 +20,7 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] **Sentence length varies deliberately.** Mix 4–6-word punches with 10–14-word narrative beats. Not all-fragments. Not all-long. A staccato post of 4-word fragments reads as unreadable.
 - [ ] Every prose sentence ≤15 words. Quotes exempt. At most one sentence over 15 (used for the heaviest narrative beat — like the AOL/Athens setup).
 - [ ] **Narrative arc is present** — setup → inciting moment → consequence cascade → reflection → open Q. Reader feels they're walking through a story, not reading a list of claims. **Avoid the insight-stack pattern** (claim → quote → claim → quote).
+- [ ] **Stay close to the source. No author voiceover on top of the story.** Every body sentence does one of: quotes the speaker, states a specific fact the speaker named, bridges the narrative (Then hinge / speaker stake / transition between quotes), or explains the etymology of a named concept the source introduced. **Audit-cut pattern:** generic author observations like *"The boring stuff compounds. The exciting stuff usually doesn't."* / *"That's a moat most companies would defend."* / *"Most platforms compete for time."* — interpretive voiceover laid *on top of* the story, not insight derived *from* it. Insight should land through the cascade and the speaker's reflective quote.
 - [ ] 2–4 direct verbatim quotes from the transcript.
 - [ ] Reported speech only. No first-person voice in body. No "I think", no "in my view".
 - [ ] **Quote attribution varies — never the same shape twice in a row.** Rotate through: no attribution at all (quote attaches after a setup sentence), character-stake lead (*"Andreessen, who was building Mosaic at the time, watched it happen."*), temporal/situational lead (*"Andreessen, looking back:"*), bare name + colon (max 1× per post), inline quote inside prose. **Audit-trigger pattern: stacked *"[Speaker], on X:"* labels.** Three of those in a row turns the post into a transcript heading. If you find yourself reaching for it three times, rewrite the surrounding prose so quotes attach naturally.
@@ -33,15 +34,19 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
   - [ ] (3) Body ends on a **reflective verbatim quote where the speaker takes both sides** (pro/con, win/cost, gratitude/regret), not author-voice reflection
   - [ ] (4) **"Then" hinge sentence** — single-sentence pivot, on its own line, with whitespace around it (*"Then America Online bought a connection to it."*)
   - [ ] (5) **Memorable reframe in the setup**, not just description (*"They were the smartest two million people in the world."* vs. *"The internet had 2M users."*)
-- [ ] **Andreessen-grade polish rules** (per master-prompt.md v3 update — apply when relevant):
+- [ ] **Andreessen-grade polish rules** (per master-prompt.md v3 update — gradient: critical vs nice-to-have):
+
+  **Critical (apply whenever the post supports it):**
   - [ ] (P1) Every prose verb is specific and active — no filler *had / got / was / built / made / did* unless intentional. Active verbs do the lifting (*pumped, swallowed, layered, watched*).
-  - [ ] (P2) If post has a named concept, it appears 3 times across the body — mechanism setup → naming with bold → live noun.
-  - [ ] (P3) When the rupture has a permanent aftermath, deploy the *"After X, Y"* consequence marker on its own line as a sister to the "Then" hinge.
-  - [ ] (P4) The one allowed >15-word sentence is the deliberate slowdown that enriches the named concept's mechanism — not a stat sentence or generic claim.
   - [ ] (P5) **One hero, many witnesses.** Other named entities (host included) populate the speaker's world without getting their own narrative beats. **Audit-trigger:** *"Then [host] asked the question. / [host]: '...'"* — absorb host's question into the speaker's response instead.
   - [ ] (P6) No qualifier creep on the central claim — drop *"according to X"* / *"X thinks"* / *"X believes"* / *"in X's view"*. The hook's *"says"* covers it.
   - [ ] (P7) Every prose sentence carries a concrete anchor — named entity, number, date, or sensory detail. Cut generic claims (*"the trajectory was clear"* / *"the market expanded"*) or replace with specifics.
   - [ ] (P8) Past tense throughout the narrative spine when the source is dated. Present tense reserved for speaker quotes and present-day state of still-existing entities.
+
+  **Nice-to-have (deploy when the post genuinely earns it; skip if forcing it would feel artificial):**
+  - [ ] (P2) If post has a strong named concept, the concept can echo at multiple scales (mechanism → naming → live noun). Don't force this if the post doesn't have a dominant named term.
+  - [ ] (P3) If the rupture has a permanent aftermath worth naming, deploy the *"After X, Y"* consequence marker on its own line. Skip if the rupture closes itself.
+  - [ ] (P4) If the post needs a deliberate slowdown to enrich a named concept's mechanism, the one allowed >15-word sentence can carry it. Otherwise, don't use the exception at all.
 - [ ] **No credential paragraph at body open** (use technique 4 — speaker stake in prose — instead).
 - [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement that earns the engagement Q. **Never a soft summary or "what this means is…" line.**
 
