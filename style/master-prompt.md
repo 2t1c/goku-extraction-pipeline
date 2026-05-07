@@ -44,6 +44,26 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 
 - **Bullet blocks are allowed when the content is genuinely list-shaped.** A 3+ item parallel block (technical components, a list of named entities, a cascade of specifics) can render as a bulleted block when that's the cleanest way to land the rhythm. Default is still inline parallel triplets ("No advertising. No commerce. No spam."), but don't avoid bullets if the list wants to breathe more visually. One bullet block per post max.
 
+## Andreessen-grade polish rules (May 2026 update v3)
+
+Eight techniques the canonical Andreessen "Eternal September" post deploys that are now required when applicable. **These are the difference between "good narrative post" and "the kind of post people screenshot."**
+
+- **(P1) Verb specificity audit.** Every prose verb should be doing work. The Andreessen post lifts on active, specific verbs: *"AOL **pumped** two million normal people directly onto the internet"* / *"swallowed by the next two million"* / *"watched it happen."* Audit drafts for *had / got / was / is / built / made / did* — these are filler. Replace with verbs that carry meaning. *"Roblox built the safety stack from week 3"* → *"Roblox **layered** the safety stack from week 3 forward."*
+
+- **(P2) Echo the named concept across three scales of meaning.** When a post bolds a named concept (per move #1), the concept should also appear twice more in different forms — building progressively. The Andreessen post moves: setup of the mechanism (*"Every September, when the new freshmen got their college email accounts, the discussion forums would briefly drop in quality"*) → naming (*"It became known as **Eternal September**"*) → noun the reader now owns (*"the September never ended"*). Three scales: mechanism → name → live concept. Posts that bold once and never echo feel half-built.
+
+- **(P3) The "after X, Y" mirror to the "Then" hinge.** Sometimes a post needs to mark the *consequence*, not just the trigger. The Andreessen post pairs *"Then America Online bought a connection to it."* (trigger) with *"After AOL connected, the September never ended."* (consequence). Both sit on their own lines with whitespace. When the rupture has a permanent aftermath worth naming, deploy the consequence marker as a sister to the "Then" hinge.
+
+- **(P4) Earn one mid-post explainer beat.** The single >15-word sentence allowed per post should be the deliberate *slowdown* that enriches the named concept's mechanism. The Andreessen post's 28-word sentence ("Pre-1993 internet veterans had a phrase. Every September…") is the *only* place the post breathes — and it teaches the reader the etymology of *Eternal September*. Wasting the one allowed exception on a generic claim or a stat sentence is leaving the technique on the table.
+
+- **(P5) One hero, many witnesses.** The post focuses on one speaker's perspective. Other named entities are *actors in that story*, not separate narrative perspectives. AOL, Mosaic, freshmen — they populate Andreessen's world; they don't get their own beats. **Audit-trigger pattern:** giving the host their own narrative line (*"Then Senra asked the question. / Senra: '...'"*) shares narrative weight and breaks the spell. Stronger version absorbs the host's question into the speaker's response: *"When asked if Roblox would license the safety stack, Baszucki said yes."* The host vanishes into the prose; the speaker keeps the spotlight.
+
+- **(P6) No qualifiers on the central claim.** Once the *"X says Y"* hook establishes the speaker as the source, the body operates as documented narrative. The Andreessen post asserts *"AOL killed the early internet"* as fact — no *"according to Andreessen"* / *"he believes"* / *"in his view"* hedges. The single "says" in the hook covers everything below it. Drop qualifier creep: *"Baszucki thinks"* / *"in Baszucki's read"* / *"his frame is"* — these multiply confidence costs without adding accuracy. Trust the hook's "says."
+
+- **(P7) Concrete sensory anchor per sentence.** Audit any sentence that doesn't carry a named entity, a number, a date, or a sensory detail. The Andreessen post has zero generic claims — every sentence anchors to *Athens in 500 BC*, *September 1993*, *five billion*, *Mosaic*, *the new freshmen*, *the discussion forums*. Replace generic claims (*"The trajectory was clear"* / *"The team grew quickly"* / *"The market expanded"*) with specifics, or delete them.
+
+- **(P8) Past tense control.** When the source is dated (a podcast from last month or last year), keep the body in past tense even for ongoing realities. *"Then America Online bought a connection to it."* (not *"buys"* or *"has bought"*). Past tense puts the reader in the historical frame; present tense pulls the post into "current events" mode and breaks the storytelling spell. **Exception:** speaker quotes can be present tense ("X says…"), and statements about the present-day state of a still-existing entity can be present tense (*"Roblox runs at 13 billion hours per month"*) — but the *narrative spine* of the post stays past.
+
 ## Required narrative moves (May 2026 update)
 
 These five moves came out of audit against the Andreessen "Eternal September" canonical post. **Strong posts deploy at least 3 of these; weak posts skip them all.**

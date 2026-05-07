@@ -51,7 +51,7 @@ If you're new here, @GeniusGTX is a gallery for the greatest minds in economics,
 
 The P.S. has two paragraphs. The first is **personalized to the post** using PAS (Problem → Agitate → Solution-bridge). The second + third are the **fixed playbook plug** — same wording every time, with the same authority association and social proof.
 
-**Para 1 (personalized — write fresh):** open the wound the post just exposed. State the problem in one short sentence, agitate it with the cost or stakes in another. Tie it back to the post's central tension. Two sentences, ≤45 words total.
+**Para 1 (personalized — write fresh, kept short):** open the wound the post just exposed. **One or two sentences. ≤30 words total.** Anything longer reads as a second body, not a P.S. — and a long P.S. signals "salesy" before the reader gets to the actual product line. The personal feel comes from compression: *"The hour someone else put on your calendar is an hour you can't put on your own. You usually don't notice the trade until years of it have stacked up."* (29 words.) That's the ceiling. Aim for 18–25.
 
 **Para 2 + 3 + closer line (fixed wording):**
 

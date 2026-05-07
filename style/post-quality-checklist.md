@@ -33,6 +33,15 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
   - [ ] (3) Body ends on a **reflective verbatim quote where the speaker takes both sides** (pro/con, win/cost, gratitude/regret), not author-voice reflection
   - [ ] (4) **"Then" hinge sentence** — single-sentence pivot, on its own line, with whitespace around it (*"Then America Online bought a connection to it."*)
   - [ ] (5) **Memorable reframe in the setup**, not just description (*"They were the smartest two million people in the world."* vs. *"The internet had 2M users."*)
+- [ ] **Andreessen-grade polish rules** (per master-prompt.md v3 update — apply when relevant):
+  - [ ] (P1) Every prose verb is specific and active — no filler *had / got / was / built / made / did* unless intentional. Active verbs do the lifting (*pumped, swallowed, layered, watched*).
+  - [ ] (P2) If post has a named concept, it appears 3 times across the body — mechanism setup → naming with bold → live noun.
+  - [ ] (P3) When the rupture has a permanent aftermath, deploy the *"After X, Y"* consequence marker on its own line as a sister to the "Then" hinge.
+  - [ ] (P4) The one allowed >15-word sentence is the deliberate slowdown that enriches the named concept's mechanism — not a stat sentence or generic claim.
+  - [ ] (P5) **One hero, many witnesses.** Other named entities (host included) populate the speaker's world without getting their own narrative beats. **Audit-trigger:** *"Then [host] asked the question. / [host]: '...'"* — absorb host's question into the speaker's response instead.
+  - [ ] (P6) No qualifier creep on the central claim — drop *"according to X"* / *"X thinks"* / *"X believes"* / *"in X's view"*. The hook's *"says"* covers it.
+  - [ ] (P7) Every prose sentence carries a concrete anchor — named entity, number, date, or sensory detail. Cut generic claims (*"the trajectory was clear"* / *"the market expanded"*) or replace with specifics.
+  - [ ] (P8) Past tense throughout the narrative spine when the source is dated. Present tense reserved for speaker quotes and present-day state of still-existing entities.
 - [ ] **No credential paragraph at body open** (use technique 4 — speaker stake in prose — instead).
 - [ ] Body lands on a sharp line — verbatim quote, paradox, or stark single-sentence statement that earns the engagement Q. **Never a soft summary or "what this means is…" line.**
 
@@ -40,7 +49,7 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 - [ ] **Engagement Q**: open natural question rooted in the post's specific tension, ≤16 words. **Not a formulaic A/B binary** ("Capital or discipline?", "Rent or own?") — those read as button-presses. The Q should invite the reader to apply the post's tension to their own situation. (See `closer-template.md` for examples.)
 - [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, @GeniusGTX is a gallery..."). Not paraphrased.
-- [ ] **P.S. — PAS para 1 is personalized**: opens the wound the post just exposed in 2 short sentences (≤45 words total), tied to the post's central tension.
+- [ ] **P.S. — PAS para 1 is personalized AND short**: 1–2 sentences, **≤30 words total** (aim 18–25), tied to the post's central tension. Long P.S. paras read as "second body" / salesy. Compression makes it feel personal and natural.
 - [ ] **P.S. — playbook plug paragraph + closer line are verbatim** as in `closer-template.md` ("I've made a free playbook... Feynman, Munger, and Musk... 90+ cognitive tools, trusted by 5,000+ founders and investors. / Grab your copy: [URL]").
 - [ ] **Attribution**: format `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around every @handle** so X auto-tags render.
 
