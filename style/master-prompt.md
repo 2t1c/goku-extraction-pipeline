@@ -33,7 +33,16 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 - **No tabloid adjectives.** Banned: shocking, unbelievable, jaw-dropping, mind-blowing, insane, crazy. Let the facts sound sensational on their own.
 - **No recency words.** No "just", "now", "today", "recently", "this week" framing the claim as breaking. Past-tense reportage when the source is dated.
 - **2–4 verbatim quotes per post.** Quotes are exempt from the 15-word cap. Strongest move: end the body with a direct quote OR a tight reflection that earns the engagement Q.
-- **Speaker connectors, used sparingly.** "Naval continues:", "Then Baszucki drops the historical context.", "[Speaker], looking back:" — these connective beats make quotes feel woven into the story rather than air-dropped. Use 1–2 per post; overuse turns into filler.
+- **Quote attribution: vary the technique. Don't tag every quote the same way.** The Andreessen "Eternal September" post is the canonical reference for how to mix attribution naturally. Patterns to rotate through:
+  - **No attribution at all** when the speaker is established and the quote follows a setup sentence that does the work. *"Andreessen says it felt like Athens in 500 BC."* → next line, the quote attaches directly: *"'The most pure, clean, intellectual, vibrant space' since the Greeks."*
+  - **Character stake as attribution.** *"Andreessen, who was building Mosaic at the time, watched it happen."* → next line, the quote: *"'That's the day the internet changed.'"* (Doubles as narrative, not just labeling.)
+  - **Temporal/situational lead.** *"Andreessen, looking back:"* / *"Twenty years later:"* / *"After the breach:"* — leads that frame *when* or *under what conditions*, not just *that the speaker is about to talk*.
+  - **Bare name + colon, used 1× per post max.** *"Baszucki:"* alone is fine **once**. Stacking two of these reads as a transcript heading, not a story. If you find yourself reaching for it three times in a single post, rewrite the surrounding prose so quotes attach naturally.
+  - **Inline quote tucked into prose.** *"He saw the obvious problem early — 'we had no flow control anywhere in the economy' — and the team killed the launch within a week."* (Quote inside a longer narrative sentence.)
+  
+  **The bad pattern to audit:** stacking *"X, on Y:"* labels (e.g., *"Baszucki, on what they built:"* → quote → *"Baszucki, on the answer:"* → quote → *"Baszucki, looking back:"* → quote). Three of those in a row turns the post into a transcript. Use at most one *"X, on Y:"* form per post; for the rest, use the other patterns above or attach the quote directly.
+
+- **Bullet blocks are allowed when the content is genuinely list-shaped.** A 3+ item parallel block (technical components, a list of named entities, a cascade of specifics) can render as a bulleted block when that's the cleanest way to land the rhythm. Default is still inline parallel triplets ("No advertising. No commerce. No spam."), but don't avoid bullets if the list wants to breathe more visually. One bullet block per post max.
 
 ## Required narrative moves (May 2026 update)
 

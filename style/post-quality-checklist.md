@@ -22,10 +22,10 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] **Narrative arc is present** — setup → inciting moment → consequence cascade → reflection → open Q. Reader feels they're walking through a story, not reading a list of claims. **Avoid the insight-stack pattern** (claim → quote → claim → quote).
 - [ ] 2–4 direct verbatim quotes from the transcript.
 - [ ] Reported speech only. No first-person voice in body. No "I think", no "in my view".
-- [ ] **Speaker connectors used 1–2 times max** ("Naval continues:", "Then Baszucki drops the historical context.", "[Speaker], looking back:"). Used sparingly to weave quotes into the narrative — not as default rhythm.
+- [ ] **Quote attribution varies — never the same shape twice in a row.** Rotate through: no attribution at all (quote attaches after a setup sentence), character-stake lead (*"Andreessen, who was building Mosaic at the time, watched it happen."*), temporal/situational lead (*"Andreessen, looking back:"*), bare name + colon (max 1× per post), inline quote inside prose. **Audit-trigger pattern: stacked *"[Speaker], on X:"* labels.** Three of those in a row turns the post into a transcript heading. If you find yourself reaching for it three times, rewrite the surrounding prose so quotes attach naturally.
+- [ ] **Bullet blocks allowed when the content is list-shaped.** 3+ parallel items, 3–6 words each, fragments. Use when the list wants to breathe visually. One bullet block per post max. Default is still inline parallel triplets unless the rhythm calls for bullets.
 - [ ] No tabloid adjectives: no `shocking`, `unbelievable`, `jaw-dropping`, `insane`, `crazy`, `mind-blowing`.
 - [ ] No recency words anywhere in the body.
-- [ ] If bullets are used: 3+ parallel items, 3–6 words each, sentence fragments.
 - [ ] **Body deploys 2–4 named techniques from `body-techniques.md`** (number cascade, dialogue exchange, closing paradox, speaker stake in prose, before/then, named-concept boldface, visual detail trio, end-on-verbatim, hedge preservation). Fewer than 2 = summary, more than 5 = overstuffed.
 - [ ] **Required narrative moves — at least 3 of 5 present** (per master-prompt.md May 2026 update):
   - [ ] (1) Named concept is **bolded** on first use (one per post max). Skip if post has no named concept.

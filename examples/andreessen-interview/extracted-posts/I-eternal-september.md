@@ -57,6 +57,12 @@ Grab your free copy here: https://besuperhuman.gumroad.com/l/mentalmodels
 - **Hook (13 words):** named villain (AOL) + named subject (the early internet) + specific date (September 1993) + dramatic verb (killed).
 - **Named concept boldface:** `**Eternal September**` is the shareable handle — the term someone Googles afterward and finds the Wikipedia article for. Bold so it doesn't get lost in the body.
 - **Three quotes** with escalating weight: the "Athens 500 BC" comparison, "That's the day the internet changed," and the longer reflective summation at the end.
+- **Quote attribution rotates — never the same shape twice.** This is the canonical reference for how to mix attribution naturally:
+  1. *"Andreessen says it felt like Athens in 500 BC."* → quote attaches directly on the next line. **No "X, on Y:" tag.** The setup sentence does the work.
+  2. *"Andreessen, who was building Mosaic at the time, watched it happen."* → quote next. **Character-stake** as attribution; doubles as narrative.
+  3. *"Andreessen, looking back:"* → final quote. **Temporal lead** ("looking back" = decades later), not just a labeling tag.
+  
+  Notice what's NOT here: the post doesn't stack *"Andreessen, on the internet:"* → *"Andreessen, on the change:"* → *"Andreessen, on the aftermath:"*. That pattern reads as transcript heading, not story. Vary the technique every quote.
 - **Naming the speaker's relationship to the event:** "Andreessen, who was building Mosaic at the time, watched it happen." This adds credibility without a separate credential paragraph.
 - **The number cascade:** "two million → next two million → twenty million → five billion." Single beat that compresses 30 years of growth.
 - **Engagement Q (8 words):** "Was AOL right to open the gates?" — binary opinion, simple answer.
