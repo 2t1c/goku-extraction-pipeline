@@ -53,26 +53,44 @@ The P.S. has two paragraphs. The first is **personalized to the post** using PAS
 
 **Para 1 (personalized — write fresh, kept short):** open the wound the post just exposed. **One or two sentences. ≤30 words total.** Anything longer reads as a second body, not a P.S. — and a long P.S. signals "salesy" before the reader gets to the actual product line. The personal feel comes from compression: *"The hour someone else put on your calendar is an hour you can't put on your own. You usually don't notice the trade until years of it have stacked up."* (29 words.) That's the ceiling. Aim for 18–25.
 
-**Para 2 + 3 + closer line (fixed wording):**
+**Para 2 → closer line (fixed wording, split across short paragraphs with blank lines for breathing room):**
 
 ```
-I've made a free playbook on how to use and create your own mental models — the same thinking strategies Feynman, Munger, and Musk built their careers on. Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
+I've made a free playbook on how to use and create your own mental models.
+
+The same thinking strategies Feynman, Munger, and Musk built their careers on.
+
+Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
 
 Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
 ```
 
+**Critical: line spacing on the closer is load-bearing.** The last 4–5 lines of the post are what the reader sees right before deciding to click or scroll past. Cramming them into one dense paragraph reads as overwhelming and salesy. Splitting into 3–4 short paragraphs with blank lines between gives each beat its own moment:
+
+1. *I've made a free playbook…* — the offer
+2. *Feynman, Munger, Musk…* — the authority anchor
+3. *90+ tools, 5,000+ founders…* — the concrete + social proof
+4. *Grab your copy: [URL]* — the action line, completely alone
+
+Each line gets visual whitespace around it. The post breathes at the end instead of dumping everything at the reader.
+
 **Why this structure works:**
 - The PAS para 1 makes the plug feel earned — it grows out of the post's argument instead of being tacked on
-- "Feynman, Munger, and Musk" anchors the product to known authorities (every founder/investor reader respects all three)
-- "90+ cognitive tools" is concrete; "trusted by 5,000+ founders and investors" is social proof targeted to the GeniusGTX audience
-- "Grab your copy:" is the cleanest possible CTA — no "free" filler (the price is implied)
+- The split playbook plug gives each beat (offer / authority / proof / CTA) its own visual moment instead of a wall
+- "Feynman, Munger, and Musk" on its own line anchors the product to known authorities (every founder/investor reader respects all three)
+- "90+ cognitive tools, trusted by 5,000+ founders and investors" on its own line stacks the concrete + social proof
+- "Grab your copy:" is the cleanest possible CTA — no "free" filler (the price is implied), and standing alone with whitespace above and below makes it visually impossible to miss
 
 **Full P.S. example (Baszucki sabbatical post):**
 
 ```
 P.S. The most expensive years of your career are usually the ones spent doing the logical thing instead of the right thing. The cost is invisible until intuition snaps you back — and most people never get that snap.
 
-I've made a free playbook on how to use and create your own mental models — the same thinking strategies Feynman, Munger, and Musk built their careers on. Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
+I've made a free playbook on how to use and create your own mental models.
+
+The same thinking strategies Feynman, Munger, and Musk built their careers on.
+
+Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
 
 Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
 ```
@@ -106,7 +124,11 @@ If you're new here, @GeniusGTX is a gallery for the greatest minds in economics,
 
 P.S. The most expensive years of your career are usually the ones spent doing the logical thing instead of the right thing. The cost is invisible until intuition snaps you back — and most people never get that snap.
 
-I've made a free playbook on how to use and create your own mental models — the same thinking strategies Feynman, Munger, and Musk built their careers on. Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
+I've made a free playbook on how to use and create your own mental models.
+
+The same thinking strategies Feynman, Munger, and Musk built their careers on.
+
+Plus a database of 90+ cognitive tools, trusted by 5,000+ founders and investors.
 
 Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
 
