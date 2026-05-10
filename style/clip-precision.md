@@ -1,89 +1,100 @@
 # Clip Precision — cuts within 100ms of the verbatim cue
 
-The problem: clips were landing 3–10 seconds off the verbatim start/end cues. Diagnosis below, plus the fixes that close the gap.
+The problem: clips were drifting 3–10 seconds off the verbatim start/end cues. Diagnosis below, plus the fixes that close the gap.
 
 ## Why clips drift
 
-Two compounding sources of error:
+Two compounding sources of error in the legacy pipeline:
 
-**(1) Transcript timestamps are chunk-level, not word-level.** The transcript surfaced in source material (e.g. Merlin AI exports for the Dwarkesh podcast) groups 2–7 seconds of audio under a single timestamp. Reading `33:50` off the transcript and passing it to `extract_clip.sh` is already a guess — the actual moment the cue is spoken sits *somewhere inside* that 2–7 second window, biased toward the end if the line is long.
+**(1) Transcript timestamps are chunk-level, not word-level.** The transcript surfaced in source material (e.g. Merlin AI exports for the Dwarkesh podcast) groups 2–7 seconds of audio under a single timestamp. Reading `33:50` off the transcript and passing it to `extract_clip.sh` is already a guess — the actual moment the cue is spoken sits *somewhere inside* that 2–7 second window.
 
 **(2) ffmpeg fast-seek snaps to keyframes.** `extract_clip.sh` uses `-ss` BEFORE `-i` with `-c copy` for ~600× realtime speed. That snaps the cut to the nearest preceding keyframe, which on YouTube source material can be another 1–5 seconds early. Net drift: requested `33:50`, audio actually at `33:53.8`, ffmpeg cuts at `33:48` (keyframe).
 
 By the time both errors stack, the clip can start mid-sentence on a transitional filler instead of on the arresting hook the cue was chosen for.
 
-## Solutions, ranked by impact
+## What's landed
 
-### (T1) Cue-lookup via cached YouTube captions — **landed**
+### (T1) Word-stream cue lookup — `cue_to_timestamp.py`
 
-`scripts/cue_to_timestamp.py` parses cached `.en.vtt` auto-captions and fuzzy-matches the cue's first 3–10 words against the caption stream (lowercased alphanumerics). Returns `START_TS=HH:MM:SS.mmm` with 0.3s head padding and 0.5s tail padding. Caches the .vtt in `~/ytclipper-fast/sources/<video_id>.en.vtt` on first call via `yt-dlp`.
+Parses the cached YouTube `.en.vtt` into a flat `[(timestamp, word), ...]` stream using the inline word-level timestamps (`<HH:MM:SS.sss><c> word</c>`). Drops static caption blocks (≈10 ms duration) and de-duplicates leading-text repeats from rolling caption windows. Result: ~25k unique words for a 3-hour podcast, each with millisecond accuracy.
 
-The bug was that `extract_clip.sh` doesn't call it. Drivers (humans or agents) were passing timestamps directly, often eyeballed off the chunked transcript.
+**Filler stripping** in `norm()` handles `uh`/`um`/`er`/`ah`/`hm`/`you know`/`i mean`/`sort of`/`kind of`/`like`. Both cue text and stream go through the same filter.
 
-### (T2) Frame-accurate two-pass ffmpeg cut — **landed**
+**Punctuation stripped in-place** so `40,000` matches `40000`, `I'm` matches `im`. Matches how YouTube's ASR typically emits numbers and contractions.
 
-`scripts/extract_clip_tight.sh` is the new default extraction entry point. Combines T1 + T2:
+**Skip tolerance in the matcher** — when matching the cue's first 8 tokens against the stream, allow up to 2 missed tokens. Catches `one` vs `1`, `gigabytes` vs `gb`, mistranscribed proper nouns. Threshold for accepting a candidate: `j ≥ n_target - 2`.
+
+**Bidirectional disambiguation** — resolve the END cue first (usually more distinctive), then use its timestamp as an auto-near-hint when searching for the START cue. Cuts the ambiguity rate without operator intervention.
+
+**Loud failure on ambiguity** — when multiple candidate matches survive de-duplication and no `near_sec` hint is provided, the resolver exits with code 4 and prints all candidate timestamps. The wrapper script surfaces this and demands a hint.
+
+Validation pass on 10 real cues from the shipped Musk pipeline: **8/10 resolve cleanly**, 2/10 produce candidate-list errors that resolve with a `near` hint.
+
+### (T2) Frame-accurate two-pass cut — `extract_clip_tight.sh`
+
+The new pipeline default. Combines T1 with a frame-accurate cut:
 
 1. Calls `cue_to_timestamp.py` to resolve cues → ms-accurate timestamps
-2. Pass 1: fast `-ss BEFORE -i` keyframe seek + `-c copy` for a coarse 10-second-buffer slice (~5MB)
+2. Pass 1: fast `-ss BEFORE -i` keyframe seek + `-c copy` for a coarse 5–15 MB slice with 10s tail buffer
 3. Pass 2: accurate `-ss AFTER -i` seek inside the small coarse file with re-encode (`libx264 preset fast crf 22`)
 
-Total cut time: ~5–10 seconds on cached source. Worth the ~5× slowdown vs the legacy keyframe-aligned cut for the precision gain.
+Total cut time: ~30–90 seconds per clip on cached source (mostly Pass 2 re-encoding). Worth the trade vs ~1s for keyframe-aligned cuts in `extract_clip.sh`.
 
 ```bash
 extract_clip_tight.sh \
   "https://www.youtube.com/watch?v=BYXbuik3dgA" \
-  "Can you imagine some mass driver" \
-  "create the solar cells and the radiators on the moon" \
-  musk-mass-driver-moon
+  "It's having the heat shield be reusable" \
+  "laborious inspection of 40,000 tiles" \
+  musk-heat-shield-kills-starship
 ```
 
-`extract_clip.sh` stays around for legacy callers and for cuts that don't correspond to a single spoken phrase (B-roll, music). All new pipeline calls should use `extract_clip_tight.sh`.
+Optional 5th argument is `near_seconds` — pass when the cue could match in multiple places.
 
-### (T3) Boundary validation with whisper-tiny — proposed
+### (T3) Whisper boundary validation — `validate_boundaries.py`
 
-After the cut, run whisper-tiny on the first and last 3 seconds. Verify:
+Optional post-cut step. Transcribes the first 4 seconds and last 4 seconds of the cut clip with `mlx-whisper` (Apple Silicon), `faster-whisper` (cross-platform), or `whisper-cpp` (binary), and fuzzy-matches the transcription against the expected start/end cues.
 
-- First 3s contains ≥4 of the start cue's first 6 words
-- Last 3s contains ≥3 of the end cue's last 5 words
+If no whisper is installed, the script no-ops with a one-line note. Wired into `extract_clip_tight.sh` as a final step.
 
-If either fails, log the drift and either retry with a 1-second-earlier start (auto-heal) or surface the warning to the operator. Catches caption-vs-audio mismatches automatically.
+To enable:
+```
+pip install mlx-whisper        # macOS Apple Silicon (recommended)
+pip install faster-whisper     # cross-platform
+brew install whisper-cpp       # macOS Homebrew binary
+```
 
-Implementation cost: ~50 lines of Python, ~200ms per validation on M-series Mac with whisper.cpp. Defer until we see a T1+T2 failure that this would have caught.
+`extract_clip.sh` stays around for cuts that don't correspond to a single spoken phrase (B-roll, music) and for legacy callers.
 
-### (T4) VAD-based silence snapping — proposed
+## Remaining gotchas
 
-Use Silero VAD or webrtcvad to find the silence gap nearest the requested cut point. Snap to silence so cuts always land between sentences instead of mid-syllable. Eliminates the "starts on a stray consonant" failure mode.
+### (G1) Cues must match what captions actually transcribe
 
-Roughly 100ms refinement on top of T1+T2+T3. Diminishing returns; defer.
+Auto-captions reflect ASR errors and stylistic choices: `1` not `one`, `gb` not `gigabytes`, mistranscribed proper nouns (`Dwarkesh` → `dwar cash`, `Heinlein` → `heinline`). The skip-tolerant matcher absorbs ~2 such mismatches per 8-token target window, but a cue with 4+ words wrong won't resolve.
 
-### (T5) Cue normalization edge cases
-
-`cue_to_timestamp.py` already lowercases and strips punctuation. Known gaps:
-
-- **Contractions:** auto-captions use "don't" while a hand-written cue might say "do not". The fuzzy matcher won't bridge that.
-- **Numerics:** "1.5 GB" in the cue vs "one point five gigabytes" in the captions. Different lexemes entirely.
-- **Filler words:** "I, uh, just want to" in audio vs "I just want to" in the cue.
-
-When cues fail to resolve, the operator should re-write the cue as the captions actually transcribe the line, not as the line "should" read.
-
-## Pipeline rule
-
-The default extraction call is now:
+When a cue fails to resolve, fix it by checking the actual `.en.vtt` near the expected timestamp. Operator-readable command:
 
 ```bash
-extract_clip_tight.sh <url> "<start_cue>" "<end_cue>" <slug>
+grep -A1 "02:09:3" ~/ytclipper-fast/sources/<video_id>.en.vtt
 ```
 
-Operators should only fall back to `extract_clip.sh <url> <HH:MM:SS> <HH:MM:SS> <slug>` for:
+### (G2) Ambiguous cues need a near_seconds hint
 
-- Videos without auto-captions (live streams, very recent uploads, age-restricted)
-- Cuts that don't correspond to a single spoken phrase (B-roll segments, music)
+When the cue's prefix matches multiple distinct locations (e.g. "It's the vanes and blades in the turbines" — Musk repeats this 5 times), the resolver exits with code 4 and lists all candidates. The operator picks the right one and re-runs with the approximate timestamp:
 
-## Audit checklist additions
+```bash
+extract_clip_tight.sh URL "start cue" "end cue" slug 350
+#                                                     ^^^ ~5:50
+```
 
-When `extract_clip_tight.sh` lands as the default, update `post-quality-checklist.md` clip section:
+### (G3) Ambiguity heuristic is end-cue-first
+
+The resolver picks the END cue first and uses its timestamp as a hint for the START cue. This works when the end cue is unique and the clip is short (≤4 minutes between them). For longer clips or when the start cue is the unique one, use a `near_seconds` hint that's closer to the start.
+
+## Audit checklist
+
+`post-quality-checklist.md` should add to the clip section:
 
 - [ ] Clip extracted via `extract_clip_tight.sh` (cue-driven), not raw timestamps
-- [ ] First 3 seconds of clip contain start cue verbatim (manual or whisper-validated)
+- [ ] First 3 seconds of clip contain start cue verbatim (manual check or whisper validation)
 - [ ] Last 3 seconds of clip contain end cue verbatim
+- [ ] If `extract_clip_tight.sh` exited with `AMBIGUOUS=...`, the chosen `near_seconds` hint corresponds to the intended occurrence

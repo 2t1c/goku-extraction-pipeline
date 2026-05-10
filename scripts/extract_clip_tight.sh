@@ -95,17 +95,35 @@ fi
 # ── Step 1: Resolve cues to precise timestamps ────────────────────────────
 echo "[1/3] Resolving cues from cached captions..."
 if [ -n "$NEAR_SEC" ]; then
-  RESOLVED=$("$PYTHON" "$DIR/cue_to_timestamp.py" "$VIDEO_ID" "$START_CUE" "$END_CUE" "$NEAR_SEC")
+  RESOLVED=$("$PYTHON" "$DIR/cue_to_timestamp.py" "$VIDEO_ID" "$START_CUE" "$END_CUE" "$NEAR_SEC" 2>&1) && CUE_EXIT=0 || CUE_EXIT=$?
 else
-  RESOLVED=$("$PYTHON" "$DIR/cue_to_timestamp.py" "$VIDEO_ID" "$START_CUE" "$END_CUE")
+  RESOLVED=$("$PYTHON" "$DIR/cue_to_timestamp.py" "$VIDEO_ID" "$START_CUE" "$END_CUE" 2>&1) && CUE_EXIT=0 || CUE_EXIT=$?
 fi
+
+# Handle the ambiguous-cue exit code (4) loudly.
+if [ "$CUE_EXIT" = "4" ]; then
+  echo "ERROR: cue resolved to multiple locations in the video."
+  echo "$RESOLVED" | grep -E '^(AMBIGUOUS|CANDIDATES)='
+  echo ""
+  echo "Re-run with a near_seconds hint to disambiguate:"
+  echo "  $0 \"$URL\" \"$START_CUE\" \"$END_CUE\" \"$SLUG\" <approx_seconds>"
+  exit 4
+fi
+
+if [ "$CUE_EXIT" != "0" ]; then
+  echo "ERROR: cue_to_timestamp.py did not resolve both cues."
+  echo "$RESOLVED"
+  echo ""
+  echo "Try shorter, more distinctive cue phrases that match the captions"
+  echo "exactly (auto-captions transcribe contractions, fillers, and proper"
+  echo "nouns however YouTube's ASR heard them)."
+  exit 2
+fi
+
 eval "$RESOLVED"
 if [ -z "$START_TS" ] || [ -z "$END_TS" ]; then
-  echo "ERROR: cue_to_timestamp.py did not resolve both cues."
+  echo "ERROR: cue resolver returned empty timestamps."
   echo "       Got: $RESOLVED"
-  echo "       Try shorter, more distinctive cue phrases that match the"
-  echo "       captions exactly. Pass a near_seconds hint if the cue is"
-  echo "       likely to appear multiple times in the video."
   exit 2
 fi
 echo "      Resolved: $START_TS → $END_TS (${DURATION}s)"
@@ -171,3 +189,13 @@ COARSE_DURATION=$(awk -v d="$DURATION" 'BEGIN { printf "%.3f", d + 10 }')
 
 T1=$(date +%s)
 echo "Done in $((T1-T0))s: $OUTPUT ($(du -h "$OUTPUT" | cut -f1))"
+
+# ── Step 4 (optional): Whisper boundary validation ────────────────────────
+# Confirms the actual cut audio contains the expected start/end cues. Catches
+# caption-vs-audio drift, wrong-occurrence matches, and ffmpeg edge cases.
+# No-ops gracefully if no whisper installation is available.
+if [ -f "$DIR/validate_boundaries.py" ]; then
+  echo "[validate] Checking clip boundaries against expected cues..."
+  "$PYTHON" "$DIR/validate_boundaries.py" "$OUTPUT" "$START_CUE" "$END_CUE" || \
+    echo "[validate] Warning: boundary check did not pass. Inspect manually."
+fi
