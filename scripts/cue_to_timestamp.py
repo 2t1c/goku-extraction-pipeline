@@ -48,8 +48,16 @@ def parse_vtt(path):
     return cues
 
 
+_FILLER_RE = re.compile(r'\b(?:uh+|um+|er+|ah+|hm+|mhm+|you know|i mean|sort of|kind of|like)\b', re.IGNORECASE)
+
+
 def norm(x):
-    return re.sub(r'[^\w\s]', '', x.lower()).strip()
+    # Strip filler words first — auto-captions transcribe "uh"/"um" but operators
+    # write cues without them. Both sides go through this filter so they line up.
+    s = _FILLER_RE.sub(' ', x.lower())
+    s = re.sub(r'[^\w\s]', '', s)
+    s = re.sub(r'\s+', ' ', s)
+    return s.strip()
 
 
 def find_cue(cues, phrase, near_sec=None):
