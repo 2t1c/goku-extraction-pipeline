@@ -12,6 +12,7 @@ inputs_required:
   - Notion integration token (env: NOTION_TOKEN)
   - Typefully social set ID (env: TYPEFULLY_SOCIAL_SET_ID)
   - Notion Evergreen Backlog parent data source ID (env: NOTION_EVERGREEN_DS_ID)
+  - Notion Master Index page ID (env: NOTION_MASTER_INDEX_ID) — default `35d04fca179481bd9c79d53bbd42838b`
 ---
 
 # Goku Extraction Pipeline — Skill
@@ -54,6 +55,7 @@ When user approves, execute in parallel batches:
 5. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
 6. **Update parent backlog**: check the corresponding extractable-idea checkbox with link to the new sub-item.
 7. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached and Typefully PUT is fired.
+8. **Append to Master Index** ([Notion page](https://www.notion.so/35d04fca179481bd9c79d53bbd42838b)) — under the parent video's section, add a new bullet: `- [<post-title>](<notion-sub-item-url>)`. Create the parent section if it does not exist yet. This is the human discovery layer that bypasses Notion's weak database search — every Ready-to-Post draft must appear here. Refresh-from-scratch is also valid: query the Evergreen Backlog data source, group by parent video, replace the index page content.
 
 ## Final user-facing message
 

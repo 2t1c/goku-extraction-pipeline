@@ -90,6 +90,26 @@ When the Notion video block is attached AND the Typefully PUT has been fired:
 3. **Warn**: "Don't hand-edit any of the pending drafts in Typefully until I confirm all attaches finished."
 4. Ask: "Next idea?" or continue if user pre-approved a batch.
 
+### 2.5 Append to Master Index (mandatory)
+
+The [📚 Master Index — Evergreen Backlog](https://www.notion.so/35d04fca179481bd9c79d53bbd42838b) is the human discovery layer that bypasses Notion's weak database search. **Every Ready-to-Post draft must appear here.**
+
+After the sub-item flips to `Ready to Post`:
+
+1. Open the Master Index page (ID `35d04fca-1794-81bd-9c79-d53bbd42838b`).
+2. Find the parent video's H2 section (e.g. `## 🎥 [Michael Dell on Founders Podcast — ...](...)`).
+3. Append a new bullet at the bottom of that section: `- [<post-title>](<notion-sub-item-url>)`.
+4. If the parent video section does not exist yet, create it as a new `## 🎥 [<video-title>](<parent-page-url>) · 1 draft` block, then add the bullet under it.
+5. Bump the draft count in the section header (e.g. `· 8 drafts` → `· 9 drafts`).
+
+**Refresh-from-scratch is also valid** when you want a clean rebuild: query the Evergreen Backlog data source via `notion-fetch` on `collection://316f17ad-ba4f-4719-b239-67a38141b0c9`, group by parent video, rebuild the entire page via `notion-update-page` with `replace_content`.
+
+The user can also trigger a full refresh anytime by saying "refresh the master index" in any Claude chat.
+
+### Workflow expectation
+
+The user finds drafts in the Master Index (Ctrl-F on the page) → clicks the @mention → lands on the Notion card → copies the post body (in code block, one-click copy) and the attached clip → pastes into Typefully manually → schedules. The Master Index is the search-layer fix for Notion's database search being unreliable.
+
 ## Phase 3 — Iteration
 
 Default to ideas that connect with named figures the audience knows. For @GeniusGTX, Elon-connected posts have demonstrated highest engagement.
