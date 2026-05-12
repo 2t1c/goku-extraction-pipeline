@@ -52,9 +52,9 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 
 ### 2.1 Setup (parallel — fire all 3 at once)
 
-1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as a `file://` hyperlink so it opens in Finder on click** — format: `[~/Desktop/AI Agents/clips/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<slug>.mp4)` (URL-encode every space as `%20`). See `style/notion-card-rendering.md` §3.
+1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. **`cover.external.url` must be set to a random pick from `config/notion-schema.json:cover_image_recommendations`** — every page (parent video AND sub-item) gets a Notion-gallery cover, never blank, never a YouTube thumbnail. See `style/notion-card-rendering.md` §1. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as a `file://` hyperlink so it opens in Finder on click** — format: `[~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)` (URL-encode every space as `%20`). See `style/notion-card-rendering.md` §3.
 2. **Create Typefully draft** on the configured social set. X platform enabled, unscheduled, share=true. Scratchpad = source URL + clip cues + parent video URL + (sub-item URL once known).
-3. **Cut the clip** via `scripts/extract_clip.sh URL START END` — fast keyframe seek + codec copy. Background process. Outputs to `~/ytclipper-fast/clips/`.
+3. **Cut the clip** via `scripts/extract_clip.sh URL START END <slug> [source_folder]` — fast keyframe seek + codec copy. Background process. Outputs to `~/Desktop/AI Agents/clips/<source_folder>/<slug>.mp4`. If `source_folder` is omitted, the script auto-derives it from the slug's first segment (e.g. `baszucki-roblox-x` → folder `baszucki/`). One folder per parent podcast/video so Finder stays browsable.
 
 ### 2.2 Cross-link (after 2.1 returns)
 

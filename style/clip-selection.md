@@ -32,7 +32,7 @@ When picking a clip for an approved post, run these in order:
 ## Length
 
 - **Sweet spot:** 2:30–3:30
-- **Acceptable floor:** ~1:30 if source material is dense and short
+- **Hard floor:** 1:00 — never under, even when the source feels dense. The clip needs enough breathing room for the speaker to actually deliver an insight, not just a one-liner. If the cue range comes back under 1:00, **extend the end cue** to capture the next coherent beat the speaker delivers, or **back the start cue up** to include more setup (as long as the start line itself isn't a banned transitional/hedge).
 - **Hard ceiling:** 4:00 (algorithm dilutes attention beyond)
 
 ## Captions

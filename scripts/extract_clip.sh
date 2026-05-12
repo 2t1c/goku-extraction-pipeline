@@ -1,17 +1,29 @@
 #!/bin/bash
-# extract_clip.sh — Fast keyframe-seek clip extraction.
+# extract_clip.sh — Fast keyframe-seek clip extraction with auto-foldering by source.
 #
 # Usage:
-#   extract_clip.sh <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug]
+#   extract_clip.sh <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug] [source_folder]
 #
 #   <slug> is optional. When provided, the output file is named "<slug>.mp4"
 #   (lowercase, hyphens). When omitted, falls back to "<VIDEO_ID>_<START>_<END>.mp4".
 #
-#   Slug should match the Notion title and Typefully draft title for consistency
-#   so files are easy to find in Finder. Example:
-#     extract_clip.sh URL 00:34:09 00:36:42 andreessen-ovitz-7am-meeting
+#   <source_folder> is optional. When provided, the clip lands in
+#   "$CLIPS_DIR/<source_folder>/<slug>.mp4" — keeps clips grouped per parent
+#   podcast/video for easy Finder browsing.
 #
-# Output: $CLIPS_DIR (default ~/Desktop/AI Agents/clips/)
+#   When <source_folder> is omitted, the script auto-derives it from the first
+#   segment of <slug> (everything before the first hyphen). So:
+#     - "baszucki-roblox-10m-vs-improbable" → folder "baszucki/"
+#     - "andreessen-ovitz-7am-meeting"      → folder "andreessen/"
+#     - "naval-no-calendar-friend"          → folder "naval/"
+#
+#   Slug should match the Notion sub-item title and Typefully draft title for
+#   consistency. Examples:
+#     extract_clip.sh URL 00:34:09 00:36:42 andreessen-ovitz-7am-meeting
+#     extract_clip.sh URL 00:34:09 00:36:42 andreessen-ovitz-7am-meeting andreessen
+#
+# Output: $CLIPS_DIR/<source_folder>/<slug>.mp4
+#         default $CLIPS_DIR is ~/Desktop/AI Agents/clips/
 #
 # Performance lessons:
 #   1. -ss BEFORE -i = keyframe seek (~1s). -ss after = decode-and-discard (~3-5min for far seeks).
@@ -23,10 +35,11 @@ set -e
 URL="$1"
 START="$2"
 END="$3"
-SLUG="$4"  # optional descriptive filename (lowercase, hyphens)
+SLUG="$4"           # optional descriptive filename (lowercase, hyphens)
+SOURCE_FOLDER="$5"  # optional subfolder; auto-derived from slug prefix if omitted
 
 if [ -z "$URL" ] || [ -z "$START" ] || [ -z "$END" ]; then
-  echo "Usage: $0 <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug]"
+  echo "Usage: $0 <youtube_url> <start HH:MM:SS> <end HH:MM:SS> [slug] [source_folder]"
   exit 1
 fi
 
@@ -41,8 +54,6 @@ SOURCES_DIR="${SOURCES_DIR:-$HOME/ytclipper-fast/sources}"
 # Default to a place visible in Finder, near the user's working folder.
 CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/AI Agents/clips}"
 
-mkdir -p "$SOURCES_DIR" "$CLIPS_DIR"
-
 # Parse YouTube ID from URL (11-char alphanumeric/dash/underscore)
 VIDEO_ID=$(echo "$URL" | grep -oE '[a-zA-Z0-9_-]{11}' | tail -1)
 if [ -z "$VIDEO_ID" ]; then
@@ -55,13 +66,24 @@ SOURCE="$SOURCES_DIR/${VIDEO_ID}.mp4"
 if [ -n "$SLUG" ]; then
   # User-provided slug — sanitize: lowercase, replace whitespace + special chars with hyphens, strip leading/trailing
   SLUG_CLEAN=$(echo "$SLUG" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
-  OUTPUT="$CLIPS_DIR/${SLUG_CLEAN}.mp4"
+
+  # Resolve source folder: explicit arg → use as-is; otherwise derive from slug's first segment
+  if [ -z "$SOURCE_FOLDER" ]; then
+    SOURCE_FOLDER=$(echo "$SLUG_CLEAN" | cut -d'-' -f1)
+  fi
+  SOURCE_FOLDER_CLEAN=$(echo "$SOURCE_FOLDER" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g')
+
+  OUTPUT_DIR="$CLIPS_DIR/$SOURCE_FOLDER_CLEAN"
+  OUTPUT="$OUTPUT_DIR/${SLUG_CLEAN}.mp4"
 else
-  # Fallback: VIDEO_ID + timestamps
+  # Fallback: VIDEO_ID + timestamps, flat in CLIPS_DIR (legacy behavior)
   START_SAFE=$(echo "$START" | tr ':' '-')
   END_SAFE=$(echo "$END" | tr ':' '-')
-  OUTPUT="$CLIPS_DIR/${VIDEO_ID}_${START_SAFE}_${END_SAFE}.mp4"
+  OUTPUT_DIR="$CLIPS_DIR"
+  OUTPUT="$OUTPUT_DIR/${VIDEO_ID}_${START_SAFE}_${END_SAFE}.mp4"
 fi
+
+mkdir -p "$SOURCES_DIR" "$OUTPUT_DIR"
 
 # Step 1: Download source if not cached
 if [ -f "$SOURCE" ]; then

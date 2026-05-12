@@ -91,12 +91,13 @@ Every sub-item post page has a Clip Spec section ending in a "Local clip path:" 
 ### Required format
 
 ```
-- **Local clip path:** [~/Desktop/AI Agents/clips/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<slug>.mp4)
+- **Local clip path:** [~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)
 ```
 
-Two parts:
+Three parts:
 
 - **Visible text:** the human-readable `~/`-rooted path. Easy to read in the card.
+- **`<source>` subfolder:** clips are grouped by source video in subfolders. Auto-derived from the slug's first segment (e.g. `baszucki-roblox-10m-vs-improbable` → folder `baszucki/`). Same speaker on a different show would get its own folder (e.g. `andreessen-senra/`, `andreessen-lex/`).
 - **Underlying URL:** `file:///` + absolute path with **`%20`** in place of every space (URL-encoding is required for spaces, otherwise Notion silently breaks the link).
 
 ### Why URL-encoding matters
@@ -104,8 +105,8 @@ Two parts:
 The folder name is `AI Agents` (with a space). Raw spaces in a `file://` URL break it in Notion. URL-encoded `AI%20Agents` is the only form that survives the Notion editor and clicks correctly.
 
 ```
-✅ file:///Users/toantruong/Desktop/AI%20Agents/clips/dell-bus-past-rice-stock-ticker.mp4
-❌ file:///Users/toantruong/Desktop/AI Agents/clips/dell-bus-past-rice-stock-ticker.mp4
+✅ file:///Users/toantruong/Desktop/AI%20Agents/clips/dell/dell-bus-past-rice-stock-ticker.mp4
+❌ file:///Users/toantruong/Desktop/AI Agents/clips/dell/dell-bus-past-rice-stock-ticker.mp4
 ```
 
 ### What NOT to do
