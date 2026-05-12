@@ -84,6 +84,49 @@ Applies to all 2–4 verbatim quotes in every Goku post body.
 
 The `"..."` marks themselves are sufficient visual signal that a passage is a quote — readers' eyes catch the marks. The vertical-bar styling of Notion's quote block is heavier visual noise that the card doesn't need.
 
+## 3. Local clip path — render as a `file://` hyperlink that opens in Finder
+
+Every sub-item post page has a Clip Spec section ending in a "Local clip path:" line. **The path must be rendered as a clickable hyperlink that opens the file (and its enclosing folder) in macOS.** Clicking it from the Notion desktop app reveals the clip in Finder.
+
+### Required format
+
+```
+- **Local clip path:** [~/Desktop/AI Agents/clips/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<slug>.mp4)
+```
+
+Two parts:
+
+- **Visible text:** the human-readable `~/`-rooted path. Easy to read in the card.
+- **Underlying URL:** `file:///` + absolute path with **`%20`** in place of every space (URL-encoding is required for spaces, otherwise Notion silently breaks the link).
+
+### Why URL-encoding matters
+
+The folder name is `AI Agents` (with a space). Raw spaces in a `file://` URL break it in Notion. URL-encoded `AI%20Agents` is the only form that survives the Notion editor and clicks correctly.
+
+```
+✅ file:///Users/toantruong/Desktop/AI%20Agents/clips/dell-bus-past-rice-stock-ticker.mp4
+❌ file:///Users/toantruong/Desktop/AI Agents/clips/dell-bus-past-rice-stock-ticker.mp4
+```
+
+### What NOT to do
+
+- ❌ **Bare path** (e.g. `~/Desktop/AI Agents/clips/<slug>.mp4` with no link). Notion auto-links the `.mp` prefix as an `http://` URL, producing a broken `[<slug>.mp](http://<slug>.mp)4` artifact that points to nowhere.
+- ❌ **Backslash-escaped tilde** (`\~/Desktop/...`) — the backslash leaks into the rendered text.
+- ❌ **Without `file:///`** — without the scheme, Notion treats it as plain text.
+
+### Click behavior
+
+Clicking the link in the Notion desktop app on macOS:
+1. Hands the `file://` URL to the OS
+2. macOS opens the `.mp4` in the default video player (QuickTime) AND/OR can be configured to reveal in Finder
+3. To always reveal in Finder, the user can also link the parent folder separately as a secondary `[📁 Open clips folder](file:///Users/toantruong/Desktop/AI%20Agents/clips/)` line.
+
+### Applies to
+
+- All sub-item posts created by `scripts/notion_upload.py` (the local-path line in the Clip Spec section).
+- Every Phase 2 sub-item created in `Evergreen Backlog`.
+- The retro-fix path below for any existing cards with broken bare-path renders.
+
 ## Retro-fix script (reference)
 
 If a previously-created card has the wrong cover or curly quotes:

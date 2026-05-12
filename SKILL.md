@@ -62,7 +62,7 @@ When user approves, execute in parallel batches:
 When you finish Phase 2, surface to the user:
 - Notion sub-item URL (Status `Ready to Post`)
 - Typefully draft URLs (text already attached, media PUT fired and processing)
-- Local clip path (manual drag-drop escape hatch): `~/Desktop/AI Agents/clips/<filename>.mp4`
+- Local clip path (manual drag-drop escape hatch): `[~/Desktop/AI Agents/clips/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<slug>.mp4)` — rendered as a clickable file:// hyperlink in the Notion card. Click in the Notion desktop app to reveal the clip in Finder. See `style/notion-card-rendering.md` §3.
 - **Lockout warning**: "Don't hand-edit any pending Typefully drafts until I confirm all media attaches landed."
 
 ## Manual drag-drop fallback

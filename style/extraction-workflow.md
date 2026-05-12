@@ -52,7 +52,7 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 
 ### 2.1 Setup (parallel — fire all 3 at once)
 
-1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. Body content = full post draft + clip spec.
+1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as a `file://` hyperlink so it opens in Finder on click** — format: `[~/Desktop/AI Agents/clips/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<slug>.mp4)` (URL-encode every space as `%20`). See `style/notion-card-rendering.md` §3.
 2. **Create Typefully draft** on the configured social set. X platform enabled, unscheduled, share=true. Scratchpad = source URL + clip cues + parent video URL + (sub-item URL once known).
 3. **Cut the clip** via `scripts/extract_clip.sh URL START END` — fast keyframe seek + codec copy. Background process. Outputs to `~/ytclipper-fast/clips/`.
 
@@ -79,7 +79,7 @@ When the clip file exists:
 
 **Race condition warning (load-bearing):** the user MUST NOT hand-edit Typefully drafts between the PUT and the final PATCH. UI saves can strip media_ids. Tell them explicitly: "Don't touch these drafts until I confirm attaches landed." Lockout window is the slowest clip's encoding time.
 
-**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path (`~/Desktop/AI Agents/clips/<filename>.mp4`) and the draft edit URL. They drag it in. `scripts/typefully_upload.py` still works for headless runs.
+**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path as a `file://` hyperlink (`[~/Desktop/AI Agents/clips/<filename>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<filename>.mp4)`) and the draft edit URL. They click the hyperlink to reveal the clip in Finder, then drag it in. `scripts/typefully_upload.py` still works for headless runs.
 
 ### 2.4 Finalize
 
