@@ -48,21 +48,22 @@ When user approves, execute in parallel batches:
 
 1. **Notion sub-item create** in Evergreen Backlog (status `Adding Media`, parent relation to source video).
 2. **Typefully draft create** on the configured social set (X enabled, unscheduled, share=true).
-3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second.
-4. **When clip lands:**
+3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second. **Side effect:** on first clip from a source, it kicks off `transcribe_source.sh` in background to pre-warm the transcript cache at `~/ytclipper-fast/transcripts/<VIDEO_ID>.srt`.
+4. **Caption the clip** (mandatory) via `scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>` — burns Helvetica 24pt bold captions into the .mp4 in-place. Uses cached full-podcast SRT when available (~3-5s) or falls back to clip-direct whisper (~15-20s). See `style/clip-captioning.md`.
+5. **When captioned clip is ready:**
    - `scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part upload to Notion, attaches as native video block. **Fully automated.**
    - **Typefully parallel API (default):** `POST /v1/media-uploads` then `curl -T FILE PRESIGNED_URL`. Fire and move on. Don't block on encoding. At batch checkpoints, poll pending media_ids and PATCH drafts when each is `ready`. Manual drag-drop only if user explicitly asks or API fails.
-5. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
-6. **Update parent backlog**: check the corresponding extractable-idea checkbox with link to the new sub-item.
-7. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached and Typefully PUT is fired.
-8. **Append to Master Index** ([Notion page](https://www.notion.so/35d04fca179481bd9c79d53bbd42838b)) — under the parent video's section, add a new bullet: `- [<post-title>](<notion-sub-item-url>)`. Create the parent section if it does not exist yet. This is the human discovery layer that bypasses Notion's weak database search — every Ready-to-Post draft must appear here. Refresh-from-scratch is also valid: query the Evergreen Backlog data source, group by parent video, replace the index page content.
+6. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
+7. **Update parent backlog**: check the corresponding extractable-idea checkbox with link to the new sub-item.
+8. **Advance Notion status** `Adding Media` → `Ready to Post` once the Notion video block is attached and Typefully PUT is fired.
+9. **Append to Master Index** ([Notion page](https://www.notion.so/35d04fca179481bd9c79d53bbd42838b)) — under the parent video's section, add a new bullet: `- [<post-title>](<notion-sub-item-url>)`. Create the parent section if it does not exist yet. This is the human discovery layer that bypasses Notion's weak database search — every Ready-to-Post draft must appear here. Refresh-from-scratch is also valid: query the Evergreen Backlog data source, group by parent video, replace the index page content.
 
 ## Final user-facing message
 
 When you finish Phase 2, surface to the user:
 - Notion sub-item URL (Status `Ready to Post`)
 - Typefully draft URLs (text already attached, media PUT fired and processing)
-- Local clip path (manual drag-drop escape hatch): `[~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)` — rendered as a clickable file:// hyperlink in the Notion card. Click in the Notion desktop app to reveal the clip in Finder. **Clips are grouped by source (parent podcast/video) in subfolders** — `<source>` is auto-derived from the slug's first segment (e.g. `baszucki`, `andreessen`, `naval`). See `style/notion-card-rendering.md` §3.
+- Local clip path (manual drag-drop escape hatch): `~/Desktop/AI Agents/clips/<source>/<slug>.mp4` rendered as **bold "Local clip path: " + code-styled inline path, NO link annotation** — Notion's markdown parser strips `file://` URLs and Notion's REST API rejects them with `"Invalid URL for link."` To open in Finder: copy the path and run `open <path>` in Terminal, or paste into Notion UI's Cmd-K dialog (the desktop app accepts `file://` when typed by a human). **Clips are grouped by source (parent podcast/video) in subfolders** — `<source>` is auto-derived from the slug's first segment (e.g. `baszucki`, `andreessen`, `naval`, `dell`). Same shape for optional `Local SRT path:` line. See `style/notion-card-rendering.md` §3.
 - **Lockout warning**: "Don't hand-edit any pending Typefully drafts until I confirm all media attaches landed."
 
 ## Manual drag-drop fallback

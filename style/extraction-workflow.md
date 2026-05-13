@@ -52,7 +52,7 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 
 ### 2.1 Setup (parallel — fire all 3 at once)
 
-1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. **`cover.external.url` must be set to a random pick from `config/notion-schema.json:cover_image_recommendations`** — every page (parent video AND sub-item) gets a Notion-gallery cover, never blank, never a YouTube thumbnail. See `style/notion-card-rendering.md` §1. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as a `file://` hyperlink so it opens in Finder on click** — format: `[~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)` (URL-encode every space as `%20`). See `style/notion-card-rendering.md` §3.
+1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. **`cover.external.url` must be set to a random pick from `config/notion-schema.json:cover_image_recommendations`** — every page (parent video AND sub-item) gets a Notion-gallery cover, never blank, never a YouTube thumbnail. See `style/notion-card-rendering.md` §1. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as bold-label + code-styled inline path with NO link annotation** (Notion's markdown parser breaks `file://` URLs into broken `http://` auto-links; the REST API rejects `file://` outright). The slug's first segment determines the subfolder under `clips/` (e.g. `dell-*` → `clips/dell/`). See `style/notion-card-rendering.md` §3.
 2. **Create Typefully draft** on the configured social set. X platform enabled, unscheduled, share=true. Scratchpad = source URL + clip cues + parent video URL + (sub-item URL once known).
 3. **Cut the clip** via `scripts/extract_clip.sh URL START END <slug> [source_folder]` — fast keyframe seek + codec copy. Background process. Outputs to `~/Desktop/AI Agents/clips/<source_folder>/<slug>.mp4`. If `source_folder` is omitted, the script auto-derives it from the slug's first segment (e.g. `baszucki-roblox-x` → folder `baszucki/`). One folder per parent podcast/video so Finder stays browsable.
 
@@ -62,9 +62,32 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 2. Patch the Typefully scratchpad with the Notion sub-item URL.
 3. Update the parent video page's "extractable ideas" checklist — check the corresponding box and add a link to the new sub-item.
 
-### 2.3 Upload media — Notion API + Typefully parallel API (default)
+### 2.3 Caption the clip (mandatory)
 
-When the clip file exists:
+After `extract_clip.sh` writes the .mp4, burn captions in-place:
+
+```bash
+bash scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>
+```
+
+The script picks the fastest path automatically:
+
+- **Cache hit** (full-podcast SRT already at `~/ytclipper-fast/transcripts/<video-id>.srt`):
+  slice by `[clip_start, clip_end]`, burn — **~3-5s**.
+- **Cache miss**: run whisper.cpp on the clip directly, burn — ~15-20s.
+
+`extract_clip.sh` pre-warms the cache by triggering `transcribe_source.sh` in
+the background as soon as a fresh source is downloaded, so the first clip from
+a new podcast usually misses the cache and every clip after that hits it.
+
+The captioned .mp4 overwrites the original path — no downstream upload changes
+needed. Style is **Helvetica 24pt bold, 1.5px black outline + 1.5px soft
+shadow, bottom-centered 50px margin**. See `style/clip-captioning.md` for the
+full spec, deps, and rationale.
+
+### 2.4 Upload media — Notion API + Typefully parallel API (default)
+
+When the captioned clip file exists:
 
 1. **Notion (automated):** `python3 scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part File Upload API + attach as native video block. ~10–20 sec per file.
 2. **Typefully (parallel API, automated):** Fire the PUT immediately. Don't block on the encoding queue.
@@ -79,9 +102,9 @@ When the clip file exists:
 
 **Race condition warning (load-bearing):** the user MUST NOT hand-edit Typefully drafts between the PUT and the final PATCH. UI saves can strip media_ids. Tell them explicitly: "Don't touch these drafts until I confirm attaches landed." Lockout window is the slowest clip's encoding time.
 
-**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path as a `file://` hyperlink (`[~/Desktop/AI Agents/clips/<filename>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<filename>.mp4)`) and the draft edit URL. They click the hyperlink to reveal the clip in Finder, then drag it in. `scripts/typefully_upload.py` still works for headless runs.
+**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path as plain text (`~/Desktop/AI Agents/clips/<source>/<filename>.mp4`) and the draft edit URL. They copy the path, run `open <path>` in Terminal to reveal it in Finder, then drag it in. `scripts/typefully_upload.py` still works for headless runs.
 
-### 2.4 Finalize
+### 2.5 Finalize
 
 When the Notion video block is attached AND the Typefully PUT has been fired:
 
@@ -90,7 +113,7 @@ When the Notion video block is attached AND the Typefully PUT has been fired:
 3. **Warn**: "Don't hand-edit any of the pending drafts in Typefully until I confirm all attaches finished."
 4. Ask: "Next idea?" or continue if user pre-approved a batch.
 
-### 2.5 Append to Master Index (mandatory)
+### 2.6 Append to Master Index (mandatory)
 
 The [📚 Master Index — Evergreen Backlog](https://www.notion.so/35d04fca179481bd9c79d53bbd42838b) is the human discovery layer that bypasses Notion's weak database search. **Every Ready-to-Post draft must appear here.**
 

@@ -89,7 +89,7 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 - [ ] Notion sub-item title matches the post hook claim (or a short distillation)
 - [ ] Topic Tags set (1–4 from the schema)
 - [ ] Parent video relation linked
-- [ ] Local clip path in body for manual fallback, rendered as a `file://` hyperlink (URL-encode spaces as `%20`): `[~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)`. Bare paths break — Notion auto-links the `.mp` prefix as an http URL. See `notion-card-rendering.md` §3.
+- [ ] Local clip path in body rendered via the Notion API as a `bulleted_list_item` with `rich_text` of `"Local clip path: "` (bold) + `"~/Desktop/AI Agents/clips/<source>/<slug>.mp4"` (code-styled, NO link annotation). Do NOT use markdown `[text](file://...)` syntax — Notion's parser strips it and inserts a broken `http://` auto-link. Do NOT set a `file://` link annotation — the REST API returns `"Invalid URL for link."` See `notion-card-rendering.md` §3.
 - [ ] **Cover image set** to a random pick from `config/notion-schema.json:cover_image_recommendations` (both parent video page AND sub-item). Not a YouTube thumbnail. See `notion-card-rendering.md`.
 - [ ] **Verbatim quotes rendered as `paragraph` blocks** with straight `"..."` ASCII marks. Never `quote` block type — Notion curly-quotes the content and breaks copy-paste to X. See `notion-card-rendering.md`.
 

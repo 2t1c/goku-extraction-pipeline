@@ -84,49 +84,44 @@ Applies to all 2–4 verbatim quotes in every Goku post body.
 
 The `"..."` marks themselves are sufficient visual signal that a passage is a quote — readers' eyes catch the marks. The vertical-bar styling of Notion's quote block is heavier visual noise that the card doesn't need.
 
-## 3. Local clip path — render as a `file://` hyperlink that opens in Finder
+## 3. Local clip path — render as code-styled plain text (Notion API blocks `file://` links)
 
-Every sub-item post page has a Clip Spec section ending in a "Local clip path:" line. **The path must be rendered as a clickable hyperlink that opens the file (and its enclosing folder) in macOS.** Clicking it from the Notion desktop app reveals the clip in Finder.
+Every sub-item post page has a Clip Spec section with a "Local clip path:" line. **The path is rendered as code-styled plain text, NOT as a hyperlink.** A previous version of this doc instructed using `file://` URLs; that approach is now known not to work and is documented here so no future agent re-introduces it.
 
 ### Required format
 
-```
-- **Local clip path:** [~/Desktop/AI Agents/clips/<source>/<slug>.mp4](file:///Users/toantruong/Desktop/AI%20Agents/clips/<source>/<slug>.mp4)
-```
+The clip path bullet is built via the Notion API as a `bulleted_list_item` block whose `rich_text` is two segments:
 
-Three parts:
+1. `"Local clip path: "` with `bold: true`
+2. `"~/Desktop/AI Agents/clips/<source>/<slug>.mp4"` with `code: true` (no `link` field)
 
-- **Visible text:** the human-readable `~/`-rooted path. Easy to read in the card.
-- **`<source>` subfolder:** clips are grouped by source video in subfolders. Auto-derived from the slug's first segment (e.g. `baszucki-roblox-10m-vs-improbable` → folder `baszucki/`). Same speaker on a different show would get its own folder (e.g. `andreessen-senra/`, `andreessen-lex/`).
-- **Underlying URL:** `file:///` + absolute path with **`%20`** in place of every space (URL-encoding is required for spaces, otherwise Notion silently breaks the link).
+Same shape for SRT:
 
-### Why URL-encoding matters
+1. `"Local SRT path: "` with `bold: true`
+2. `"~/Desktop/AI Agents/clips/<source>/<slug>.srt"` with `code: true` (no `link` field)
 
-The folder name is `AI Agents` (with a space). Raw spaces in a `file://` URL break it in Notion. URL-encoded `AI%20Agents` is the only form that survives the Notion editor and clicks correctly.
+**Do not send markdown like `[text](file://...)`** via the MCP create-pages tool — Notion's markdown parser strips `file://` URLs, then auto-links the bare `.mp` prefix as `http://`, producing a broken `[<slug>.mp](http://<slug>.mp)4` artifact.
 
-```
-✅ file:///Users/toantruong/Desktop/AI%20Agents/clips/dell/dell-bus-past-rice-stock-ticker.mp4
-❌ file:///Users/toantruong/Desktop/AI Agents/clips/dell/dell-bus-past-rice-stock-ticker.mp4
-```
+**Do not send rich_text with `link.url: "file:///..."`** via the raw Notion API — the endpoint returns `400 Invalid URL for link.`
 
-### What NOT to do
+### Why this is the right call
 
-- ❌ **Bare path** (e.g. `~/Desktop/AI Agents/clips/<slug>.mp4` with no link). Notion auto-links the `.mp` prefix as an `http://` URL, producing a broken `[<slug>.mp](http://<slug>.mp)4` artifact that points to nowhere.
-- ❌ **Backslash-escaped tilde** (`\~/Desktop/...`) — the backslash leaks into the rendered text.
-- ❌ **Without `file:///`** — without the scheme, Notion treats it as plain text.
+Two hard constraints from Notion as of May 2026:
 
-### Click behavior
+1. **Markdown layer:** the MCP `notion-create-pages` tool's markdown parser does not preserve `file://` URLs. They get dropped and a broken `http://` auto-link is inserted instead.
+2. **REST API layer:** `PATCH /v1/blocks/<id>` with a `rich_text` containing `link.url` starting with `file://` returns `"Invalid URL for link."` Notion only accepts `http://` and `https://` schemes.
 
-Clicking the link in the Notion desktop app on macOS:
-1. Hands the `file://` URL to the OS
-2. macOS opens the `.mp4` in the default video player (QuickTime) AND/OR can be configured to reveal in Finder
-3. To always reveal in Finder, the user can also link the parent folder separately as a secondary `[📁 Open clips folder](file:///Users/toantruong/Desktop/AI%20Agents/clips/)` line.
+Plain code-styled text dodges both. The user can copy the path with one click on the inline-code background, then run `open <path>` in Terminal (which reveals the file's parent folder in Finder), or paste the path into Notion's Cmd-K link dialog manually — the Notion **desktop app** accepts `file://` when typed by a human, just not when posted via API.
+
+### Subfolder rule
+
+Clips are grouped by source video in subfolders. Auto-derived from the slug's first segment (e.g. `baszucki-roblox-10m-vs-improbable` → folder `baszucki/`). Same speaker on a different show gets its own folder (e.g. `andreessen-senra/`, `andreessen-lex/`).
 
 ### Applies to
 
-- All sub-item posts created by `scripts/notion_upload.py` (the local-path line in the Clip Spec section).
+- All sub-item posts created by `scripts/notion_upload.py` (the local-path bullets in the Clip Spec section).
 - Every Phase 2 sub-item created in `Evergreen Backlog`.
-- The retro-fix path below for any existing cards with broken bare-path renders.
+- The retro-fix path: any existing card with a broken `[<slug>.mp](http://<slug>.mp)4` artifact should be PATCHed to the plain code-styled rich_text shape above.
 
 ## Retro-fix script (reference)
 
