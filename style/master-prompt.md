@@ -12,15 +12,15 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 ## Hook format
 
 ```
-[Speaker] says [named actor] [violent verb] [named target] [specific anchor].
+[Credentialed Name] says [named actor] [violent verb] [named target] [specific anchor].
 ```
 
-- **≤15 words.** Hard ceiling. Aim 11–14.
+- **Target 15 words. Hard cap 17.** 11–14 is the sweet spot; 16–17 allowed when the extra word(s) preserve credential strength or a specific anchor. At 18+, trim — drop articles/adverbs/full first names, never the credential.
 - **Default verb is `says`.** Alternatives allowed for variety and curiosity-gap framing: `reveals`, `exposes`, `warns`, `admits`, `confesses`, `predicts`. Use `says` ~70% of the time; reach for the others when the angle benefits from the extra anticipation (a hidden mechanism, a confession, a stark warning). Still banned: `just revealed`, `recently said`, `claims`, `argues`. Source podcasts are dated; recency words read as dishonest. (See `no-recency-words.md`.)
 - **Violent verb is non-negotiable.** `killed`, `crushed`, `lit on fire`, `broke`, `swallowed`, `wiped out`, `buried`, `gutted`, `flipped`. **Bland verbs (`built`, `created`, `started`, `worked on`) are not Goku hooks** — they describe instead of dramatize. Full list + worked transformations in `hook-recipe.md`.
 - **Named actor + named target.** Both must be specific entities (person, company, place). Not "a founder" or "Big Pharma" — `Elon`, `AOL`, `Hollywood`.
 - **One specific anchor.** Number, date, or visual detail (`$180 million`, `September 1993`, `20 identical Jaguars`). Exactly one — zero is vague, three is a list.
-- Credential prefix only if the bare name is weak (`Dr.`, `Netscape founder`, `Sequoia's`). Pick the shortest phrase that establishes authority.
+- **Credential prefix is the default, not the exception.** Format: `[Title / role / company] [Name]`, under 6 words. Pick the **most powerful** phrasing for a cold reader, not the shortest. Examples: `Netscape founder Marc Andreessen`, `Tesla CEO Elon Musk`, `Roblox CEO David Baszucki`, `Renaissance historian Ada Palmer`, `Harvard anthropologist Joseph Henrich`. Drop the prefix only when it would be redundant filler. **Never lead with a `$` valuation** — money/scale anchors live in the claim, not on the credential.
 
 **Read `hook-recipe.md` before drafting.** Bland-vs-Goku transformations live there.
 
