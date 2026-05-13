@@ -82,9 +82,11 @@ Brand names (Armani, Sulka, Jaguar). Specific counts (twenty, twenty). Specific 
 
 Use when the speaker provides cinematic detail. Don't invent details to fill the slot — readers can tell.
 
-## 8. End the body on a verbatim quote
+## 8. End the body on a verbatim quote OR a reflective one-liner
 
-Highest-leverage move. Let the speaker have the last word before the engagement question.
+Highest-leverage move. Let the speaker have the last word — or land a reflective one-liner that pays off the central tension.
+
+(On the `experimental-hemingway` branch, there is no engagement question following the body. The body's last line **is** the close. See `closer-template.md`.)
 
 > Andreessen, looking back:
 >
@@ -105,6 +107,39 @@ If the speaker hedges in the source (`I think it was Adeo Ressi, or someone…`)
 > The friend (Andreessen thinks it was Adeo Ressi) sat Elon down before he started SpaceX.
 
 Don't confidently attribute what the speaker hedged. The hedge is part of the truth — and stripping it makes the post fragile to fact-checks.
+
+## 10. Setup-before-long-quote
+
+**Rule:** any verbatim quote longer than ~15 words gets a plain-English setup sentence in front of it. The setup tells the reader what the quote is going to do, in 4th-grade vocabulary. Then the quote can use its full register — Musk's `shucking tiles`, Andreessen's `ivory tower`, Palmer's `philosopher princes` — without losing the reader.
+
+**Before (drops the reader cold):**
+
+> "It's gotta make it through the ascent phase without shucking a bunch of tiles, and then it's gotta come back in and also not lose a bunch of tiles or overheat the main airframe."
+
+The reader has to parse `shucking tiles` and `ascent phase` without any anchor. By the time they figure it out, they've stopped reading.
+
+**After (setup carries the reader in):**
+
+> The shield has two jobs and they fight each other.
+>
+> Going up, it has to survive the ascent without losing tiles. Coming back down, it has to hold the airframe together through reentry without burning through.
+>
+> *"It's gotta make it through the ascent phase without shucking a bunch of tiles, and then it's gotta come back in and also not lose a bunch of tiles or overheat the main airframe."*
+
+The reader now has the concept in plain English before they hit the technical quote. The quote becomes texture and authority — Musk's actual voice on the problem — instead of a wall the reader has to climb.
+
+**When the setup is required:**
+- Quote contains jargon (`shucking`, `airframe`, `consensus mechanism`, `quorum`)
+- Quote contains a proper noun the audience doesn't know cold (`Brutus`, `Marsilio Ficino`, `the Officers of the Night`)
+- Quote is longer than ~20 words
+- Quote uses sentence structure that takes a second pass to parse
+
+**When you can skip the setup:**
+- Quote is short (≤15 words) and self-contained
+- Quote is the **payoff** of a setup the prose already did
+- Quote IS the named concept (`"It became known as the Eternal September."`)
+
+The setup is what keeps the body at 6–7th grade reading level even when the speaker's quotes naturally sit at 10–12th. See `hemingway-clarity.md`.
 
 ## Combining techniques — the gold-standard pattern
 

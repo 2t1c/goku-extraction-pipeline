@@ -105,12 +105,14 @@ Plus the universal building blocks:
 
 Strong posts deploy 3–4 techniques. Fewer than 2 reads as a summary. More than 5 feels overstuffed.
 
-## Closer (4 parts, in order)
+## Closer (4 parts, in order — experimental Hemingway branch)
 
-1. **Engagement Question** — simple binary opinion question (e.g. *"Genius — or ruthless?"*). See `closer-template.md`.
-2. **Brand CTA (verbatim).**
-3. **P.S. Product CTA (verbatim).**
+1. **Body One-Liner Close** — the last line of the body itself, a reflective punch that lands the post's central tension. **No engagement question follows.** See `closer-template.md`.
+2. **Product CTA (verbatim).**
+3. **Brand CTA (verbatim).**
 4. **Attribution** — `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around handles** so X auto-tags render.
+
+> **Note (this branch):** The engagement question (`"Genius — or ruthless?"`, `"Capital or discipline?"`, etc.) is **deprecated**. Every post ends the body on a reflective one-liner — no quiz prompt, no question. Rationale: every post ending on the same beat made the feed feel templated. Statement closes feel like essays. See `closer-template.md` §1.
 
 (See `closer-template.md` for the verbatim wording of items 2–3 and the attribution format.)
 
@@ -120,21 +122,25 @@ Strong posts deploy 3–4 techniques. Fewer than 2 reads as a summary. More than
 - **Tier 2 (100K–500K):** cutting-edge science; named insiders who got it wrong; paradigm-break corporate stories.
 - **Tier 3 (50K–150K):** quirky historical facts; founder origin stories; cultural pattern posts.
 
-## Virality stress test (run before delivering)
+## Virality stress test (run before delivering — Hemingway branch)
 
-- [ ] Hook: `[Speaker] says [actor] [VIOLENT VERB] [target] [anchor]`, ≤15 words
+- [ ] Hook: `[Credentialed Name] says [actor] [VIOLENT VERB] [target] [anchor]`, target 15 words / hard cap 17
+- [ ] Hook has credentialed-name prefix (title + role + name under 6 words — *not* shortest, *most powerful*)
+- [ ] Hook does NOT lead with a `$` valuation (money/scale lives in the claim, not the prefix)
 - [ ] Hook verb is from the violent-verb list (`killed`, `crushed`, `lit on fire`, etc.) — **not** `built`, `created`, `said`, `revealed`
 - [ ] Hook has named actor AND named target (both specific entities)
 - [ ] Hook has exactly one specific anchor (number, date, or visual detail)
+- [ ] When `one X` vs `count of X` are both options, hook leads with `one` (curiosity lever — see `hook-recipe.md`)
 - [ ] Hook has no recency words ("just", "now", "today", "recently")
-- [ ] Body: 240–250 words (count it, don't estimate)
+- [ ] Body: 240–260 words (count it, don't estimate)
 - [ ] Every prose sentence ≤15 words (at most one exception)
 - [ ] 2–4 direct verbatim quotes
 - [ ] Reported speech only — no first-person, no tabloid adjectives
 - [ ] Body deploys 2–4 named techniques from `body-techniques.md`
-- [ ] Body ends on a verbatim quote, paradox, or sharp single-sentence statement (never a soft summary)
-- [ ] Engagement Q is a simple binary, not "where in your life"
-- [ ] Brand CTA + P.S. Product CTA verbatim
+- [ ] **No engagement question.** Body ends on a reflective one-liner that lands the central tension.
+- [ ] Long verbatim quotes are preceded by a plain-English setup sentence (don't drop the reader cold into jargon).
+- [ ] Hemingway clarity pass run — see `hemingway-clarity.md` 5-rule audit (plain verbs, one idea per sentence, concrete nouns, no jargon, active voice).
+- [ ] Product CTA + Brand CTA verbatim
 - [ ] Attribution has spaces inside parentheses on handles
 
 If any box is unchecked, rewrite before delivering.
@@ -142,11 +148,12 @@ If any box is unchecked, rewrite before delivering.
 ## Reading order for new agents
 
 1. This file (you are here).
-2. `hook-recipe.md` — the violent-verb hook formula. **Read before drafting any hook.**
-3. `body-techniques.md` — number cascades, dialogue exchanges, closing paradoxes, speaker stake.
-4. `closer-template.md` — closer details.
-5. `word-count.md` — how to hit 240–250 without padding.
-6. `no-recency-words.md` — the ban list and replacements.
-7. `clip-selection.md` — clip pick after you've drafted.
-8. `extraction-workflow.md` — Phase 1 / Phase 2 mechanics.
-9. `examples/andreessen-interview/extracted-posts/` — worked examples of finished posts.
+2. `hook-recipe.md` — credential rule, violent-verb formula, 15-word target / 17-word cap, "one X" framing. **Read before drafting any hook.**
+3. `hemingway-clarity.md` — the 5 readability rules (plain verbs, one idea per sentence, concrete nouns, no jargon, active voice). **Read before drafting any body.**
+4. `body-techniques.md` — number cascades, dialogue exchanges, closing paradoxes, speaker stake.
+5. `closer-template.md` — closer details. **No engagement Q on this branch.**
+6. `word-count.md` — how to hit 240–250 without padding.
+7. `no-recency-words.md` — the ban list and replacements.
+8. `clip-selection.md` — clip pick after you've drafted.
+9. `extraction-workflow.md` — Phase 1 / Phase 2 mechanics.
+10. `examples/andreessen-interview/extracted-posts/` — worked examples of finished posts.

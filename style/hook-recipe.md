@@ -75,6 +75,38 @@ Every hook has exactly one specific concrete:
 
 If a hook has zero anchors it sounds vague. If it has three it sounds like a list. Pick the sharpest one and front-load it.
 
+## "One X" framing — when one beats many
+
+When you can choose between `one [thing]` and a specific count like `40,000 [things]`, **prefer "one"** for the hook. Counterintuitive, but it's a curiosity lever:
+
+- A large number tells the reader the size of the problem upfront. They know how big it is. They have an answer.
+- `One X` forces the reader to ask *which one?* It opens a loop the body has to close.
+
+**Examples (experimental-hemingway branch):**
+
+✅ `Elon Musk says one heat shield problem could kill Starship's reusability for years.`
+- Reader thinks: *which one problem?* They click to find out.
+
+❌ `Elon Musk says 40,000 tiles could kill Starship's reusability for years.`
+- Reader already has the size of the problem. Less mystery. The 40,000 anchor belongs in the body, where it pays off the open loop.
+
+---
+
+✅ `Ada Palmer says one Renaissance city was so notorious that visiting it once was court evidence in France.`
+- *Which city? What evidence?* Loop opens.
+
+❌ `Ada Palmer says Florence so dominated sodomy that France used it as court evidence.`
+- All the named entities are spent in the hook. Loop pre-closes.
+
+---
+
+**When to use the count anyway:**
+
+- The count IS the shock and there's no path to "one" framing — `Musk says SpaceX will launch 10,000 Starships a year — one every hour.` (Here the count IS the claim; trying to obscure it makes the hook weaker.)
+- The count is a paradox-anchor, not a quantity-anchor — `Andreessen says AOL killed the early internet on a single day in September 1993.` ("A single day" works *because* it's small, not despite being a count.)
+
+**Rule of thumb:** if the body's job is to reveal a specific concrete answer, hide that answer in the hook. Lead with `one` and let the body deliver the number, the name, or the visual.
+
 ## Worked transformations
 
 **Bland → Goku:**
