@@ -70,7 +70,7 @@ That's it. Same on every post. Drop it in.
 ### 3. Brand CTA (verbatim — never change, comes AFTER Product CTA)
 
 ```
-If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
+If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 ```
 
 **Why fixed beats personalized:**
@@ -101,7 +101,7 @@ Format:
 - The Feynman/Munger/Musk strategist credential line and the "Trusted by 5,000+ founders and investors" social proof line are both **deprecated** — current P.S. is just the offer line + the pain/desire one-liner + the comment-to-DM mechanic.
 - The earlier PAS-personalized P.S. para 1 (with theme-tied agitation) is **deprecated** — the P.S. is now drop-in fixed wording on every post.
 - **The earlier Product CTA order (pain line first → offer → DM mechanic) is deprecated.** Current order leads with the offer (*"P.S. I made a full playbook..."*), then the pain/desire one-liner (*"So if you want to stop overthinking..."*), then the DM mechanic. Lead with what the product is, not with what's wrong with the reader.
-- The earlier Brand CTA wording (*"@GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content."*) is **deprecated**. Current Brand CTA is the shorter version: *"If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history."*
+- The earlier Brand CTA wording (*"@GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content."*) is **deprecated**. Current Brand CTA is the shorter version: *"If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history."*
 - Formulaic A/B binary engagement questions (`"Genius — or ruthless?"`, `"Capital or discipline?"`) are **deprecated**.
 - **All engagement questions of any form are deprecated on the `experimental-hemingway` branch.** The body itself ends on a reflective one-liner. No question prompt follows the body. Rationale: every post ending on the same quiz-prompt beat made the feed feel templated. Statement closes feel like essays. See "1. Body One-Liner Close" above.
 
@@ -116,7 +116,7 @@ So if you want to stop overthinking, control chaos, and navigate any decision wi
 
 Comment "models" and follow @GeniusGTX so I can DM you a copy.
 
-If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
+If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 
 — Ada Palmer ( @Ada_Palmer ), Renaissance historian at the University of Chicago, on Dwarkesh Patel's ( @dwarkesh_sp ) podcast
 ```

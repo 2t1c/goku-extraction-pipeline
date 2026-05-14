@@ -63,7 +63,7 @@ Order on the `experimental-hemingway` branch: **Body One-Liner Close → P.S. (P
 
   Comment "models" and follow @GeniusGTX so I can DM you a copy.
   ```
-- [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history."). Not paraphrased.
+- [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history."). Not paraphrased.
 - [ ] **Whitespace audit on the entire post.** One sentence per line is the default. Blank lines between every paragraph. The post should look airy on the page, not like a chunk. The reader's eyes should never hit a wall of text — especially in the closer.
 - [ ] **Attribution**: format `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around every @handle** so X auto-tags render.
 

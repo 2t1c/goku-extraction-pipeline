@@ -45,7 +45,7 @@ The 90-year-old agency model never recovered.
 
 Genius — or just ruthless?
 
-If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
+If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 
 P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 

@@ -41,7 +41,7 @@ Most founders never come back from a detour like that. They keep applying to com
 
 How many people are walking past their own vision because the logical path looks safer?
 
-If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
+If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 
 P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 

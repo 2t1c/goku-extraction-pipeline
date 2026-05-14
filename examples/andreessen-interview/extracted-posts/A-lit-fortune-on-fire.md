@@ -45,7 +45,7 @@ But he was right about the fire.
 
 What "you're going to light your fortune on fire" warning have you ignored — and were glad you did?
 
-If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
+If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 
 P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
