@@ -96,6 +96,15 @@ else
     "$URL" 2>&1 | tail -5
 fi
 
+# Step 1.5: Kick off background transcribe of full source (idempotent, no-op if cached or already running).
+# This pre-warms ~/ytclipper-fast/transcripts/<VIDEO_ID>.srt so per-clip captioning becomes a 3-5s
+# SRT slice + ffmpeg burn-in instead of a 15-20s whisper-on-clip run. See style/clip-captioning.md.
+TRANSCRIBE_SCRIPT="$(dirname "$0")/transcribe_source.sh"
+if [ -x "$TRANSCRIBE_SCRIPT" ]; then
+  nohup bash "$TRANSCRIBE_SCRIPT" "$VIDEO_ID" > /tmp/transcribe-${VIDEO_ID}.log 2>&1 &
+  disown || true
+fi
+
 # Step 2: Cut clip — fast keyframe seek + codec copy
 echo "[2/2] Cutting $START → $END..."
 T0=$(date +%s)

@@ -54,21 +54,23 @@ After the body ends, in this exact order:
 The Product CTA is the same on every post. **Don't personalize. Don't theme-tie. Don't agitate.** The body already did the narrative work; the Product CTA is just the clean handoff to the product. Same wording every time, with blank lines between paragraphs for breathing room:
 
 ```
-P.S. If you want to stop overthinking, control chaos, and navigate any decision with the clarity...
+P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
-I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
+So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
 
 Comment "models" and follow @GeniusGTX so I can DM you a copy.
 ```
 
 That's it. Same on every post. Drop it in.
 
+**Order matters:** offer first (the product), then the pain/desire one-liner (what it solves for the reader), then the comment-to-DM mechanic. Previous versions led with the pain line — that version is deprecated. Lead with the offer.
+
 **The mechanic is comment-to-DM**, not a URL — Comment "models" + follow → operator DMs the product. Engagement-driven distribution, not link-out.
 
 ### 3. Brand CTA (verbatim — never change, comes AFTER Product CTA)
 
 ```
-If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
+If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
 ```
 
 **Why fixed beats personalized:**
@@ -96,8 +98,10 @@ Format:
 
 - The old "bridge / reciprocity lens" intro ("One pattern worth keeping...", "One lens worth keeping...") is **deprecated**.
 - The old P.S. wording with downloads + reviews ("5,000+ downloads. 113 five-star reviews. Grab your free copy here:") is **deprecated** — the new playbook line replaces it.
-- The Feynman/Munger/Musk strategist credential line and the "Trusted by 5,000+ founders and investors" social proof line are both **deprecated** — current P.S. is just the offer line, the URL on its own line, and "Just remember." as the tag.
+- The Feynman/Munger/Musk strategist credential line and the "Trusted by 5,000+ founders and investors" social proof line are both **deprecated** — current P.S. is just the offer line + the pain/desire one-liner + the comment-to-DM mechanic.
 - The earlier PAS-personalized P.S. para 1 (with theme-tied agitation) is **deprecated** — the P.S. is now drop-in fixed wording on every post.
+- **The earlier Product CTA order (pain line first → offer → DM mechanic) is deprecated.** Current order leads with the offer (*"P.S. I made a full playbook..."*), then the pain/desire one-liner (*"So if you want to stop overthinking..."*), then the DM mechanic. Lead with what the product is, not with what's wrong with the reader.
+- The earlier Brand CTA wording (*"@GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content."*) is **deprecated**. Current Brand CTA is the shorter version: *"If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history."*
 - Formulaic A/B binary engagement questions (`"Genius — or ruthless?"`, `"Capital or discipline?"`) are **deprecated**.
 - **All engagement questions of any form are deprecated on the `experimental-hemingway` branch.** The body itself ends on a reflective one-liner. No question prompt follows the body. Rationale: every post ending on the same quiz-prompt beat made the feed feel templated. Statement closes feel like essays. See "1. Body One-Liner Close" above.
 
@@ -106,15 +110,13 @@ Format:
 ```
 That was the war Machiavelli watched.
 
-Thanks for reading.
+P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
-Small ask: If you want to stop overthinking, control chaos, and navigate any decision, while supporting our channel...
+So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
 
-I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
+Comment "models" and follow @GeniusGTX so I can DM you a copy.
 
-Comment "models" and follow @GeniusGTX so I can DM you a copy. ❤️
-
-If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
+If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
 
 — Ada Palmer ( @Ada_Palmer ), Renaissance historian at the University of Chicago, on Dwarkesh Patel's ( @dwarkesh_sp ) podcast
 ```

@@ -52,18 +52,18 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 ## Closer (after body, in this order)
 
-- [ ] **Engagement Q**: open natural question rooted in the post's specific tension, ≤16 words. **Not a formulaic A/B binary** ("Capital or discipline?", "Rent or own?") — those read as button-presses. The Q should invite the reader to apply the post's tension to their own situation. (See `closer-template.md` for examples.)
-- [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, @GeniusGTX is a gallery..."). Not paraphrased.
-- [ ] **P.S. — fixed drop-in wording, 4 short paragraphs with blank lines between.** Verbatim per `closer-template.md`. **No personalization, no theme-tie, no agitation.** The body did the narrative work; the P.S. is just the clean product handoff. Same on every post:
+Order on the `experimental-hemingway` branch: **Body One-Liner Close → P.S. (Product CTA) → Brand CTA → Attribution.** Engagement Q is deprecated — the body itself ends on a reflective one-liner. P.S. now comes BEFORE Brand CTA.
+
+- [ ] **Body One-Liner Close**: the body's last line is a reflective punch on its own line (e.g. *"That was the war Machiavelli watched."*). No question prompt. See `closer-template.md` §1.
+- [ ] **P.S. — fixed drop-in wording, 3 short paragraphs with blank lines between (Product CTA comes BEFORE Brand CTA).** Verbatim per `closer-template.md`. **No personalization, no theme-tie, no agitation.** The body did the narrative work; the P.S. is just the clean product handoff. Order: offer → pain/desire → DM mechanic. Same on every post:
   ```
-  P.S. I made a free playbook on how to use and create your own mental models.
+  P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
-  The same thinking strategies Feynman, Munger, and Musk built their careers on.
+  So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
 
-  Trusted by 5,000+ founders and investors.
-
-  Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
+  Comment "models" and follow @GeniusGTX so I can DM you a copy.
   ```
+- [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history."). Not paraphrased.
 - [ ] **Whitespace audit on the entire post.** One sentence per line is the default. Blank lines between every paragraph. The post should look airy on the page, not like a chunk. The reader's eyes should never hit a wall of text — especially in the closer.
 - [ ] **Attribution**: format `— [Name] ( @handle ), [credential], on [Host] ( @host_handle ) [Show]`. **Spaces inside parentheses around every @handle** so X auto-tags render.
 

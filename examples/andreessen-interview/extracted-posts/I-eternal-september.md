@@ -41,13 +41,13 @@ Andreessen, looking back:
 
 Was AOL right to open the gates?
 
-If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
+If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
 
-P.S. I made a free toolkit breaking down 100+ mental models used by history's greatest thinkers.
+P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
-5,000+ downloads. 113 five-star reviews.
+So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
 
-Grab your free copy here: https://besuperhuman.gumroad.com/l/mentalmodels
+Comment "models" and follow @GeniusGTX so I can DM you a copy.
 
 — Marc Andreessen ( @pmarca ), co-founder of a16z, on David Senra's ( @FoundersPodcast ) podcast
 ```

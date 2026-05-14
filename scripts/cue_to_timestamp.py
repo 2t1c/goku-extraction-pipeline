@@ -32,8 +32,16 @@ import sys
 import subprocess
 
 SOURCES = os.path.expanduser("~/ytclipper-fast/sources")
+TRANSCRIPTS = os.path.expanduser("~/ytclipper-fast/transcripts")
+
+# YouTube VTT auto-captions are timed loosely — pad generously.
 PAD_START = 0.3
 PAD_END = 0.5
+
+# Whisper word-level SRT timestamps land within ~50ms of actual word onset.
+# Tighten the padding accordingly so cuts open right on the syllable.
+WHISPER_PAD_START = 0.05
+WHISPER_PAD_END = 0.20
 
 # Filler tokens that auto-captions transcribe but operators rarely write
 # into cues. Stripped from BOTH cue and stream before matching.
@@ -168,6 +176,42 @@ def parse_vtt_words(path):
     return words
 
 
+_SRT_CUE_RE = re.compile(
+    r"\d+\s*\n"
+    r"(\d{2}):(\d{2}):(\d{2}),(\d{3})\s+-->\s+"
+    r"(\d{2}):(\d{2}):(\d{2}),(\d{3})[^\n]*\n"
+    r"(.+?)(?=\n\s*\n|\Z)",
+    re.DOTALL,
+)
+
+
+def parse_whisper_words_srt(path):
+    """Parse a whisper.cpp word-level SRT (produced with --max-len 1 --split-on-word)
+    into the same (start_sec, word) stream format as parse_vtt_words.
+
+    Each SRT cue is typically a single token with millisecond-precise start/end.
+    Tokens that normalize to empty (punctuation-only) are skipped.
+    """
+    with open(path, encoding="utf-8") as f:
+        content = f.read()
+
+    words = []
+    for m in _SRT_CUE_RE.finditer(content):
+        sh, sm, ss, sms = (int(m.group(i)) for i in range(1, 5))
+        start_sec = sh * 3600 + sm * 60 + ss + sms / 1000.0
+        text = m.group(9)
+        # whisper splits multi-word tokens like "I'm" → "I" + "m" but also emits
+        # composite cues occasionally — handle both.
+        for w in text.split():
+            stripped = _strip_word(w)
+            if not stripped:
+                continue
+            words.append((start_sec, stripped))
+
+    words.sort(key=lambda x: x[0])
+    return words
+
+
 def find_cue(words, cue, near_sec=None, return_all=False):
     """Locate the cue in the word stream.
 
@@ -270,6 +314,35 @@ def ensure_vtt(video_id):
     return path
 
 
+def _suggest_nearest_phrase(words, cue, k=3):
+    """Pick the k word-stream substrings whose token sequence most overlaps the
+    cue tokens. Used to surface 'did you mean…' hints when a cue is not found.
+    """
+    cue_tokens = norm(cue).split()
+    if not cue_tokens:
+        return []
+    n = len(cue_tokens)
+    clean = [(ts, w) for ts, w in words if norm(w)]
+    cue_set = set(cue_tokens)
+    scored = []
+    for i in range(0, len(clean) - n + 1):
+        window = [clean[i + j][1] for j in range(n)]
+        overlap = sum(1 for w in window if w in cue_set)
+        if overlap >= max(2, n // 2):
+            scored.append((overlap, clean[i][0], " ".join(window)))
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    seen = []
+    out = []
+    for sc, ts, phrase in scored:
+        if any(abs(ts - prev_ts) < 5 for prev_ts in seen):
+            continue
+        seen.append(ts)
+        out.append((sec_to_ts(ts), phrase))
+        if len(out) >= k:
+            break
+    return out
+
+
 def main():
     if len(sys.argv) < 4:
         print(__doc__)
@@ -279,15 +352,33 @@ def main():
     end_cue = sys.argv[3]
     near = float(sys.argv[4]) if len(sys.argv) > 4 else None
 
-    vtt = ensure_vtt(video_id)
-    words = parse_vtt_words(vtt)
+    # Source priority: whisper word-level SRT > YouTube VTT auto-captions.
+    # Whisper is ~10x more accurate on proper nouns and numbers, and its word
+    # boundaries are ~50ms vs VTT's ~300ms. See style/clip-captioning.md.
+    whisper_words = os.path.join(TRANSCRIPTS, f"{video_id}.words.srt")
+    if os.path.exists(whisper_words):
+        words = parse_whisper_words_srt(whisper_words)
+        source = "whisper"
+        pad_start, pad_end = WHISPER_PAD_START, WHISPER_PAD_END
+        print(f"# source=whisper-words ({whisper_words})", file=sys.stderr)
+    else:
+        vtt = ensure_vtt(video_id)
+        words = parse_vtt_words(vtt)
+        source = "vtt"
+        pad_start, pad_end = PAD_START, PAD_END
+        print(f"# source=youtube-vtt ({vtt})", file=sys.stderr)
 
     # Resolve END cue first — usually more distinctive (specific final
     # phrases land uniquely). If unique, its timestamp anchors the START
     # cue search.
     end_match = find_cue(words, end_cue, near_sec=(near + 60) if near else None)
     if end_match is None:
-        print(f"ERROR: end cue not found in stream", file=sys.stderr)
+        print(f"ERROR: end cue not found in {source} stream: {end_cue!r}", file=sys.stderr)
+        suggestions = _suggest_nearest_phrase(words, end_cue)
+        if suggestions:
+            print("DID_YOU_MEAN=", file=sys.stderr)
+            for ts, phrase in suggestions:
+                print(f"  {ts}  '{phrase}'", file=sys.stderr)
         sys.exit(2)
 
     if isinstance(end_match, list):
@@ -303,7 +394,7 @@ def main():
         end_match = end_match[0]
 
     end_start_sec, end_end_sec = end_match
-    end_ts = end_end_sec + PAD_END
+    end_ts = end_end_sec + pad_end
 
     # Use END cue location as anchor for START cue search if no operator hint.
     # Estimate start within ~5 minutes before end (typical clip ≤ 4 min).
@@ -311,7 +402,12 @@ def main():
 
     start_match = find_cue(words, start_cue, near_sec=auto_near)
     if start_match is None:
-        print(f"ERROR: start cue not found in stream", file=sys.stderr)
+        print(f"ERROR: start cue not found in {source} stream: {start_cue!r}", file=sys.stderr)
+        suggestions = _suggest_nearest_phrase(words, start_cue)
+        if suggestions:
+            print("DID_YOU_MEAN=", file=sys.stderr)
+            for ts, phrase in suggestions:
+                print(f"  {ts}  '{phrase}'", file=sys.stderr)
         sys.exit(2)
 
     if isinstance(start_match, list):
@@ -335,7 +431,7 @@ def main():
                 sys.exit(4)
 
     start_start_sec, _ = start_match
-    start_ts = max(0, start_start_sec - PAD_START)
+    start_ts = max(0, start_start_sec - pad_start)
 
     print(f"START_TS={sec_to_ts(start_ts)}")
     print(f"END_TS={sec_to_ts(end_ts)}")

@@ -41,15 +41,13 @@ Most founders never come back from a detour like that. They keep applying to com
 
 How many people are walking past their own vision because the logical path looks safer?
 
-If you're new here, @GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content.
+If you're new here, follow @GeniusGTX for content the greatest minds in economics, psychology, and history.
 
-P.S. I made a free playbook on how to use and create your own mental models.
+P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
 
-The same thinking strategies Feynman, Munger, and Musk built their careers on.
+So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
 
-Trusted by 5,000+ founders and investors.
-
-Grab your copy: https://besuperhuman.gumroad.com/l/mentalmodels
+Comment "models" and follow @GeniusGTX so I can DM you a copy.
 
 — David Baszucki ( @DavidBaszucki ), founder & CEO of Roblox, on David Senra's ( @davidsenra ) Founders podcast
 ```
