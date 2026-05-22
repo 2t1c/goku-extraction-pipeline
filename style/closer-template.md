@@ -54,18 +54,20 @@ After the body ends, in this exact order:
 The Product CTA is the same on every post. **Don't personalize. Don't theme-tie. Don't agitate.** The body already did the narrative work; the Product CTA is just the clean handoff to the product. Same wording every time, with blank lines between paragraphs for breathing room:
 
 ```
-P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
+P.S. I made a playbook breaking down 100+ most powerful decision making mental models used by history's greatest thinkers.
 
-So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
+5,000+ downloads. 113 five-star reviews.
 
-Comment "models" and follow @GeniusGTX so I can DM you a copy.
+Grab a free copy here:
+
+https://besuperhuman.gumroad.com/l/mentalmodels
 ```
 
 That's it. Same on every post. Drop it in.
 
-**Order matters:** offer first (the product), then the pain/desire one-liner (what it solves for the reader), then the comment-to-DM mechanic. Previous versions led with the pain line — that version is deprecated. Lead with the offer.
+**Order matters:** offer line (the product) → social proof (downloads + reviews) → CTA line → URL. Lead with what the product is, follow with proof, then the direct link.
 
-**The mechanic is comment-to-DM**, not a URL — Comment "models" + follow → operator DMs the product. Engagement-driven distribution, not link-out.
+**The mechanic is a direct URL** to the Gumroad listing. No comment-to-DM gating, no operator middle step. Link-out, not engagement-gated.
 
 ### 3. Brand CTA (verbatim — never change, comes AFTER Product CTA)
 
@@ -97,10 +99,11 @@ Format:
 ## What's removed from the old format
 
 - The old "bridge / reciprocity lens" intro ("One pattern worth keeping...", "One lens worth keeping...") is **deprecated**.
-- The old P.S. wording with downloads + reviews ("5,000+ downloads. 113 five-star reviews. Grab your free copy here:") is **deprecated** — the new playbook line replaces it.
-- The Feynman/Munger/Musk strategist credential line and the "Trusted by 5,000+ founders and investors" social proof line are both **deprecated** — current P.S. is just the offer line + the pain/desire one-liner + the comment-to-DM mechanic.
+- The comment-to-DM mechanic (*"Comment 'models' and follow @GeniusGTX so I can DM you a copy."*) is **deprecated** — current P.S. ships a direct Gumroad URL (`https://besuperhuman.gumroad.com/l/mentalmodels`). No operator middle step.
+- The pain/desire one-liner (*"So if you want to stop overthinking, control chaos, and navigate any decision with the clarity..."*) is **deprecated** — replaced by the social-proof line (*"5,000+ downloads. 113 five-star reviews."*) + a direct *"Grab a free copy here:"* CTA line.
+- The "full playbook breaking down the timeless decision-making mental models" wording is **deprecated** — current phrasing is *"a playbook breaking down 100+ most powerful decision making mental models"* (concrete count over the vague "timeless").
+- The Feynman/Munger/Musk strategist credential line and the "Trusted by 5,000+ founders and investors" social proof line are both **deprecated** — current P.S. is offer line + downloads/reviews proof + URL.
 - The earlier PAS-personalized P.S. para 1 (with theme-tied agitation) is **deprecated** — the P.S. is now drop-in fixed wording on every post.
-- **The earlier Product CTA order (pain line first → offer → DM mechanic) is deprecated.** Current order leads with the offer (*"P.S. I made a full playbook..."*), then the pain/desire one-liner (*"So if you want to stop overthinking..."*), then the DM mechanic. Lead with what the product is, not with what's wrong with the reader.
 - The earlier Brand CTA wording (*"@GeniusGTX is a gallery for the greatest minds in economics, psychology, and history. Follow along for more similar content."*) is **deprecated**. Current Brand CTA is the shorter version: *"If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history."*
 - Formulaic A/B binary engagement questions (`"Genius — or ruthless?"`, `"Capital or discipline?"`) are **deprecated**.
 - **All engagement questions of any form are deprecated on the `experimental-hemingway` branch.** The body itself ends on a reflective one-liner. No question prompt follows the body. Rationale: every post ending on the same quiz-prompt beat made the feed feel templated. Statement closes feel like essays. See "1. Body One-Liner Close" above.
@@ -110,11 +113,13 @@ Format:
 ```
 That was the war Machiavelli watched.
 
-P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
+P.S. I made a playbook breaking down 100+ most powerful decision making mental models used by history's greatest thinkers.
 
-So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
+5,000+ downloads. 113 five-star reviews.
 
-Comment "models" and follow @GeniusGTX so I can DM you a copy.
+Grab a free copy here:
+
+https://besuperhuman.gumroad.com/l/mentalmodels
 
 If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
 

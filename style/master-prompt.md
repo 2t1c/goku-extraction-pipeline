@@ -50,7 +50,7 @@ SPECIFIC EVIDENCE → MASS IMPLICATION → QUIET CONSPIRACY/SUPPRESSION → CTA
 
 Eight techniques the canonical Andreessen "Eternal September" post deploys. **These are the difference between "good narrative post" and "the kind of post people screenshot."** Treat them as a gradient:
 
-- **Critical** (apply whenever the post supports it): **P1** (verb specificity), **P5** (one hero, many witnesses), **P6** (no qualifier creep), **P7** (concrete sensory anchor per sentence), **P8** (past tense narrative spine).
+- **Critical** (apply whenever the post supports it): **P1** (verb specificity), **P5** (one hero, many witnesses), **P7** (concrete sensory anchor per sentence), **P8** (past tense narrative spine).
 - **Nice-to-have** (deploy when the post genuinely earns it; skip if forcing it would feel artificial): **P2** (echo the named concept across multiple scales), **P3** ("after X, Y" consequence marker), **P4** (mid-post explainer beat).
 
 Don't force techniques that don't fit the source. When they fit, deploy them deliberately.
@@ -64,8 +64,6 @@ Don't force techniques that don't fit the source. When they fit, deploy them del
 - **(P4) Earn one mid-post explainer beat.** The single >15-word sentence allowed per post should be the deliberate *slowdown* that enriches the named concept's mechanism. The Andreessen post's 28-word sentence ("Pre-1993 internet veterans had a phrase. Every September…") is the *only* place the post breathes — and it teaches the reader the etymology of *Eternal September*. Wasting the one allowed exception on a generic claim or a stat sentence is leaving the technique on the table.
 
 - **(P5) One hero, many witnesses.** The post focuses on one speaker's perspective. Other named entities are *actors in that story*, not separate narrative perspectives. AOL, Mosaic, freshmen — they populate Andreessen's world; they don't get their own beats. **Audit-trigger pattern:** giving the host their own narrative line (*"Then Senra asked the question. / Senra: '...'"*) shares narrative weight and breaks the spell. Stronger version absorbs the host's question into the speaker's response: *"When asked if Roblox would license the safety stack, Baszucki said yes."* The host vanishes into the prose; the speaker keeps the spotlight.
-
-- **(P6) No qualifiers on the central claim.** Once the *"X says Y"* hook establishes the speaker as the source, the body operates as documented narrative. The Andreessen post asserts *"AOL killed the early internet"* as fact — no *"according to Andreessen"* / *"he believes"* / *"in his view"* hedges. The single "says" in the hook covers everything below it. Drop qualifier creep: *"Baszucki thinks"* / *"in Baszucki's read"* / *"his frame is"* — these multiply confidence costs without adding accuracy. Trust the hook's "says."
 
 - **(P7) Concrete sensory anchor per sentence.** Audit any sentence that doesn't carry a named entity, a number, a date, or a sensory detail. The Andreessen post has zero generic claims — every sentence anchors to *Athens in 500 BC*, *September 1993*, *five billion*, *Mosaic*, *the new freshmen*, *the discussion forums*. Replace generic claims (*"The trajectory was clear"* / *"The team grew quickly"* / *"The market expanded"*) with specifics, or delete them.
 
@@ -118,9 +116,14 @@ Strong posts deploy 3–4 techniques. Fewer than 2 reads as a summary. More than
 
 ## Topic tier hierarchy
 
-- **Tier 1 (500K+ potential):** tech/government conspiracy affecting health; mainstream belief being proven wrong; named-Elon angles for @GeniusGTX.
-- **Tier 2 (100K–500K):** cutting-edge science; named insiders who got it wrong; paradigm-break corporate stories.
-- **Tier 3 (50K–150K):** quirky historical facts; founder origin stories; cultural pattern posts.
+Tiers are derived from the 6-criterion ranking rubric in `style/topic-ranking.md`. Each candidate idea is scored 0/1/2 on six dimensions (belief-confirming contrarianism, massive specificity, mechanism revealability, buyable takeaway, conspiracy/suppression layer, everyday-behavior attack). Total maps to tier:
+
+- **Tier 1 (10–12 / 12, 500K+ potential):** named-villain stories that confirm a strongly-held audience suspicion, with a teachable mechanism, a buyable takeaway, an implied or named institutional antagonist, and an attack on default behavior. *Examples:* tech/government conspiracy affecting health, mainstream belief being proven wrong, named-Elon angles for @GeniusGTX.
+- **Tier 2 (7–9 / 12, 100K–500K):** strong on most criteria but missing one or two of villain/everyday-behavior. *Examples:* cutting-edge science, named insiders who got it wrong, paradigm-break corporate stories.
+- **Tier 3 (4–6 / 12, 50K–150K):** specific enough to anchor, but missing contrarianism or buyable takeaway. *Examples:* quirky historical facts, founder origin stories, cultural pattern posts.
+- **Skip (0–3 / 12):** abstract / passive / no antagonist / pure trivia. Move on.
+
+**Read `style/topic-ranking.md` before surfacing candidates in Phase 1 step 2.**
 
 ## Virality stress test (run before delivering — Hemingway branch)
 

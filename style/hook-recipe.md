@@ -13,7 +13,7 @@ Five slots. All five present. **Target 15 words. Hard cap 17.**
 | Slot | What it is | Example |
 |---|---|---|
 | Credentialed Name | Title/role/company + name. Pick the **most powerful** phrasing under 6 words — not the shortest. See "The credential rule" below. | `Netscape founder Marc Andreessen`, `Renaissance historian Ada Palmer` |
-| Verb | Always `says`. Never `revealed`, `claims`, `argues`, `believes`. | `says` |
+| Verb | `says` or `reveals` — pick whichever fits the angle. `says` is the default; `reveals` when the claim is a hidden mechanism, suppressed fact, or insider knowledge. Never `claims`, `argues`, `believes`, `just revealed`, `recently said`. | `says` / `reveals` |
 | Named actor | The protagonist of the claim — a person, company, or institution by name. Not "a founder", not "Big Pharma" generically. | `Elon`, `AOL`, `Michael Ovitz` |
 | Violent verb | The dramatic action. See list below. This is the slot most people miss. | `killed`, `crushed`, `lit on fire` |
 | Named target + anchor | What got hit, plus one concrete specific (number, date, visual detail). | `Hollywood with a 7am meeting and 20 identical Jaguars` |

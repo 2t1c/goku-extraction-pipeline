@@ -24,7 +24,7 @@ When the user invokes this skill (via trigger phrase, slash command, or `/goku-e
 For each candidate post idea from the source:
 
 1. **Read** the full transcript. Don't skim — find Tier 1 angles that hit the Goku virality stack (authority + shocking specific claim + named characters + suppression layer).
-2. **Surface 5–10 candidate ideas** ranked by tier (1 = potential 500K+, 2 = 100K–500K, 3 = 50K–150K). Show them to the user with one-line rationales.
+2. **Surface 5–10 candidate ideas, scored against the 6-criterion rubric in `style/topic-ranking.md`.** Each candidate scored 0/1/2 on: (1) belief-confirming contrarianism, (2) massive specificity, (3) mechanism revealability, (4) buyable takeaway, (5) conspiracy/suppression layer, (6) everyday-behavior attack. Total → tier (10–12 = T1 500K+, 7–9 = T2 100K–500K, 4–6 = T3 50K–150K, 0–3 = skip). Show the user a ranked table with totals and one-line rationales. **Do not surface anything scoring 0–3.**
 3. **User picks one.** Don't draft until they confirm.
 4. **Draft the post** in strict Goku style. Read these IN ORDER, every time:
    - `style/master-prompt.md` — the canonical Goku format (current rules, supersedes any older Goku doc)

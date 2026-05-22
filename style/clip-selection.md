@@ -34,7 +34,7 @@ When picking a clip for an approved post, run these in order:
 - **Target range:** 1:00–2:00 — the empirical sweet spot. Long enough for the speaker to actually deliver an insight, short enough to hold attention without dilution. Aim for ~1:15–1:45.
 - **Hard floor:** 1:00 — never under, even when the source feels dense. If the cue range comes back under 1:00, **extend the end cue** to capture the next coherent beat the speaker delivers, or **back the start cue up** to include more setup (as long as the start line isn't a banned transitional/hedge).
 - **Soft ceiling:** 2:00 — going over 2:00 is fine when the source genuinely earns it (a dense exchange with multiple key quotes, or a setup-payoff that takes 2:30 to land). Don't artificially trim a 2:30 clip that's all signal.
-- **Hard ceiling:** 4:00 (algorithm dilutes attention beyond)
+- **Hard ceiling:** 3:00 (algorithm dilutes attention beyond). Going past 3:00 is a reject — trim or split into two clips.
 
 **Failure mode to avoid:** cutting too early. The current cue-driven pipeline tends to land 0:45–1:00 because the end cue resolves on the last word of Musk's *answer*, not the last word of the *beat*. Push the end cue forward by one or two sentences to capture the speaker's natural landing, not their mid-thought pause.
 

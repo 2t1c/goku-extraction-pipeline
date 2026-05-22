@@ -4,9 +4,9 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 
 ## Hook (15 words max)
 
-- [ ] Format: `[Speaker] says [named actor] [violent verb] [named target] [specific anchor]`
-- [ ] Reporting verb is exactly `says`. Not `just revealed`. Not `claims`. Not `argues`.
-- [ ] **Violent verb is present** — `killed`, `crushed`, `lit on fire`, `broke`, `swallowed`, `wiped out`, `buried`, `gutted`, `flipped`. (See full list in `hook-recipe.md`.) **Reject hooks that use `built`, `created`, `started`, `worked on`, `helped`, `said`, `revealed`** — these describe instead of dramatize.
+- [ ] Format: `[Speaker] says|reveals [named actor] [violent verb] [named target] [specific anchor]`
+- [ ] Reporting verb is `says` or `reveals` (default `says`; `reveals` when claim is a hidden mechanism / suppressed fact / insider knowledge). Not `just revealed`. Not `claims`. Not `argues`.
+- [ ] **Violent verb is present** — `killed`, `crushed`, `lit on fire`, `broke`, `swallowed`, `wiped out`, `buried`, `gutted`, `flipped`. (See full list in `hook-recipe.md`.) **Reject hooks that use `built`, `created`, `started`, `worked on`, `helped`, `said`** — these describe instead of dramatize.
 - [ ] Named actor (specific person/company/place, not "a founder" or "Big Pharma")
 - [ ] Named target (the entity getting hit/changed/destroyed)
 - [ ] Exactly one specific anchor — number, date, or visual detail (`$180M`, `September 1993`, `20 Jaguars`). Zero = vague. Three = list.
@@ -39,7 +39,6 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
   **Critical (apply whenever the post supports it):**
   - [ ] (P1) Every prose verb is specific and active — no filler *had / got / was / built / made / did* unless intentional. Active verbs do the lifting (*pumped, swallowed, layered, watched*).
   - [ ] (P5) **One hero, many witnesses.** Other named entities (host included) populate the speaker's world without getting their own narrative beats. **Audit-trigger:** *"Then [host] asked the question. / [host]: '...'"* — absorb host's question into the speaker's response instead.
-  - [ ] (P6) No qualifier creep on the central claim — drop *"according to X"* / *"X thinks"* / *"X believes"* / *"in X's view"*. The hook's *"says"* covers it.
   - [ ] (P7) Every prose sentence carries a concrete anchor — named entity, number, date, or sensory detail. Cut generic claims (*"the trajectory was clear"* / *"the market expanded"*) or replace with specifics.
   - [ ] (P8) Past tense throughout the narrative spine when the source is dated. Present tense reserved for speaker quotes and present-day state of still-existing entities.
 
@@ -55,13 +54,15 @@ Run this before delivering any draft. **Every box must check.** If any fails, re
 Order on the `experimental-hemingway` branch: **Body One-Liner Close → P.S. (Product CTA) → Brand CTA → Attribution.** Engagement Q is deprecated — the body itself ends on a reflective one-liner. P.S. now comes BEFORE Brand CTA.
 
 - [ ] **Body One-Liner Close**: the body's last line is a reflective punch on its own line (e.g. *"That was the war Machiavelli watched."*). No question prompt. See `closer-template.md` §1.
-- [ ] **P.S. — fixed drop-in wording, 3 short paragraphs with blank lines between (Product CTA comes BEFORE Brand CTA).** Verbatim per `closer-template.md`. **No personalization, no theme-tie, no agitation.** The body did the narrative work; the P.S. is just the clean product handoff. Order: offer → pain/desire → DM mechanic. Same on every post:
+- [ ] **P.S. — fixed drop-in wording, 4 short paragraphs with blank lines between (Product CTA comes BEFORE Brand CTA).** Verbatim per `closer-template.md`. **No personalization, no theme-tie, no agitation.** The body did the narrative work; the P.S. is just the clean product handoff. Order: offer → social proof → CTA line → URL. Same on every post:
   ```
-  P.S. I made a full playbook breaking down the timeless decision-making mental models used by history's greatest thinkers.
+  P.S. I made a playbook breaking down 100+ most powerful decision making mental models used by history's greatest thinkers.
 
-  So if you want to stop overthinking, control chaos, and navigate any decision with the clarity...
+  5,000+ downloads. 113 five-star reviews.
 
-  Comment "models" and follow @GeniusGTX so I can DM you a copy.
+  Grab a free copy here:
+
+  https://besuperhuman.gumroad.com/l/mentalmodels
   ```
 - [ ] **Brand CTA**: VERBATIM as in `closer-template.md` ("If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history."). Not paraphrased.
 - [ ] **Whitespace audit on the entire post.** One sentence per line is the default. Blank lines between every paragraph. The post should look airy on the page, not like a chunk. The reader's eyes should never hit a wall of text — especially in the closer.
@@ -80,7 +81,7 @@ Order on the `experimental-hemingway` branch: **Body One-Liner Close → P.S. (P
 - [ ] Clip range covers every quoted line in the post body
 - [ ] Start cue is verbatim from the transcript and passes the standalone-hook test (see `clip-selection.md`)
 - [ ] End cue is verbatim and lands with finality (sharp line, punchline, quote, stark statement)
-- [ ] Clip length 2:00–4:00 (sweet spot 2:30–3:30)
+- [ ] Clip length 1:00–2:00 (sweet spot ~1:15–1:45). Hard cap 3:00.
 - [ ] Slug for the local mp4 follows the naming convention (lowercase, hyphens, derived from post title)
 
 ## Phase 2 readiness
@@ -102,7 +103,7 @@ Currently active feedback rules (May 2026):
 - **Engagement Q must be open + story-rooted**, NOT a formulaic A/B binary. (Updated May 2026 — supersedes the old "simple binary" rule.)
 - **Narrative arc required** — setup → inciting moment → consequence cascade → reflection → open Q. The Andreessen "Eternal September" post is the canonical example. (Added May 2026.)
 - **Sentence length varies deliberately** — mix short punches with longer narrative beats. Not all-fragments. (Added May 2026.)
-- **P.S. has personalized PAS para 1 + fixed playbook plug** (Feynman/Munger/Musk + 90+ tools + 5,000+ founders/investors). Old "free toolkit / 113 five-star reviews" wording deprecated. (Updated May 2026.)
+- **P.S. is fixed drop-in: offer line ("100+ most powerful decision making mental models") + social proof ("5,000+ downloads. 113 five-star reviews.") + "Grab a free copy here:" + Gumroad URL (https://besuperhuman.gumroad.com/l/mentalmodels).** Comment-to-DM mechanic deprecated; PAS-personalized para 1 deprecated. (Updated May 2026.)
 - **Clip start cue must match the audio verbatim** — including any filler words ("Um", "you know") that begin the spoken phrase. Don't cherry-pick the cleanest version of the line. (Added May 2026.)
 - No recency words in posts
 - Word count target 240–260
