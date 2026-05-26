@@ -1,6 +1,8 @@
-# goku-extraction-pipeline
+# goku-extraction-pipeline — student edition
 
-Turn one long-form video interview (Andreessen-style podcast, 1–2 hours) into 5–10 short-form X posts in the **@ProjectGokuu / @GeniusGTX style**, end-to-end automated.
+Turn one long-form video interview (Andreessen-style podcast, 1–2 hours) into 5–10 short-form X posts in the **GeniusGTX long-form style**, end-to-end automated.
+
+> **Student note:** this branch is the student edition. The *taste* (hook recipe, body discipline, topic ranking, clip selection) is identical to what GeniusGTX ships. What you swap in is **your handle**, **your product CTA**, and **which kinds of ideas you elevate inside the same scoring rubric**. Read [`STUDENT_SETUP.md`](./STUDENT_SETUP.md) before your first run — it walks you through the three changes you need to make.
 
 ## What this does
 

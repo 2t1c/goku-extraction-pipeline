@@ -1,6 +1,8 @@
-# Closer Template — experimental Hemingway branch (May 2026)
+# Closer Template — student edition (May 2026)
 
-The closer is the last elements of every long-form Goku post for @GeniusGTX. **Product + Brand CTA wording is verbatim. The body one-liner and attribution are written fresh per post.**
+The closer is the last elements of every long-form Goku post. **Product + Brand CTA wording is verbatim per batch. The body one-liner and attribution are written fresh per post.**
+
+> **Student note:** This file uses `{{BRAND_HANDLE}}`, `{{BRAND_DESCRIPTION}}`, `{{PRODUCT_NAME}}`, `{{PRODUCT_DESCRIPTION}}`, `{{PRODUCT_SOCIAL_PROOF}}`, `{{PRODUCT_URL}}`, and `{{DM_KEYWORD}}` placeholders. Fill them in once for your account (see `STUDENT_SETUP.md`). The filled-in example at the bottom shows what one looks like for GeniusGTX.
 
 ## Order
 
@@ -51,7 +53,29 @@ After the body ends, in this exact order:
 
 ### 2. Product CTA — fixed verbatim, drop-in (comes BEFORE Brand CTA)
 
-The Product CTA is the same on every post. **Don't personalize. Don't theme-tie. Don't agitate.** The body already did the narrative work; the Product CTA is just the clean handoff to the product. Same wording every time, with blank lines between paragraphs for breathing room:
+The Product CTA is the same on every post. **Don't personalize. Don't theme-tie. Don't agitate.** The body already did the narrative work; the Product CTA is just the clean handoff to the product. Same wording every time, with blank lines between paragraphs for breathing room.
+
+Two mechanics are valid. Pick **one** per batch — never mix on the same post.
+
+---
+
+#### Option A — Direct URL (use for free products)
+
+```
+P.S. I made {{PRODUCT_DESCRIPTION}}.
+
+{{PRODUCT_SOCIAL_PROOF}}
+
+{{CTA_LINE}}
+
+{{PRODUCT_URL}}
+```
+
+**Order matters:** offer line (the product) → social proof (optional, real numbers only) → CTA line → URL.
+
+**Drop the `{{PRODUCT_SOCIAL_PROOF}}` line entirely if you don't have real numbers** — made-up proof corrodes trust.
+
+**Filled-in GeniusGTX example (production wording):**
 
 ```
 P.S. I made a playbook breaking down 100+ most powerful decision making mental models used by history's greatest thinkers.
@@ -63,13 +87,47 @@ Grab a free copy here:
 https://besuperhuman.gumroad.com/l/mentalmodels
 ```
 
-That's it. Same on every post. Drop it in.
+---
 
-**Order matters:** offer line (the product) → social proof (downloads + reviews) → CTA line → URL. Lead with what the product is, follow with proof, then the direct link.
+#### Option B — Comment-to-DM (use for paid products)
 
-**The mechanic is a direct URL** to the Gumroad listing. No comment-to-DM gating, no operator middle step. Link-out, not engagement-gated.
+```
+P.S. {{STORY_ROOTED_BRIDGE}}
+
+As {{AUTHORITY}} said: "{{AUTHORITY_QUOTE}}"
+
+So I {{PRODUCT_ORIGIN_LINE}}.
+
+Comment "{{DM_KEYWORD}}" and I'll send you the details.
+```
+
+**Four-beat structure:** story-rooted bridge → third-party authority quote on the frame → product line → comment-to-DM call.
+
+**No URL in the P.S.** The comment is the gate. When the reader comments `{{DM_KEYWORD}}`, you (or your automation) DM them the paid link — the gating qualifies intent so you can send the right context.
+
+**Filled-in GeniusGTX example (Incentives book):**
+
+```
+P.S. Pull the thread on any story like this and you'll find the hidden incentive at the other end.
+
+As Munger said: "Show me the incentive and I'll show you the outcome."
+
+So I wrote a short book on how to spot them and design your own.
+
+Comment "INCENTIVES" and I'll send you the details.
+```
+
+---
+
+**Why two mechanics, not one:** free product → direct URL (lowest friction; we want everyone to grab it). Paid product → comment-to-DM (qualify intent, control the link). Don't cross the wires.
 
 ### 3. Brand CTA (verbatim — never change, comes AFTER Product CTA)
+
+```
+If you're new here, follow {{BRAND_HANDLE}} for content on {{BRAND_DESCRIPTION}}.
+```
+
+**Filled-in GeniusGTX example:**
 
 ```
 If you're new here, follow @GeniusGTX for content on the greatest minds in economics, psychology, and history.
