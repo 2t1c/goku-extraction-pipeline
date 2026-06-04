@@ -90,20 +90,21 @@ rm ~/ytclipper-fast/transcripts/<VIDEO_ID>.srt
 `transcribe_source.sh` is idempotent and the lock file is cleared on exit
 (including crashes).
 
-## Dependencies
+## Dependencies (optional — only if you enable captioning)
 
-The captioning scripts shell out to:
+Captioning is an optional, advanced step. The default path ships clips uncaptioned.
+See `INSTALL.md` §6 for setup. The captioning scripts shell out to:
 
-- **whisper.cpp** binary + `ggml-small.en.bin` model
-  - default `$HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/main`
-  - override with env `WHISPER_BIN` and `WHISPER_MODEL`
-- **ffmpeg with libass + libfreetype** (the stock Homebrew `ffmpeg` is built
-  without these — every burn-in needs the static build)
-  - default `$HOME/Desktop/AI Agents/remotion-captions/ffmpeg-full`
-  - override with env `FFMPEG_FULL`
+- **whisper.cpp** binary + a `ggml` model
+  - `WHISPER_BIN` auto-detects `whisper-cli` on PATH (`brew install whisper-cpp`)
+  - `WHISPER_MODEL` defaults to `$HOME/ytclipper-fast/models/ggml-base.en.bin`
+  - override either with env `WHISPER_BIN` / `WHISPER_MODEL`
+- **ffmpeg with libass** (the `subtitles` filter; stock Homebrew `ffmpeg` may lack it —
+  verify with `ffmpeg -hide_banner -filters | grep subtitles`)
+  - `FFMPEG_FULL` defaults to the `ffmpeg` on PATH; override with env `FFMPEG_FULL`
 
-If either binary is missing, `caption_clip.sh` exits with a clear error
-message. **Do not silently skip captioning** — surface the failure to the user.
+If a dependency is missing, `caption_clip.sh` exits with a clear, actionable error
+message pointing at `INSTALL.md` §6.
 
 ## Why small.en instead of medium.en
 

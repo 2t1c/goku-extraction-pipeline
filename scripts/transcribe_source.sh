@@ -24,10 +24,11 @@ SRT_OUT="$TRANSCRIPTS_DIR/${VIDEO_ID}.srt"            # sentence-level — used 
 WORDS_SRT_OUT="$TRANSCRIPTS_DIR/${VIDEO_ID}.words.srt" # word-level — used by cue_to_timestamp.py
 LOCK="$TRANSCRIPTS_DIR/${VIDEO_ID}.lock"
 
-# Defaults point at the remotion-captions install. Override via env if you move them.
-WHISPER_BIN="${WHISPER_BIN:-$HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/main}"
-WHISPER_MODEL="${WHISPER_MODEL:-$HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/models/ggml-small.en.bin}"
-FFMPEG_FULL="${FFMPEG_FULL:-$HOME/Desktop/AI Agents/remotion-captions/ffmpeg-full}"
+# Optional/advanced — only used if you've enabled captioning. Auto-detects brew's whisper-cli.
+# Override any of these via env. See style/clip-captioning.md.
+WHISPER_BIN="${WHISPER_BIN:-$(command -v whisper-cli || command -v whisper-cpp || true)}"
+WHISPER_MODEL="${WHISPER_MODEL:-$HOME/ytclipper-fast/models/ggml-base.en.bin}"
+FFMPEG_FULL="${FFMPEG_FULL:-${FFMPEG:-ffmpeg}}"
 
 if [[ -f "$SRT_OUT" && -f "$WORDS_SRT_OUT" ]]; then
   echo "[transcribe] cached: $SRT_OUT + $WORDS_SRT_OUT"
@@ -43,16 +44,18 @@ if [[ ! -f "$SOURCE_MP4" ]]; then
   echo "[transcribe] ERROR: source not found: $SOURCE_MP4" >&2
   exit 1
 fi
-if [[ ! -x "$WHISPER_BIN" ]]; then
-  echo "[transcribe] ERROR: whisper binary not executable: $WHISPER_BIN" >&2
+if [[ -z "$WHISPER_BIN" || ! -x "$WHISPER_BIN" ]]; then
+  echo "[transcribe] ERROR: whisper not found ($WHISPER_BIN). Install with: brew install whisper-cpp" >&2
   exit 1
 fi
 if [[ ! -f "$WHISPER_MODEL" ]]; then
   echo "[transcribe] ERROR: whisper model not found: $WHISPER_MODEL" >&2
   exit 1
 fi
-if [[ ! -x "$FFMPEG_FULL" ]]; then
-  echo "[transcribe] ERROR: ffmpeg-full not executable: $FFMPEG_FULL" >&2
+if command -v "$FFMPEG_FULL" >/dev/null 2>&1; then
+  FFMPEG_FULL="$(command -v "$FFMPEG_FULL")"
+elif [[ ! -x "$FFMPEG_FULL" ]]; then
+  echo "[transcribe] ERROR: ffmpeg not found: $FFMPEG_FULL" >&2
   exit 1
 fi
 

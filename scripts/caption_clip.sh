@@ -22,9 +22,13 @@ CLIP_START="${3:?usage: caption_clip.sh <clip_path> <video_id> <clip_start_HH:MM
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-WHISPER_BIN="${WHISPER_BIN:-$HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/main}"
-WHISPER_MODEL="${WHISPER_MODEL:-$HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/models/ggml-small.en.bin}"
-FFMPEG_FULL="${FFMPEG_FULL:-$HOME/Desktop/AI Agents/remotion-captions/ffmpeg-full}"
+# Captioning is an OPTIONAL, advanced step — not part of the default student path.
+# To use it you need: whisper.cpp (`brew install whisper-cpp` → `whisper-cli`), a ggml
+# model, and an ffmpeg built WITH libass (the `subtitles` filter). Homebrew's ffmpeg may
+# lack libass — verify with: ffmpeg -hide_banner -filters | grep subtitles
+WHISPER_BIN="${WHISPER_BIN:-$(command -v whisper-cli || command -v whisper-cpp || true)}"
+WHISPER_MODEL="${WHISPER_MODEL:-$HOME/ytclipper-fast/models/ggml-base.en.bin}"
+FFMPEG_FULL="${FFMPEG_FULL:-${FFMPEG:-ffmpeg}}"
 TRANSCRIPTS_DIR="${TRANSCRIPTS_DIR:-$HOME/ytclipper-fast/transcripts}"
 
 CACHED_SRT="$TRANSCRIPTS_DIR/${VIDEO_ID}.srt"
@@ -33,8 +37,17 @@ LOCK="$TRANSCRIPTS_DIR/${VIDEO_ID}.lock"
 if [[ ! -f "$CLIP" ]]; then
   echo "[caption] ERROR: clip not found: $CLIP" >&2; exit 1
 fi
-if [[ ! -x "$FFMPEG_FULL" ]]; then
-  echo "[caption] ERROR: ffmpeg-full missing/not executable: $FFMPEG_FULL" >&2; exit 1
+# Resolve ffmpeg (may be a bare name on PATH) and confirm it can burn subtitles (needs libass).
+if command -v "$FFMPEG_FULL" >/dev/null 2>&1; then
+  FFMPEG_FULL="$(command -v "$FFMPEG_FULL")"
+elif [[ ! -x "$FFMPEG_FULL" ]]; then
+  echo "[caption] ERROR: ffmpeg not found ($FFMPEG_FULL). Install with: brew install ffmpeg" >&2; exit 1
+fi
+if ! "$FFMPEG_FULL" -hide_banner -filters 2>/dev/null | grep -qw subtitles; then
+  echo "[caption] ERROR: this ffmpeg was built without libass — it can't burn captions." >&2
+  echo "          Captioning is optional/advanced. Point FFMPEG_FULL at an ffmpeg that has the" >&2
+  echo "          'subtitles' filter. Verify with: ffmpeg -hide_banner -filters | grep subtitles" >&2
+  exit 1
 fi
 
 # Convert HH:MM:SS (or MM:SS) to seconds for SRT slicing
@@ -62,8 +75,15 @@ t0=$(date +%s)
 
 # Caption display granularity: --max-len 30 chars + --split-on-word gives ~4-6 word phrase chunks
 # per cue. Sentence-level cues display too much text per frame for mobile-feed reading speed.
-if [[ ! -x "$WHISPER_BIN" ]] || [[ ! -f "$WHISPER_MODEL" ]]; then
-  echo "[caption] ERROR: whisper.cpp not configured. Set WHISPER_BIN and WHISPER_MODEL or install at $HOME/Desktop/AI Agents/remotion-captions/whisper.cpp/" >&2
+if [[ -z "$WHISPER_BIN" || ! -x "$WHISPER_BIN" ]]; then
+  echo "[caption] ERROR: whisper not found. Install with: brew install whisper-cpp" >&2
+  echo "          (or set WHISPER_BIN to your whisper-cli binary). Captioning is optional/advanced." >&2
+  exit 1
+fi
+if [[ ! -f "$WHISPER_MODEL" ]]; then
+  echo "[caption] ERROR: whisper model not found at $WHISPER_MODEL" >&2
+  echo "          Download once: mkdir -p \"$(dirname "$WHISPER_MODEL")\" &&" >&2
+  echo "          curl -L -o \"$WHISPER_MODEL\" https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin" >&2
   exit 1
 fi
 echo "[caption] running whisper on clip directly (phrase chunks)"

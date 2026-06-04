@@ -90,7 +90,7 @@ Order on the `experimental-hemingway` branch: **Body One-Liner Close → P.S. (P
 - [ ] Notion sub-item title matches the post hook claim (or a short distillation)
 - [ ] Topic Tags set (1–4 from the schema)
 - [ ] Parent video relation linked
-- [ ] Local clip path in body rendered via the Notion API as a `bulleted_list_item` with `rich_text` of `"Local clip path: "` (bold) + `"~/Desktop/AI Agents/clips/<source>/<slug>.mp4"` (code-styled, NO link annotation). Do NOT use markdown `[text](file://...)` syntax — Notion's parser strips it and inserts a broken `http://` auto-link. Do NOT set a `file://` link annotation — the REST API returns `"Invalid URL for link."` See `notion-card-rendering.md` §3.
+- [ ] Local clip path in body rendered via the Notion API as a `bulleted_list_item` with `rich_text` of `"Local clip path: "` (bold) + `"~/Desktop/goku-clips/<source>/<slug>.mp4"` (code-styled, NO link annotation). Do NOT use markdown `[text](file://...)` syntax — Notion's parser strips it and inserts a broken `http://` auto-link. Do NOT set a `file://` link annotation — the REST API returns `"Invalid URL for link."` See `notion-card-rendering.md` §3.
 - [ ] **Cover image set** to a random pick from `config/notion-schema.json:cover_image_recommendations` (both parent video page AND sub-item). Not a YouTube thumbnail. See `notion-card-rendering.md`.
 - [ ] **Verbatim quotes rendered as `paragraph` blocks** with straight `"..."` ASCII marks. Never `quote` block type — Notion curly-quotes the content and breaks copy-paste to X. See `notion-card-rendering.md`.
 
@@ -111,6 +111,6 @@ Currently active feedback rules (May 2026):
 - Manual drag-drop or parallel API attach for Typefully (user-controlled)
 - Slug naming for clip files
 - Pre-cut clip in parallel with draft delivery
-- Clip output to `~/Desktop/AI Agents/clips/<source>/` — clips grouped by source video in subfolders for Finder browsability. Subfolder auto-derived from slug's first segment (`baszucki/`, `andreessen/`, `naval/`, `dell/`, `musk/`).
+- Clip output to `~/Desktop/goku-clips/<source>/` — clips grouped by source video in subfolders for Finder browsability. Subfolder auto-derived from slug's first segment (`baszucki/`, `andreessen/`, `naval/`, `dell/`, `musk/`).
 
 If any of these conflict with what this checklist says, do what the memory rule says — it's the more recent decision.

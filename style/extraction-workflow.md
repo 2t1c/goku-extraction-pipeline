@@ -54,7 +54,7 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 
 1. **Create Notion sub-item** in Evergreen Backlog. Status = `Adding Media`. Set: Video Title, Video URL, Source URL, Topic Tags, Clip Start, Clip End, Key Quote, Parent item relation. **`cover.external.url` must be set to a random pick from `config/notion-schema.json:cover_image_recommendations`** — every page (parent video AND sub-item) gets a Notion-gallery cover, never blank, never a YouTube thumbnail. See `style/notion-card-rendering.md` §1. Body content = full post draft + clip spec. **The Clip Spec section's `Local clip path:` line must be rendered as bold-label + code-styled inline path with NO link annotation** (Notion's markdown parser breaks `file://` URLs into broken `http://` auto-links; the REST API rejects `file://` outright). The slug's first segment determines the subfolder under `clips/` (e.g. `dell-*` → `clips/dell/`). See `style/notion-card-rendering.md` §3.
 2. **Create Typefully draft** on the configured social set. X platform enabled, unscheduled, share=true. Scratchpad = source URL + clip cues + parent video URL + (sub-item URL once known).
-3. **Cut the clip** via `scripts/extract_clip.sh URL START END <slug> [source_folder]` — fast keyframe seek + codec copy. Background process. Outputs to `~/Desktop/AI Agents/clips/<source_folder>/<slug>.mp4`. If `source_folder` is omitted, the script auto-derives it from the slug's first segment (e.g. `baszucki-roblox-x` → folder `baszucki/`). One folder per parent podcast/video so Finder stays browsable.
+3. **Cut the clip** via `scripts/extract_clip.sh URL START END <slug> [source_folder]` — fast keyframe seek + codec copy. Background process. Outputs to `~/Desktop/goku-clips/<source_folder>/<slug>.mp4`. If `source_folder` is omitted, the script auto-derives it from the slug's first segment (e.g. `baszucki-roblox-x` → folder `baszucki/`). One folder per parent podcast/video so Finder stays browsable.
 
 ### 2.2 Cross-link (after 2.1 returns)
 
@@ -62,9 +62,13 @@ When approved, execute in this order. Steps in `()` parens are parallel-safe.
 2. Patch the Typefully scratchpad with the Notion sub-item URL.
 3. Update the parent video page's "extractable ideas" checklist — check the corresponding box and add a link to the new sub-item.
 
-### 2.3 Caption the clip (mandatory)
+### 2.3 Caption the clip (optional, advanced — skipped by default)
 
-After `extract_clip.sh` writes the .mp4, burn captions in-place:
+**The default student path ships clips without burned-in captions.** Cut the clip, drag it
+into Typefully, and (if you want captions) add them on X/Typefully. Only do local caption
+burning if you've completed `INSTALL.md` §6 (whisper.cpp + model + an ffmpeg with libass).
+
+When enabled, burn captions in-place after `extract_clip.sh` writes the .mp4:
 
 ```bash
 bash scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>
@@ -102,7 +106,7 @@ When the captioned clip file exists:
 
 **Race condition warning (load-bearing):** the user MUST NOT hand-edit Typefully drafts between the PUT and the final PATCH. UI saves can strip media_ids. Tell them explicitly: "Don't touch these drafts until I confirm attaches landed." Lockout window is the slowest clip's encoding time.
 
-**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path as plain text (`~/Desktop/AI Agents/clips/<source>/<filename>.mp4`) and the draft edit URL. They copy the path, run `open <path>` in Terminal to reveal it in Finder, then drag it in. `scripts/typefully_upload.py` still works for headless runs.
+**Manual drag-drop fallback:** if user explicitly asks for manual, or if the API path fails, surface the local clip path as plain text (`~/Desktop/goku-clips/<source>/<filename>.mp4`) and the draft edit URL. They copy the path, run `open <path>` in Terminal to reveal it in Finder, then drag it in. `scripts/typefully_upload.py` still works for headless runs.
 
 ### 2.5 Finalize
 

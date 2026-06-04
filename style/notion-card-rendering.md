@@ -93,12 +93,12 @@ Every sub-item post page has a Clip Spec section with a "Local clip path:" line.
 The clip path bullet is built via the Notion API as a `bulleted_list_item` block whose `rich_text` is two segments:
 
 1. `"Local clip path: "` with `bold: true`
-2. `"~/Desktop/AI Agents/clips/<source>/<slug>.mp4"` with `code: true` (no `link` field)
+2. `"~/Desktop/goku-clips/<source>/<slug>.mp4"` with `code: true` (no `link` field)
 
 Same shape for SRT:
 
 1. `"Local SRT path: "` with `bold: true`
-2. `"~/Desktop/AI Agents/clips/<source>/<slug>.srt"` with `code: true` (no `link` field)
+2. `"~/Desktop/goku-clips/<source>/<slug>.srt"` with `code: true` (no `link` field)
 
 **Do not send markdown like `[text](file://...)`** via the MCP create-pages tool — Notion's markdown parser strips `file://` URLs, then auto-links the bare `.mp` prefix as `http://`, producing a broken `[<slug>.mp](http://<slug>.mp)4` artifact.
 

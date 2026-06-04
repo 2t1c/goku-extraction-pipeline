@@ -40,7 +40,7 @@
 #     musk-mass-driver-moon \
 #     2030  # ~33:50 in seconds
 #
-# Output: ${CLIPS_DIR:-~/Desktop/AI Agents/clips/}<slug>.mp4
+# Output: ${CLIPS_DIR:-~/Desktop/goku-clips/}<slug>.mp4
 #
 # See style/clip-precision.md for the diagnosis behind this script.
 
@@ -72,7 +72,7 @@ PYTHON="${PYTHON:-python3}"
 
 # Paths
 SOURCES_DIR="${SOURCES_DIR:-$HOME/ytclipper-fast/sources}"
-CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/AI Agents/clips}"
+CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/goku-clips}"
 mkdir -p "$SOURCES_DIR" "$CLIPS_DIR"
 
 # Parse YouTube ID

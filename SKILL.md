@@ -48,9 +48,9 @@ When user approves, execute in parallel batches:
 
 1. **Notion sub-item create** in Evergreen Backlog (status `Adding Media`, parent relation to source video).
 2. **Typefully draft create** on the configured social set (X enabled, unscheduled, share=true).
-3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second. **Side effect:** on first clip from a source, it kicks off `transcribe_source.sh` in background to pre-warm the transcript cache at `~/ytclipper-fast/transcripts/<VIDEO_ID>.srt`.
-4. **Caption the clip** (mandatory) via `scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>` — burns Helvetica 24pt bold captions into the .mp4 in-place. Uses cached full-podcast SRT when available (~3-5s) or falls back to clip-direct whisper (~15-20s). See `style/clip-captioning.md`.
-5. **When captioned clip is ready:**
+3. **Clip extraction** in background via `scripts/extract_clip.sh URL START END` — uses fast keyframe seek (`-ss` BEFORE `-i`) and codec copy. Runs in ~1 second. (If local captioning is configured, it also pre-warms a transcript cache at `~/ytclipper-fast/transcripts/<VIDEO_ID>.srt`; otherwise this is skipped.)
+4. **Caption the clip** (OPTIONAL, advanced — skipped on the default path) via `scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>`. Requires whisper.cpp + a model + an ffmpeg with libass (see `INSTALL.md` §6). By default, ship the clip uncaptioned and add captions on X/Typefully. See `style/clip-captioning.md`.
+5. **When the clip is ready:**
    - `scripts/notion_upload.py PAGE_ID FILE NAME` — multi-part upload to Notion, attaches as native video block. **Fully automated.**
    - **Typefully parallel API (default):** `POST /v1/media-uploads` then `curl -T FILE PRESIGNED_URL`. Fire and move on. Don't block on encoding. At batch checkpoints, poll pending media_ids and PATCH drafts when each is `ready`. Manual drag-drop only if user explicitly asks or API fails.
 6. **Cross-link** Typefully URL/ID into Notion sub-item properties (text-only — the URL is known the moment the draft is created).
@@ -63,7 +63,7 @@ When user approves, execute in parallel batches:
 When you finish Phase 2, surface to the user:
 - Notion sub-item URL (Status `Ready to Post`)
 - Typefully draft URLs (text already attached, media PUT fired and processing)
-- Local clip path (manual drag-drop escape hatch): `~/Desktop/AI Agents/clips/<source>/<slug>.mp4` rendered as **bold "Local clip path: " + code-styled inline path, NO link annotation** — Notion's markdown parser strips `file://` URLs and Notion's REST API rejects them with `"Invalid URL for link."` To open in Finder: copy the path and run `open <path>` in Terminal, or paste into Notion UI's Cmd-K dialog (the desktop app accepts `file://` when typed by a human). **Clips are grouped by source (parent podcast/video) in subfolders** — `<source>` is auto-derived from the slug's first segment (e.g. `baszucki`, `andreessen`, `naval`, `dell`). Same shape for optional `Local SRT path:` line. See `style/notion-card-rendering.md` §3.
+- Local clip path (manual drag-drop escape hatch): `~/Desktop/goku-clips/<source>/<slug>.mp4` rendered as **bold "Local clip path: " + code-styled inline path, NO link annotation** — Notion's markdown parser strips `file://` URLs and Notion's REST API rejects them with `"Invalid URL for link."` To open in Finder: copy the path and run `open <path>` in Terminal, or paste into Notion UI's Cmd-K dialog (the desktop app accepts `file://` when typed by a human). **Clips are grouped by source (parent podcast/video) in subfolders** — `<source>` is auto-derived from the slug's first segment (e.g. `baszucki`, `andreessen`, `naval`, `dell`). Same shape for optional `Local SRT path:` line. See `style/notion-card-rendering.md` §3.
 - **Lockout warning**: "Don't hand-edit any pending Typefully drafts until I confirm all media attaches landed."
 
 ## Manual drag-drop fallback

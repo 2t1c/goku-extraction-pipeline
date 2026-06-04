@@ -6,13 +6,13 @@
 # yt-dlp for source video download
 brew install yt-dlp
 
-# ffmpeg for clip cutting and (optionally) caption burning
-# Note: Homebrew's ffmpeg is fine for cutting (libx264 included).
-# If you need burned-in captions, you also need libass + libfreetype.
-# Easiest: copy the bundled ffmpeg-static from a YouTube Clipper FAST install,
-# or `brew install ffmpeg` works for most cases.
+# ffmpeg for clip cutting (Homebrew's build is fine — it includes libx264).
 brew install ffmpeg
 ```
+
+> **Captions are optional.** The default student path ships clips **without** burned-in
+> captions — you cut the clip and drag it into Typefully. You can add captions on X/Typefully,
+> or set up local caption burning later (see §6, advanced). Don't let captions block your first post.
 
 ## 2. Notion integration
 
@@ -61,7 +61,7 @@ By default, the pipeline writes to:
 
 ```
 ~/ytclipper-fast/sources/    # cached full-length source videos (persistent, deep-nested — they're huge)
-~/Desktop/AI Agents/clips/   # cut clips (user-facing — you drag-drop these into Typefully)
+~/Desktop/goku-clips/   # cut clips (user-facing — you drag-drop these into Typefully)
 ```
 
 Why split? Source videos are 500–1500 MB and you don't interact with them directly. Cut clips are ~10–25 MB and you drag them into Typefully drafts. The clips folder lives on the Desktop in plain sight; the sources folder stays out of the way.
@@ -74,14 +74,33 @@ Override either via env vars: `SOURCES_DIR=...` and `CLIPS_DIR=...`.
 
 ```bash
 set -a; source .env; set +a
-bash scripts/extract_clip.sh https://www.youtube.com/watch?v=dQw4w9WgXcQ 00:00:30 00:00:45
-ls ~/ytclipper-fast/clips/
+bash scripts/extract_clip.sh "https://www.youtube.com/watch?v=dQw4w9WgXcQ" 00:00:30 00:00:45
+ls ~/Desktop/goku-clips/
 ```
 
-If you see a 15-second clip, the local pipeline works.
+> **Quote the URL.** macOS's default shell (zsh) treats `?` in the URL as a wildcard — an
+> unquoted URL fails with `zsh: no matches found`. Always wrap YouTube URLs in `"…"`.
+
+If you see a 15-second clip in `~/Desktop/goku-clips/`, the local pipeline works.
 
 ```bash
-python3 scripts/notion_upload.py <test_page_id> ~/ytclipper-fast/clips/<file> test.mp4
+python3 scripts/notion_upload.py <test_page_id> ~/Desktop/goku-clips/<file> test.mp4
 ```
 
 If you see a video block on the test page, the Notion path works.
+
+## 6. Captions (optional, advanced)
+
+The default path ships clips without burned-in captions. To burn them locally you need three
+things, then run `scripts/caption_clip.sh <clip-path> <video-id> <clip-start-HH:MM:SS>`:
+
+1. **whisper.cpp** — `brew install whisper-cpp` (installs `whisper-cli`).
+2. **A model** — download once:
+   ```bash
+   mkdir -p ~/ytclipper-fast/models
+   curl -L -o ~/ytclipper-fast/models/ggml-base.en.bin \
+     https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin
+   ```
+3. **An ffmpeg with libass** (the `subtitles` filter). Homebrew's ffmpeg may not include it —
+   verify with `ffmpeg -hide_banner -filters | grep subtitles`. If it's missing, point
+   `FFMPEG_FULL` at an ffmpeg build that has it.

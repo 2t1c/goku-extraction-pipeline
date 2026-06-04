@@ -23,7 +23,7 @@
 #     extract_clip.sh URL 00:34:09 00:36:42 andreessen-ovitz-7am-meeting andreessen
 #
 # Output: $CLIPS_DIR/<source_folder>/<slug>.mp4
-#         default $CLIPS_DIR is ~/Desktop/AI Agents/clips/
+#         default $CLIPS_DIR is ~/Desktop/goku-clips/
 #
 # Performance lessons:
 #   1. -ss BEFORE -i = keyframe seek (~1s). -ss after = decode-and-discard (~3-5min for far seeks).
@@ -51,8 +51,8 @@ FFMPEG="${FFMPEG:-/opt/homebrew/bin/ffmpeg}"
 SOURCES_DIR="${SOURCES_DIR:-$HOME/ytclipper-fast/sources}"
 
 # Clips are user-facing — they get drag-dropped into Typefully manually.
-# Default to a place visible in Finder, near the user's working folder.
-CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/AI Agents/clips}"
+# Default to a Finder-visible folder on the Desktop. Override with CLIPS_DIR=...
+CLIPS_DIR="${CLIPS_DIR:-$HOME/Desktop/goku-clips}"
 
 # Parse YouTube ID from URL (11-char alphanumeric/dash/underscore)
 VIDEO_ID=$(echo "$URL" | grep -oE '[a-zA-Z0-9_-]{11}' | tail -1)
@@ -96,12 +96,16 @@ else
     "$URL" 2>&1 | tail -5
 fi
 
-# Step 1.5: Kick off background transcribe of full source (idempotent, no-op if cached or already running).
-# This pre-warms ~/ytclipper-fast/transcripts/<VIDEO_ID>.srt so per-clip captioning becomes a 3-5s
-# SRT slice + ffmpeg burn-in instead of a 15-20s whisper-on-clip run. See style/clip-captioning.md.
+# Step 1.5: (Optional, advanced) Pre-warm a full-source transcript so per-clip captioning is fast.
+# Captioning is NOT part of the default student path — clips ship without burned-in captions.
+# This only fires if whisper is configured (WHISPER_BIN + WHISPER_MODEL). Otherwise it's skipped,
+# so the basic path stays clean — no background work, no errors. See style/clip-captioning.md.
+WHISPER_BIN_RESOLVED="${WHISPER_BIN:-$(command -v whisper-cli || command -v whisper-cpp || true)}"
+WHISPER_MODEL_RESOLVED="${WHISPER_MODEL:-$HOME/ytclipper-fast/models/ggml-base.en.bin}"
 TRANSCRIBE_SCRIPT="$(dirname "$0")/transcribe_source.sh"
-if [ -x "$TRANSCRIBE_SCRIPT" ]; then
-  nohup bash "$TRANSCRIBE_SCRIPT" "$VIDEO_ID" > /tmp/transcribe-${VIDEO_ID}.log 2>&1 &
+if [ -x "$TRANSCRIBE_SCRIPT" ] && [ -n "$WHISPER_BIN_RESOLVED" ] && [ -x "$WHISPER_BIN_RESOLVED" ] && [ -f "$WHISPER_MODEL_RESOLVED" ]; then
+  WHISPER_BIN="$WHISPER_BIN_RESOLVED" WHISPER_MODEL="$WHISPER_MODEL_RESOLVED" \
+    nohup bash "$TRANSCRIBE_SCRIPT" "$VIDEO_ID" > /tmp/transcribe-${VIDEO_ID}.log 2>&1 &
   disown || true
 fi
 
