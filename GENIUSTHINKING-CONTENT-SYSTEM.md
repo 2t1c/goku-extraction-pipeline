@@ -8,6 +8,22 @@ component** on the GeniusGTX / health-fleet side. GeniusThinking is not a greenf
 it is a *configuration* of four existing engines plus four existing discovery skills.
 The work is wiring, not invention.
 
+**The account model (confirmed by operator, 2026-07-27):** GeniusThinking is ONE account
+running THREE content engines side by side:
+
+1. **Reposts** — proven viral tweets from other accounts, via Project Hail Mary.
+   GeniusThinking is registered as a **Page in a Hail Mary base**; the existing
+   scout → approve → caption-variant → schedule engine supplies baseline daily volume
+   and follower growth, with all four dup-flag guards.
+2. **Our longform** — original posts from transcripts (goku clip posts + viral-longform-x
+   text posts), the premium content that differentiates the account.
+3. **Viral thread pipeline** — proven winning threads recreated in our voice,
+   Infinity-style (`recreate.mjs` pattern), fed by the daily-inspiration / What's Working
+   swipe data.
+
+Hail Mary carries the volume; longform and threads carry the identity. The design below
+is organized around making the three engines share one account without colliding.
+
 ---
 
 ## 1. The assets (what already exists)
@@ -37,14 +53,23 @@ flowchart TB
     TR --> GEN[viral-longform-x +<br/>goku style/ system]
     GEN --> CLIP[gtx-clipper-service<br/>POST /clip → media_id]
   end
+  subgraph L2b [Layer 2b · REPOST ENGINE]
+    HMS[Hail Mary scout<br/>2×/day] --> BL[(Backlog · approve gate)]
+    BL --> CV[captions.mjs<br/>2–3 variants] --> HSCH[schedule.mjs<br/>fills repost slots]
+  end
+  subgraph L2c [Layer 2c · THREAD ENGINE]
+    WW -->|proven winners| RECR[Infinity-style recreate<br/>faithful / skeleton]
+  end
   subgraph L3 [Layer 3 · PUBLISH]
     GEN --> TF[Typefully drafts<br/>GeniusThinking social set]
     CLIP --> TF
+    HSCH --> TF
+    RECR --> TF
     GEN --> NB[(Notion Evergreen Backlog<br/>+ Master Index)]
-    TF --> X((X · @GeniusThinking))
+    TF --> X((X · GeniusThinking))
   end
-  subgraph L4 [Layer 4 · AMPLIFY]
-    X --> HM[Hail Mary pool<br/>new base, sibling pages]
+  subgraph L4 [Layer 4 · AMPLIFY · later]
+    X --> HM[Hail Mary sibling pages<br/>same base, RT the main]
   end
   subgraph L5 [Layer 5 · MEASURE & IMPROVE]
     X --> REG[(Published Content registry<br/>Infinity-style)]
@@ -89,6 +114,44 @@ respond to). Two production paths share one style system:
 
 Transcript acquisition is the one genuinely new piece (see §5, Gap 1).
 
+### Layer 2b — Repost engine (Hail Mary)
+
+GeniusThinking becomes a **Page row** in a Hail Mary base — either a new
+"GeniusThinking" pool (own Sources + Backlog, seeded via `apply-fleet.mjs`) or a pool in
+an existing base if the niche overlaps (see §4, Decision 3). Everything is the stock
+engine, zero code changes:
+
+- **Scout** monitors GeniusThinking-adjacent Sources (the daily-inspiration watchlist is
+  the natural seed list) + the niche sweep; operator approves keepers in the Backlog.
+- **Captions** writes 2–3 rewrite variants per approved original (5-gram similarity gate,
+  banned-phrase list, niche relabeling).
+- **Schedule** fills the page's `Posts per day` repost slots, rotates variants, appends
+  the follow-CTA, QRTs the page's own prior posts (`qrt_share`) for bonus reach.
+- All four dup-flag guards apply (variation, fan-out cap, stagger, per-page cooldown).
+
+### Layer 2c — Thread engine (Infinity pattern)
+
+Proven winning threads → recreated in the GeniusThinking voice. The daily-inspiration /
+What's Working DB is exactly Infinity's swipe input: full verbatim hooks, hook-structure
+templates, engagement ratios, format anatomy. Recreation follows the two Infinity modes
+(faithful ~85% reword, or skeleton-variation: keep the viral FORM, new substance), with
+deterministic gates before any write. This engine starts manual-per-thread and only goes
+on cron after the QC gate exists (Phase 5).
+
+### Slot coordination (the one real integration point)
+
+Three engines writing to one Typefully social set must not collide. Infinity already
+solved this shape — its Harvest engine "schedules its own variations into reserved slots
+independently" while daily-winners owns the 9pm slot. Same rule here, **directional by
+slot ownership**:
+
+- **Reposts** = Hail Mary's `Posts per day` capacity, filling next-free-slot as designed.
+- **Threads** = one reserved premium slot per day (Infinity's 9pm-Saigon precedent).
+- **Longform/clips** = 1–2 reserved slots, operator-scheduled at first.
+- The `daily_dispatch_cap` config remains the fleet-wide backstop, and the Hail Mary
+  scheduler must treat reserved slots as booked (existing bookings already eat capacity
+  in its slot-filling pass, so this is config, not code).
+
 ### Layer 3 — Publish
 
 - **Typefully is the spine** (same as every existing system): drafts created on the
@@ -100,13 +163,12 @@ Transcript acquisition is the one genuinely new piece (see §5, Gap 1).
   fixed premium slots per day once QC confidence is earned — the same progression
   Infinity followed before its 9pm-slot automation.
 
-### Layer 4 — Amplify (phase 2 — do not build first)
+### Layer 4 — Amplify (later phase — do not build first)
 
-A **new Hail Mary pool**: duplicate the template base per `schema.json`, register it in
-`fleet.json` + `HAILMARY_BASES`, seed Sources with GeniusThinking-adjacent creators, add
-sibling pages. Zero engine changes — this is exactly the "add a new niche" operation the
-Hail Mary README documents. The grown pages RT/QRT the main account (the Infinity RT-bridge
-pattern) and are themselves sellable reach later.
+Once the GeniusThinking pool exists (Layer 2b), adding **sibling pages** is one
+`pages` entry in `fleet.json` + `apply-fleet.mjs --apply` each — shared Backlog, fan-out
+guard spreading each winner across handles. The grown pages RT/QRT the main account (the
+Infinity RT-bridge pattern) and are themselves sellable reach later.
 
 ### Layer 5 — Measure & improve (phase 2–3)
 
@@ -131,38 +193,41 @@ Ordered so each phase ships something usable alone. Estimates assume the connect
 | Phase | Deliverable | Effort | Done when |
 |---|---|---|---|
 | **0. Config foundations** | GeniusThinking brand profile for `viral-longform-x`; confirm Typefully social set + Notion DB IDs; clipper deployed on Railway with its own `SERVICE_KEY` | ~half a day | `POST /health` green; brand profile committed |
-| **1. Production path, manual trigger** | Approved idea → posts drafted (audited) → clips cut cloud-side → Typefully drafts + Notion cards, cross-linked | 1–2 days | One idea flows end-to-end with zero local tooling |
-| **2. Discovery on schedule** | The three scan skills running as scheduled tasks, feeding the Idea Pipeline; convergence upgrades working | ~1 day | 6–10 fresh scored ideas/day arriving unattended |
-| **3. Publishing cadence** | Fixed daily slots; QC checklist gate before anything schedules (adapt Infinity `checks.mjs` philosophy: deterministic gates, then LLM QC as backstop) | 1–2 days | A week of posts ships with zero structural defects |
-| **4. Amplification pool** | Hail Mary base for GeniusThinking vertical, 3–5 sibling pages, sources seeded | ~1 day + page warm-up time | `apply-fleet.mjs --apply` clean; scout filling the backlog |
-| **5. Registry + retro** | Published Content registry, winner flags, repost loop, IMPROVEMENTS.md | 1–2 days | First winner auto-flagged and recreated |
+| **1. Repost engine live** | GeniusThinking pool + Page in Hail Mary (`apply-fleet.mjs`), Sources seeded from the daily-inspiration watchlist, scout/captions/schedule on the existing crons | ~1 day (data + config only) | Reposts flowing daily through the approve gate; follower tracking on |
+| **2. Longform path, manual trigger** | Approved idea → posts drafted (audited) → clips cut cloud-side → Typefully drafts + Notion cards, cross-linked | 1–2 days | One idea flows end-to-end with zero local tooling |
+| **3. Discovery on schedule** | The three scan skills running as scheduled tasks, feeding the Idea Pipeline; convergence upgrades working | ~1 day | 6–10 fresh scored ideas/day arriving unattended |
+| **4. Thread engine + cadence** | Thread recreation from What's Working winners into the reserved premium slot; QC checklist gate before anything schedules (Infinity `checks.mjs` philosophy: deterministic gates, then LLM QC backstop) | 1–2 days | A week of mixed posts ships with zero structural defects |
+| **5. Registry + retro** | Published Content registry, winner flags, repost loop, IMPROVEMENTS.md; sibling amplification pages when growth data supports it | 1–2 days | First winner auto-flagged and recreated |
 
-Phase 1 is the keystone: it proves the whole production spine before anything runs
-unattended. Phases 4 and 5 are deliberately last — Infinity's GOALS.md discipline applies:
-don't scale distribution before the content path is verified, don't scale untracked.
+Phase 1 first because it is pure configuration of a proven engine — the account starts
+growing while the original-content path is built. Phase 2 is the keystone for identity:
+it proves the production spine before anything original runs unattended. Registry and
+sibling pages are deliberately last — Infinity's GOALS.md discipline applies: don't scale
+distribution before the content path is verified, don't scale untracked.
 
 ---
 
 ## 4. Open decisions (operator input needed)
 
-1. **Brand identity.** Is GeniusThinking (a) the existing @GeniusGTX account under a new
-   system, (b) the @GeniusGTX_2 account graduating to primary, or (c) a genuinely new
-   handle? This decides the Typefully social set, the brand profile voice, and whether
-   Layer 4 amplifies an account with 278k followers or warms a new one.
-2. **Content mix.** Ratio of clip-first (Goku video posts) vs text-first (longform) vs
-   repost-style (Hail Mary captions on the main account). Proposal: start 2 clip posts +
-   1 longform per day, adjust on data.
-3. **Existing vs new Notion databases.** Reuse the live Idea Pipeline + Evergreen Backlog
+1. **Which handle & social set.** Is GeniusThinking (a) the existing @GeniusGTX account
+   under this new system, (b) @GeniusGTX_2 graduating to primary, or (c) a new handle?
+   Decides the Typefully social set, the brand-profile voice, and whether the repost
+   engine warms a fresh page or rides 278k followers.
+2. **Slot budget.** Confirmed shape: reposts (volume) + longform (identity) + threads
+   (virality). Proposal for the starting ratio: 4–5 reposts + 1 thread + 1 longform/clip
+   per day, adjusted on follower + engagement data.
+3. **Hail Mary base placement.** New "GeniusThinking" pool (own Sources/Backlog, cleanest)
+   vs a pool in the existing AI base (shared backlog, faster start). Proposal: new base —
+   the niche mix (ideas/philosophy/systems) differs from the AI pool, and niche guards
+   work best with a dedicated taxonomy.
+4. **Existing vs new Notion databases.** Reuse the live Idea Pipeline + Evergreen Backlog
    (fastest, shared with GTX workflows) or duplicate them for a clean GeniusThinking
-   workspace (cleaner attribution, more setup). Proposal: reuse — the Source/Notes fields
-   already distinguish funnels.
-4. **Monetization rails.** GTX-style (ebook/Gumroad + affiliate where it fits) or
-   audience-first with monetization deferred to phase 5? This only blocks Phase 5, not 1–4.
-5. **Scheduling runtime.** GitHub Actions crons (Infinity's pattern — versioned, free,
-   observable) vs n8n (already the data-ingestion layer) vs Claude scheduled tasks (the
-   discovery skills assume this). Proposal: discovery = scheduled Claude tasks (they need
-   a browser), everything deterministic = GitHub Actions, n8n only where it already owns
-   a flow.
+   workspace. Proposal: reuse — the Source/Notes fields already distinguish funnels.
+5. **Monetization rails.** GTX-style (ebook/Gumroad + affiliate where it fits) or
+   audience-first with monetization deferred to phase 5? Only blocks Phase 5, not 1–4.
+   Scheduling runtime is treated as settled, not a decision: discovery = scheduled Claude
+   tasks (they need a browser), deterministic jobs = GitHub Actions (Infinity's pattern),
+   n8n only where it already owns a flow.
 
 ---
 
