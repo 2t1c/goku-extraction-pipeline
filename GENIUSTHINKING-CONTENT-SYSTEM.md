@@ -207,27 +207,31 @@ distribution before the content path is verified, don't scale untracked.
 
 ---
 
-## 4. Open decisions (operator input needed)
+## 4. Decisions (operator-resolved 2026-07-27 unless marked open)
 
-1. **Which handle & social set.** Is GeniusThinking (a) the existing @GeniusGTX account
-   under this new system, (b) @GeniusGTX_2 graduating to primary, or (c) a new handle?
-   Decides the Typefully social set, the brand-profile voice, and whether the repost
-   engine warms a fresh page or rides 278k followers.
-2. **Slot budget.** Confirmed shape: reposts (volume) + longform (identity) + threads
-   (virality). Proposal for the starting ratio: 4–5 reposts + 1 thread + 1 longform/clip
-   per day, adjusted on follower + engagement data.
-3. **Hail Mary base placement.** New "GeniusThinking" pool (own Sources/Backlog, cleanest)
-   vs a pool in the existing AI base (shared backlog, faster start). Proposal: new base —
-   the niche mix (ideas/philosophy/systems) differs from the AI pool, and niche guards
-   work best with a dedicated taxonomy.
-4. **Existing vs new Notion databases.** Reuse the live Idea Pipeline + Evergreen Backlog
-   (fastest, shared with GTX workflows) or duplicate them for a clean GeniusThinking
-   workspace. Proposal: reuse — the Source/Notes fields already distinguish funnels.
-5. **Monetization rails.** GTX-style (ebook/Gumroad + affiliate where it fits) or
-   audience-first with monetization deferred to phase 5? Only blocks Phase 5, not 1–4.
-   Scheduling runtime is treated as settled, not a decision: discovery = scheduled Claude
-   tasks (they need a browser), deterministic jobs = GitHub Actions (Infinity's pattern),
-   n8n only where it already owns a flow.
+1. **Handle: @GeniusGTX** ✅. The repost engine rides the 278k-follower main account.
+   Operational catch: the default Typefully workspace key sees GeniusGTX_2
+   ("Genius Thinking", social set 151393) but **not @GeniusGTX** — the pool's Config
+   needs the `typefully_api_key` of the workspace that owns @GeniusGTX, plus its real
+   social set id, before the page activates.
+2. **New Hail Mary pool** ✅ ("it is going to be a lot"). Own base, own Sources/Backlog.
+   The concrete pool spec is committed in Project-Hail-Mary's `fleet.example.json`
+   (GeniusThinking pool): 7 curated sources — @readswithravi, @PeakThinkers_, @cptdankkk,
+   @r0ck3t23, @Kekius_Sage, @bluewmist, @Jayyanginspires — one page (@GeniusGTX,
+   niche `Other` = wildcard over the curated pool), `Active: false` until keys land.
+3. **Everything is paraphrased** ✅ — both short tweets AND longform reposts are briefly
+   rewritten, never raw re-uploads. This is exactly `captions.mjs`; the one adjustment is
+   `rewrite_max_chars` raised per-pool (260 → ~2200, a live Config key, no code change)
+   so longform originals can be paraphrased at full length. All similarity gates
+   (no 5-word run shared with the original or sibling variants) still apply.
+4. **Existing vs new Notion databases** (open). Proposal stands: reuse the live Idea
+   Pipeline + Evergreen Backlog — Source/Notes fields already distinguish funnels.
+5. **Monetization rails** (open). Only blocks Phase 5, not 1–4. Scheduling runtime is
+   settled: discovery = scheduled Claude tasks (browser needed), deterministic jobs =
+   GitHub Actions, n8n only where it already owns a flow.
+
+**Starting slot budget** (adjust on data): 5 reposts (Hail Mary `Posts per day`) +
+1 thread (reserved premium slot) + 1 longform/clip (reserved) per day.
 
 ---
 
